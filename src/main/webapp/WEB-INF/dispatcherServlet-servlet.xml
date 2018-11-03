@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <!--SpringMVC的配置-->
+    <!--SpringMVC的配置，主要配置网站跳转逻辑-->
+
+    <!--配置组建扫描器-->
+    <context:component-scan base-package="com.ebook.*" use-default-filters="false"><!--use-default-filters关闭扫描所有的，只扫描一下配置-->
+        <!--让其只扫描控制器，即标注了@Controller注解的-->
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--配置前缀-->
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <!--配置后缀-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--标准配置-->
+    <!--此配置是将springmvc不能处理的请求交给tomcat去处理，这样就可以实现静态资源的访问了-->
+    <mvc:default-servlet-handler/>
+
+    <!--配置后可以支持springMVC的一些高级支持，比如基于springmvc的JSR303校验，快捷的ajax请求等，最主要的是用来映射动态请求-->
+    <mvc:annotation-driven/>
+
 
 
 
