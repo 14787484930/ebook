@@ -1,13 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
 
     <!--Spring的配置文件，这里主要配置和业务逻辑有关的-->
 
+    <!--配置组件扫描器,spring除了控制器，全扫-->
+    <context:component-scan base-package="com.ebook.*">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--引入外部配置文件，这里引入的事数据库的配置文件-->
+    <context:property-placeholder location="classpath:jdbc-config.properties"/>
 
 
+    <!--============================================================================================-->
 
+    <!--配置数据源，用c3p0-->
+    <bean id="comboPooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
+        <property name="driverClass" value="${jdbc.driverClass}"></property>
+        <property name="user" value="${jdbc.user}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+
+
+    <!--配置和MyBatis的整合-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+       <!--指定Mybatis全局配置文件的位置-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--数据源-->
+        <property name="dataSource" value="comboPooledDataSource"/>
+        <!--指定Mybatis的映射文件的位置-->
+        <!--<property name="mapperLocations" value="classpath:mapper/*.xml"/>-->
+    </bean>
+    <!--配置扫描器，将Mybatis接口的实现加入到IoC容器中-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--扫描所有的dao接口-->
+        <property name="basePackage" value="com.ebook.daos"/>
+    </bean>
+
+<!--===============================================================================================-->
+    <!--事务控制的配置-->
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" value="comboPooledDataSource"/>
+    </bean>
+
+
+    <!--基于配置的事务,事务采用配置式事务，而不采用注解式-->
+    <aop:config>
+        <!--配置切入点-->
+        <aop:pointcut id="tdPoint" expression="execution(public * com.ebook.serviceImpls..*(..))"/>
+        <!--配置事务增强-->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="tdPoint"/>
+    </aop:config>
+
+    <!--配置事务通知-->
+    <!-- 将事务以什么方式植入到什么方法 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- 指定这些方法用什么事务特征，
+    		propagation指定的是事务的传播行为，REQUIRED是最常用的，表示该方法必须在食事务中执行 ,
+    		isolation制定事务的隔离级别，DEFAULT表示数据库默认的隔离级别，
+    		read-only，配置该方法是否只做读取，true表示只做读取-->
+            <tx:method name="save*" isolation="DEFAULT" propagation="REQUIRED"/>
+            <tx:method name="delete*" isolation="DEFAULT" propagation="REQUIRED"/>
+            <tx:method name="update*" isolation="DEFAULT" propagation="REQUIRED"/>
+            <tx:method name="get*" isolation="DEFAULT" propagation="REQUIRED" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
 
 </beans>
