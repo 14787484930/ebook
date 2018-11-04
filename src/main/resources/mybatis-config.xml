@@ -4,6 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+    <!--相关常量的配置-->
+    <settings>
+        <!--配置驼峰命名规则-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!--配置别名，配置后bean及子包下类名不能重复-->
+    <typeAliases>
+        <package name="com.ebook.beans"/>
+    </typeAliases>
+
+
 
 
 </configuration>
