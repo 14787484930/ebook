@@ -138,8 +138,12 @@
       <scope>test</scope>
     </dependency>
 
-
-
+    <!--引入Mybatis分页插件pagehelper-->
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>5.0.0</version>
+    </dependency>
 
 
   </dependencies>
