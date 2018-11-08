@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
+@RequestMapping("/book")
 public class BookController {
 
     @Autowired
     BookService bookService;
 
     @RequestMapping("/books")
-    public Object getBooks(Model model,@RequestParam(value = "pn", defaultValue = "2") Integer pn){
+    public Object getBooks(@RequestParam(value = "pn", defaultValue = "2") Integer pn ,Model model){
 
         //在查询之前注入页码和页面容量
         PageHelper.startPage(pn,2);
@@ -29,6 +30,6 @@ public class BookController {
         PageInfo<Book> pageInfo = new PageInfo<Book>(list,3);
 
         model.addAttribute("pageinfo",pageInfo);
-        return model;
+        return "books/books";
     }
 }
