@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -20,6 +21,19 @@ public class BookController {
     BookService bookService;
 
     @RequestMapping("/books")
+    @ResponseBody
+    public Object getBooks(@RequestParam(value = "pn", defaultValue = "2") Integer pn , Model model){
+
+        //在查询之前注入页码和页面容量
+        PageHelper.startPage(pn,2);
+        //查询数据
+        List<Book> list = bookService.getBooks();
+        //包装查询后的结果
+        PageInfo<Book> pageInfo = new PageInfo<Book>(list,3);
+        return pageInfo;
+    }
+
+   /* @RequestMapping("/books")
     public Object getBooks(@RequestParam(value = "pn", defaultValue = "2") Integer pn ,Model model){
 
         //在查询之前注入页码和页面容量
@@ -31,5 +45,5 @@ public class BookController {
 
         model.addAttribute("pageinfo",pageInfo);
         return "books/books";
-    }
+    }*/
 }
