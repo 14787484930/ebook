@@ -8,6 +8,19 @@
     <settings>
         <!--配置驼峰命名规则-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+        <!--开启二级缓存-->
+        <setting name="cacheEnabled" value="true"/>
+
+        <!-- 对于级联延迟加载 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+
+        <!-- 对于懒加载的数据按需加载，不一次性加载 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+
+        <!--配置打印sql-->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+
     </settings>
 
     <!--配置别名，配置后bean及子包下类名不能重复-->
