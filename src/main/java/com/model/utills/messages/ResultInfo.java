@@ -20,7 +20,7 @@ public class ResultInfo {
     private Map<String,Object> msgs = new HashMap<String,Object>();
 
     //pageInfo数据（回馈用户的主要数据）
-    private  Map<String,Object> pageinfo = new HashMap<String,Object>();
+    private  Map<String,Object> page = new HashMap<String,Object>();
 
 
     public static ResultInfo success(){
@@ -38,7 +38,7 @@ public class ResultInfo {
     }
 
     public ResultInfo add(String key,Object value){
-        this.pageinfo.put(key, value);
+        this.page.put(key, value);
         return this;
     }
 }

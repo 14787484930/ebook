@@ -32,7 +32,7 @@ public class BookController {
         //包装查询后的结果
         PageInfo<Book> pageInfo = new PageInfo<Book>(list,3);
         //封装数据
-        return ResultInfo.success().add("pageinfo",pageInfo);
+        return ResultInfo.success().add("pageInfo",pageInfo);
     }
 
 
