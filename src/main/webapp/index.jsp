@@ -22,6 +22,15 @@
                 <h1>ebook测试页面</h1>
             </div>
         </div>
+
+        <%--操作按钮--%>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-8">
+                <button class="btn btn-primary" id="emp_add_modal_btn">新增</button>
+                <button class="btn btn-danger" id="emp_delete_all_btn">删除</button>
+            </div>
+        </div>
+
         <%--table--%>
         <div class="row">
             <div class="col-md-12">
