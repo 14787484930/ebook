@@ -1,4 +1,4 @@
-package com.model.utills.aes;
+package com.model.utills.encodedecode;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
