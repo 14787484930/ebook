@@ -19,4 +19,12 @@ public class BookServiceImpl implements BookService {
         List<Book> list = bookDao.getBooks();
         return list;
     }
+
+    @Override
+    public void save(Book book) {
+
+        //注入主键
+        //book.setId(GeneratingId.getId());
+        bookDao.save(book);
+    }
 }

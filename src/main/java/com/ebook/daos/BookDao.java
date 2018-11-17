@@ -7,4 +7,5 @@ import java.util.List;
 public interface BookDao {
 
     public List<Book> getBooks();
+    public void save(Book book);
 }

@@ -5,6 +5,23 @@
     <cache type="com.model.utills.redis.RedisCache" />
 
     <select id="getBooks" resultType="Book">
-        select * from bookinfo
+        select * from bookinfo order by id desc
     </select>
+
+    <insert id="save" parameterType="Book">
+        insert into bookinfo
+        (
+        name,
+        price,
+        pub_Date,
+        pic
+        )
+        values
+        (
+        #{name},
+        #{price},
+        #{pubDate},
+        #{pic}
+        )
+    </insert>
 </mapper>

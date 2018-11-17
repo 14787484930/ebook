@@ -26,8 +26,8 @@
         <%--操作按钮--%>
         <div class="row">
             <div class="col-md-4 col-md-offset-8">
-                <button class="btn btn-primary" id="emp_add_modal_btn">新增</button>
-                <button class="btn btn-danger" id="emp_delete_all_btn">删除</button>
+                <button class="btn btn-primary" id="book_add">新增</button>
+                <button class="btn btn-danger" id="book_delete">删除</button>
             </div>
         </div>
 
@@ -40,8 +40,8 @@
                         <th>#</th>
                         <th>书名</th>
                         <th>价格</th>
-                        <th>图片</th>
                         <th>出版日期</th>
+                        <th>图片</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -64,6 +64,53 @@
 
     </div>
 </center>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">图书添加</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">书名：</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="name" value="1" class="form-control" id="name" placeholder="书名">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">价格：</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="price" value="1" class="form-control" id="price" placeholder="价格">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">出版日期</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="pubDate" value="2018-11-17" class="form-control" id="pubDate" placeholder="出版日期">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">图片</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="pic" value="1" class="form-control" id="pic" placeholder="图片">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="save_btn">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
 
     var totalRecord,currentPage;
@@ -195,6 +242,109 @@
          navEle.appendTo("#page_nav_area");
      }
 
+    //清空表单样式及内容
+  /*  function reset_form(ele){
+        $(ele)[0].reset();
+        //清空表单样式
+        $(ele).find("*").removeClass("has-error has-success");
+        $(ele).find(".help-block").text("");
+    }*/
+
+    //点击新增按钮弹出模态框。
+    $("#book_add").click(function(){
+        //清除表单数据（表单完整重置（表单的数据，表单的样式））
+        reset_form("#addModal form");
+        //弹出模态框
+        $("#addModal").modal({
+            backdrop:"static"
+        });
+    });
+
+    //点击保存，保存图书
+    $("#save_btn").click(function(){
+
+        if(!validate_add_form()){
+            return false;
+        };
+        alert(123);
+        //2、发送ajax请求保存图书
+        /*$.ajax({
+            url:"${APP_PATH}/book/save",
+            type:"POST",
+            data:$("#addModal form").serialize(),
+            dataType:"json",
+            success:function(result){
+                //alert(result.msg);
+                if(result.code == 100){
+                    //1、关闭模态框
+                    $("#addModal").modal('hide');
+
+                    //2、来到最后一页，显示刚才保存的数据
+                    //发送ajax请求显示第一页
+                    to_page(1);
+                }
+            }
+        });*/
+    });
+
+    //校验表单数据
+    function validate_add_form(){
+        //书名校验
+        var name = $("#name").val();
+        if(name === ""){
+            show_validate_msg("#name", "error", "图书名称不能为空");
+            return false;
+        }else{
+            show_validate_msg("#name", "success", "");
+        };
+
+        //价格校验
+        var price = $("#price").val();
+        if(price === ""){
+            show_validate_msg("#price", "error", "价格不能为空");
+            return false;
+        }else{
+            show_validate_msg("#price", "success", "");
+        };
+
+        //日期校验
+        var pubDate = $("#pubDate").val();
+        if(pubDate === ""){
+            show_validate_msg("#pubDate", "error", "出版日期不能为空");
+            return false;
+        }else{
+            show_validate_msg("#pubDate", "success", "");
+        };
+
+        var pic = $("#pic").val();
+        if(pic === ""){
+            show_validate_msg("#pic", "error", "图片不能为空");
+            return false;
+        }else{
+            show_validate_msg("#pic", "success", "");
+        };
+        return true;
+    }
+    function show_validate_msg(ele,status,msg){
+        //清除当前元素的校验状态
+        $(ele).parent().removeClass("has-success has-error");
+        $(ele).next("span").text("");
+        if("success"==status){
+            $(ele).parent().addClass("has-success");
+            $(ele).next("span").text(msg);
+        }else if("error" == status){
+            $(ele).parent().addClass("has-error");
+            $(ele).next("span").text(msg);
+        }
+    }
+
+    //清空表单样式及内容
+    function reset_form(ele){
+        $(ele)[0].reset();
+        //清空表单样式
+        $(ele).find("*").removeClass("has-error has-success");
+        $(ele).find(".help-block").text("");
+    }
 
 </script>
 

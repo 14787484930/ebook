@@ -35,6 +35,14 @@ public class BookController {
         return ResultInfo.success().add("pageInfo",pageInfo);
     }
 
+    @RequestMapping("/save")
+    @ResponseBody
+    public Object save(Book book){
+
+        bookService.save(book);
+        return ResultInfo.success();
+    }
+
 
     /*@RequestMapping("/books")
     @ResponseBody
