@@ -266,9 +266,9 @@
         if(!validate_add_form()){
             return false;
         };
-        alert(123);
+
         //2、发送ajax请求保存图书
-        /*$.ajax({
+        $.ajax({
             url:"${APP_PATH}/book/save",
             type:"POST",
             data:$("#addModal form").serialize(),
@@ -284,7 +284,7 @@
                     to_page(1);
                 }
             }
-        });*/
+        });
     });
 
     //校验表单数据
