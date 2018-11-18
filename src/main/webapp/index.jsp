@@ -278,10 +278,12 @@
                 if(result.code == 100){
                     //1、关闭模态框
                     $("#addModal").modal('hide');
-
-                    //2、来到最后一页，显示刚才保存的数据
-                    //发送ajax请求显示第一页
                     to_page(1);
+                    console.log(result);
+                }else{
+                    //后端校验结果打印
+                    console.log(result);
+
                 }
             }
         });

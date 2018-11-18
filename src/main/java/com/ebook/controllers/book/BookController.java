@@ -5,13 +5,16 @@ import com.ebook.services.BookService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.model.utills.messages.ResultInfo;
+import com.model.utills.validate.ValidateDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -37,10 +40,18 @@ public class BookController {
 
     @RequestMapping("/save")
     @ResponseBody
-    public Object save(Book book){
+    public Object save(@Valid Book book, BindingResult result){
 
+        /*服务器端校验*/
+        if(result.hasErrors()){
+            //校验失败
+            return ResultInfo.fail().add("errors", ValidateDate.checkDate(result));
+        }
+
+        //校验成功,,进行保存操作
         bookService.save(book);
         return ResultInfo.success();
+
     }
 
 
