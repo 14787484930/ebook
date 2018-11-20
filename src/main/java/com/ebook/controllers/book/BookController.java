@@ -1,6 +1,7 @@
 package com.ebook.controllers.book;
 
 import com.ebook.beans.book.Book;
+import com.ebook.beans.book.BookQuery;
 import com.ebook.services.BookService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,6 +38,41 @@ public class BookController {
         PageInfo<Book> pageInfo = new PageInfo<Book>(list,3);
         //封装数据
         return ResultInfo.success().add("pageInfo",pageInfo);
+    }
+
+    @RequestMapping(value="/getById/{id}")
+    @ResponseBody
+    public Object getById(@PathVariable("id") String id){
+
+        BookQuery query = new BookQuery();
+        query.setId(id);
+        return ResultInfo.success().add("info",bookService.getById(query));
+    }
+
+    @RequestMapping("/update")
+    @ResponseBody
+    public Object update(@Valid Book book, BindingResult result){
+
+        /*服务器端校验*/
+        if(result.hasErrors()){
+            //校验失败
+            return ResultInfo.fail().add("errors", ValidateDate.checkDate(result));
+        }
+
+        //校验成功,,进行保存操作
+        bookService.update(book);
+        return ResultInfo.success();
+
+    }
+
+    @RequestMapping(value="/delete/{id}")
+    @ResponseBody
+    public Object delete(@PathVariable("id") String id){
+
+        BookQuery query = new BookQuery();
+        query.setId(id);
+        bookService.delete(query);
+        return ResultInfo.success();
     }
 
     @RequestMapping("/save")

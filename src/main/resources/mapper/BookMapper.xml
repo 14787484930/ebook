@@ -7,6 +7,21 @@
     <select id="getBooks" resultType="Book">
         select * from bookinfo order by id desc
     </select>
+    
+    <select id="getById" resultType="Book">
+      select * from bookinfo where id = #{id}
+    </select>
+
+    <update id="update" parameterType="Book">
+        update bookinfo
+        set name = #{name},price = #{price},pub_date=#{pubDate},pic = #{pic}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="BookQuery">
+        delete from bookinfo
+        where id = #{id}
+    </delete>
 
     <insert id="save" parameterType="Book">
         insert into bookinfo

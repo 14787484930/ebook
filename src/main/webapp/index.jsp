@@ -111,6 +111,56 @@
         </div>
     </div>
 </div>
+
+<%--修改图书--%>
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">图书修改</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <input type="hidden" name="id" id="id1"/>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">书名：</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="name"  class="form-control" id="name1" placeholder="书名">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">价格：</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="price" class="form-control" id="price1" placeholder="价格">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">出版日期</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="pubDate" value="2018-11-20" class="form-control" id="pubDate1" placeholder="出版日期">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">图片</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="pic" class="form-control" id="pic1" placeholder="图片">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="book_update_btn">更新</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
 
     var totalRecord,currentPage;
@@ -327,6 +377,43 @@
         };
         return true;
     }
+    function validate_update_form(){
+        //书名校验
+        var name = $("#name1").val();
+        if(name === ""){
+            show_validate_msg("#name1", "error", "图书名称不能为空");
+            return false;
+        }else{
+            show_validate_msg("#name1", "success", "");
+        };
+
+        //价格校验
+        var price = $("#price1").val();
+        if(price === ""){
+            show_validate_msg("#price1", "error", "价格不能为空");
+            return false;
+        }else{
+            show_validate_msg("#price1", "success", "");
+        };
+
+        //日期校验
+        var pubDate = $("#pubDate1").val();
+        if(pubDate === ""){
+            show_validate_msg("#pubDate1", "error", "出版日期不能为空");
+            return false;
+        }else{
+            show_validate_msg("#pubDate1", "success", "");
+        };
+
+        var pic = $("#pic").val();
+        if(pic === ""){
+            show_validate_msg("#pic1", "error", "图片不能为空");
+            return false;
+        }else{
+            show_validate_msg("#pic1", "success", "");
+        };
+        return true;
+    }
     function show_validate_msg(ele,status,msg){
         //清除当前元素的校验状态
         $(ele).parent().removeClass("has-success has-error");
@@ -347,6 +434,76 @@
         $(ele).find("*").removeClass("has-error has-success");
         $(ele).find(".help-block").text("");
     }
+
+    $(document).on("click",".edit_btn",function(){
+        //alert("edit");
+
+        //2、查出员工信息，显示员工信息
+        var a = $(this).attr("edit-id");
+        //alert(a);
+        getEmp($(this).attr("edit-id"));
+
+        //3、把员工的id传递给模态框的更新按钮
+        $("#book_update_btn").attr("edit-id",$(this).attr("edit-id"));
+        $("#updateModal").modal({
+            backdrop:"static"
+        });
+    });
+
+    function getEmp(id){
+        $.ajax({
+            url:"${APP_PATH}/book/getById/"+id,
+            type:"GET",
+            success:function(result){
+                console.log(result);
+                var book = result.page.info;
+                $("#name1").val(book.name);
+                $("#price1").val(book.price);
+                //$("#pubDate1").val([empData.gender]);
+                $("#pic1").val(book.pic);
+                $("#id1").val(book.id);
+            }
+        });
+    }
+
+    //点击更新
+    $("#book_update_btn").click(function(){
+
+        validate_update_form();
+
+        $.ajax({
+            url:"${APP_PATH}/book/update",
+            type:"POST",
+            data:$("#updateModal form").serialize(),
+            success:function(result){
+                //alert(result.msg);
+                //1、关闭对话框
+                $("#updateModal").modal("hide");
+                //2、回到本页面
+                to_page(1);
+            }
+        });
+    });
+
+    //点击删除
+    $(document).on("click",".delete_btn",function(){
+        //1、弹出是否确认删除对话框
+        var name = $(this).parents("tr").find("td:eq(1)").text();
+        var id = $(this).attr("del-id");
+        alert(name);
+        if(confirm("确认删除【"+name+"】吗？")){
+            //确认，发送ajax请求删除即可
+           $.ajax({
+                url:"${APP_PATH}/book/delete/"+id,
+                type:"GET",
+                success:function(result){
+                    alert(result.msgs.msg);
+                    //回到本页
+                    to_page(1);
+                }
+            });
+        }
+    });
 
 </script>
 
