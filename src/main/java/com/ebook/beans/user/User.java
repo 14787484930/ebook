@@ -1,14 +1,13 @@
-package com.ebook.beans.base;
+package com.ebook.beans.user;
 
-import com.ebook.beans.user.User;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class BaseBean {
+public class User {
 
-    public User createUser; //创建者，后续会用微信来做
+    private Integer id;
     public Date createTime;  //创建时间
     public String updateUser; //修改人
     public Date updateTime; //修改时间
