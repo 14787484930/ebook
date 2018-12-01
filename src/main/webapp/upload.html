@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="jquery.js"></script>
+    <script src="vue.js"></script>
+
+</head>
+<body>
+<div id="app" >
+    标题：<input id="file" v-model="info.Title" type="text"  /><br />
+    <!--multiple属性支持多张上传-->
+    <input id="file"  type="file" @change="upload" multiple="multiple" />
+
+    <button @click="saveData">提交</button><br />
+    <img v-for="item in imgList" :src="item"  style="height:100px;width:400px;" />
+</div>
+</body>
+</html>
+<script>
+    $(function () {
+        new Vue({
+            el: '#app',
+            data: {
+                list:[],
+                imgList: [],
+                info: {
+                    Title: "标题",
+                    //Text:"内容",
+                },
+                formData: new FormData(),
+            },
+            methods: {
+                upload: function (e) {
+
+                    this.list = e.target.files;
+                    this.fileHandle();
+                },
+                fileHandle: function () {
+                    var _that = this;
+                    //图片大小判断，超过2M不装入formData。
+                    $.each(_that.list, (index, item) => {
+                        if (item.size > 2000000) {
+                        alert("图片大小不能超过2M，请重新上传！");
+                        return;
+                    }
+                    //图片回显
+                    var reader = new FileReader();
+                    reader.vue = _that;
+                    reader.readAsDataURL(item);
+                    reader.onload = function () {
+                        _that.imgList.push(this.result);
+                    }
+                    //-------关键代码，将图片集合装入formData中，保存时提交给后台
+                    this.formData.append('file', item);
+
+                })
+                    _that.$forceUpdate();
+
+                },
+                //保存
+                saveData: function () {
+                    this.formData.append("Title","123");//文本框数据转为json字符串装入formData
+                    console.log(this.formData);
+                    $.ajax({
+                        url: 'book/upload',//-------（关键改动）路径需要自己修改，才可正确请求到自己的后台
+                        type: 'POST',
+                        data: this.formData,
+                        cache: false,
+                        processData: false,
+                        contentType: false
+                    }).done(function (data) {
+                        console.log(data);
+                    });
+                }
+            }
+        })
+    })
+</script>
