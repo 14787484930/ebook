@@ -6,6 +6,7 @@ import com.ebook.services.BookService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.model.utills.messages.ResultInfo;
+import com.model.utills.upload.PicUpload;
 import com.model.utills.validate.ValidateDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -118,4 +121,22 @@ public class BookController {
         model.addAttribute("pageinfo",pageInfo);
         return "books/books";
     }*/
+
+    /**
+     * 图片上传测试
+     */
+    @RequestMapping("/upload")
+    public String doFileUpload(@RequestParam(value="Title") String Title, @RequestParam(value="file",required=false) MultipartFile[] file, HttpSession session) throws Exception {
+
+
+        //图片上传
+        String picsPath = PicUpload.uploadPic(file,session,"book");
+
+        //图片删除
+        //PicUpload.delPic(picsPath,session);
+
+        return null;
+    }
+
+
 }
