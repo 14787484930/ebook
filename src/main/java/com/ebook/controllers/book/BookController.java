@@ -5,6 +5,7 @@ import com.ebook.beans.book.BookQuery;
 import com.ebook.services.BookService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.model.utills.log.SysLog;
 import com.model.utills.messages.ResultInfo;
 import com.model.utills.upload.PicUpload;
 import com.model.utills.validate.ValidateDate;
@@ -31,6 +32,7 @@ public class BookController {
 
     @RequestMapping("/books")
     @ResponseBody
+    @SysLog(moduleName = "zxl查看所有信息")
     public Object getBooks(@RequestParam(value = "pn", defaultValue = "2") Integer pn , Model model){
 
         //在查询之前注入页码和页面容量
@@ -45,6 +47,7 @@ public class BookController {
 
     @RequestMapping(value="/getById/{id}")
     @ResponseBody
+    @SysLog(moduleName = "zxl查看信息")
     public Object getById(@PathVariable("id") String id){
 
         BookQuery query = new BookQuery();
