@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ebook.daos.SensitiveWordsDao">
+
+    <cache type="com.model.utills.redis.RedisCache" />
+
+    <select id="getSensitiveWords" resultType="SensitiveWords">
+
+    </select>
+
+    <select id="getById" resultType="SensitiveWords">
+
+    </select>
+
+    <update id="update" parameterType="SensitiveWords">
+
+    </update>
+
+    <delete id="delete" parameterType="SensitiveWordsQuery">
+
+    </delete>
+
+    <insert id="save" parameterType="SensitiveWords">
+
+    </insert>
+</mapper>
