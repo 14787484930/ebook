@@ -2,7 +2,7 @@ package com.ebook.controllers.book;
 
 import com.ebook.beans.book.Book;
 import com.ebook.beans.book.BookQuery;
-import com.ebook.log.SysLog;
+import com.ebook.sys.log.SysLog;
 import com.ebook.services.BookService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
