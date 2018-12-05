@@ -104,10 +104,10 @@
 
     <!--========================利用aop实现日志===========================-->
     <!-- 启动AOP AspectJ注解自动代理 -->
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
     <!-- 指定自定义注解类的路径 及 配置在Controller上添加自定义注解来接收数据 -->
-    <context:component-scan base-package="com.model.utills.log">
+    <!--<context:component-scan base-package="com.model.utills.log">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-    </context:component-scan>
+    </context:component-scan>-->
 
 </beans>
