@@ -1,4 +1,4 @@
-package com.ebook.log;
+package com.ebook.sys.log;
 
 import java.lang.annotation.*;
 

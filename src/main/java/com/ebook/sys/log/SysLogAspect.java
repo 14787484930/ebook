@@ -1,4 +1,4 @@
-package com.ebook.log;
+package com.ebook.sys.log;
 
 import com.ebook.beans.log.Log;
 import org.aspectj.lang.JoinPoint;
@@ -26,7 +26,7 @@ import java.util.Map;
 public class SysLogAspect {
 
     //Controller层切点
-    @Pointcut("@annotation(com.ebook.log.SysLog)")
+    @Pointcut("@annotation(com.ebook.sys.log.SysLog)")
     public void controllerAspect() { }
 
     @Before("controllerAspect()")
