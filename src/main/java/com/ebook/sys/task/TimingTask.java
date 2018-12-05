@@ -1,5 +1,6 @@
 package com.ebook.sys.task;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -23,14 +24,12 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
+@Lazy(false)
 public class TimingTask {
 
-    @Scheduled(cron = "0 10 17 5 12 3")
+    @Scheduled(cron = "0 30 23 * * *")
     public void testdemo(){
-        int a = 3;
-        int b = 3;
-        int c = 0;
-        c = a + b;
+       /*编写定时任务*/
         System.out.println("==============================定时任务执行成功");
     }
 }
