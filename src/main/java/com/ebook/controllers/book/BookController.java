@@ -2,10 +2,10 @@ package com.ebook.controllers.book;
 
 import com.ebook.beans.book.Book;
 import com.ebook.beans.book.BookQuery;
+import com.ebook.log.SysLog;
 import com.ebook.services.BookService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.model.utills.log.SysLog;
 import com.model.utills.messages.ResultInfo;
 import com.model.utills.upload.PicUpload;
 import com.model.utills.validate.ValidateDate;
