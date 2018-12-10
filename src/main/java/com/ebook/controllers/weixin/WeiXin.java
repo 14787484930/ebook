@@ -119,14 +119,25 @@ public class WeiXin {
         sb.append("<ToUserName>").append(map.get("FromUserName")).append("</ToUserName>");
         sb.append("<FromUserName>").append(map.get("ToUserName")).append("</FromUserName>");
         sb.append("<CreateTime>").append(new Date().getTime()).append("</CreateTime>");
-        sb.append("<MsgType>").append(map.get("MsgType")).append("</MsgType>");
-        if(map.get("Content").equals("高鹏举")){
-            sb.append("<Content>").append("真他妈丑！").append("</Content>");
-        }else if(map.get("Content").equals("张晓亮")) {
-            sb.append("<Content>").append("真他吗帅！").append("</Content>");
-        }else {
+
+        //判断不同额类型
+
+        if(map.get("MsgType").equals("image")){
+            sb.append("<MsgType>").append(map.get("MsgType")).append("</MsgType>");
+            sb.append("<Image>");
+            sb.append("<MediaId>").append(map.get("MediaId")).append("</MediaId>");
+            sb.append("</Image>");
+        }else if(map.get("MsgType").equals("voice")){
+            sb.append("<MsgType>").append(map.get("MsgType")).append("</MsgType>");
+            sb.append("<Voice>");
+            sb.append("<MediaId>").append(map.get("MediaId")).append("</MediaId>");
+            sb.append("</Voice>");
+        }else{
+            sb.append("<MsgType>").append(map.get("MsgType")).append("</MsgType>");
             sb.append("<Content>").append(map.get("Content")).append("</Content>");
         }
+
+
 
         sb.append("</xml>");
         return sb.toString();
