@@ -1,5 +1,6 @@
 package com.ebook.controllers.weixin;
 
+import com.model.utills.parse.ParseXML;
 import com.model.utills.sha1.Sha1Util;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,15 +9,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.*;
 
 @Controller
 @RequestMapping("/weixin/")
 public class WeiXin {
 
+    /**
+     * zxl
+     * @param request
+     * @param response
+     * @throws IOException
+     * 接入认证
+     */
     @RequestMapping(value="test",method = RequestMethod.GET)
     public void test(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -66,6 +73,13 @@ public class WeiXin {
         }
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws IOException
+     * 被动恢复用户消息
+     */
     @RequestMapping(value="test",method = RequestMethod.POST)
     public void testPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -77,15 +91,45 @@ public class WeiXin {
 
         //输出请求内容
         InputStreamReader reader = new InputStreamReader(inputStream,"utf-8");
-        BufferedReader bf = new BufferedReader(reader);
+        /*BufferedReader bf = new BufferedReader(reader);
 
         String content = null;
         while ((content = bf.readLine())!=null) {
             System.out.println(content);
+        }*/
+
+        Map<String,String> map = ParseXML.parse(reader);
+
+        Set<Map.Entry<String,String>> entrySet = map.entrySet();
+        Iterator<Map.Entry<String,String>> iterator = entrySet.iterator();
+        while (iterator.hasNext()){
+            Map.Entry<String,String> next = iterator.next();
+            System.out.println(next.getKey()+":"+next.getValue());
         }
 
-        //System.out.println("========"+666);
-        //response.getWriter().print("谢谢！");
-
+        response.getWriter().print(builderXML(map));
     }
+
+    public String builderXML(Map<String,String> map){
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("<xml>");
+
+        sb.append("<ToUserName>").append(map.get("FromUserName")).append("</ToUserName>");
+        sb.append("<FromUserName>").append(map.get("ToUserName")).append("</FromUserName>");
+        sb.append("<CreateTime>").append(new Date().getTime()).append("</CreateTime>");
+        sb.append("<MsgType>").append(map.get("MsgType")).append("</MsgType>");
+        if(map.get("Content").equals("高鹏举")){
+            sb.append("<Content>").append("真他妈丑！").append("</Content>");
+        }else if(map.get("Content").equals("张晓亮")) {
+            sb.append("<Content>").append("真他吗帅！").append("</Content>");
+        }else {
+            sb.append("<Content>").append(map.get("Content")).append("</Content>");
+        }
+
+        sb.append("</xml>");
+        return sb.toString();
+    }
+
 }
