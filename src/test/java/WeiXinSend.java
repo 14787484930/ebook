@@ -18,6 +18,10 @@ import java.io.IOException;
  */
 public class WeiXinSend {
 
+    /**
+     * zxl
+     * 获取接口调用凭据（因为所有的接口调用都要用到这个凭据）
+     * */
     @Test
     public void doGet() throws IOException {
 
@@ -40,8 +44,18 @@ public class WeiXinSend {
         String jsonStr = EntityUtils.toString(httpEntity);
         System.out.println(jsonStr);
 
+        /*{
+            "access_token":"16_U8j-vvdjs3-M-IS1OFwxHty6nVAiCK95SMx0lOxm5ETo4G5S8L1JuRt42H_peD1IoMaSP85SINqGU7gSiSV7xIthP-eKP6jJThZ5Vc4qgDqmYiyMHGAIinvqg2nTw2V7OEl6N7RTmWIxatRLVJCcABAGUN",
+            "expires_in":7200
+        }*/
+
     }
 
+
+    /**
+     * zxl
+     * 自定义菜单
+     * */
     @Test
     public void doPost() throws IOException {
 
@@ -64,4 +78,13 @@ public class WeiXinSend {
         String jsonStr = EntityUtils.toString(httpEntity);
         System.out.println(jsonStr);
     }
+
+    @Test
+    public void add(){
+
+        String url = Constant.ADD_MENU_URL.replace("ACCESS_TOKEN","");
+
+    }
+
+
 }

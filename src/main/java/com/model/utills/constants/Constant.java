@@ -17,5 +17,11 @@ public  class Constant {
     public static final String APPID = "wx3393132e8ecc0542";
     //第三方用户唯一凭证密钥
     public static final String APPSECRET = "332493c05a5932737400ada0f4a61109";
+    //查询菜单
+    public static final String GET_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=ACCESS_TOKEN";
+    //删除菜单
+    public static final String DEL_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN";
+    //添加菜单
+    public static final String ADD_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/addconditional?access_token=ACCESS_TOKEN";
 
 }
