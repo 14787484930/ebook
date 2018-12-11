@@ -5,6 +5,7 @@ import com.model.utills.sha1.Sha1Util;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -81,7 +82,7 @@ public class WeiXin {
      * 被动恢复用户消息
      */
     @RequestMapping(value="test",method = RequestMethod.POST)
-    public void testPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ModelAndView testPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         //设置响应编码
         response.setContentType("text/html; charset=UTF-8");
@@ -107,9 +108,23 @@ public class WeiXin {
             System.out.println(next.getKey()+":"+next.getValue());
         }
 
-        response.getWriter().print(builderXML(map));
+
+        String msgType = map.get("MsgType");
+        String event = map.get("Event");
+        //关注时的操作处理
+        if(msgType.equals("event") && event.equals("subscribe")){
+            map.put("Content","欢迎来到西林易市");
+            map.put("MsgType","text");
+            map.put("CreateTime",new Date().getTime()+"");
+        }
+        //不关注时发邮件处理TODO
+
+
+        //response.getWriter().print(builderXML(map));
+        return new ModelAndView("weixin/weixin","map",map);
     }
 
+    /*打印消息（不用了）*/
     public String builderXML(Map<String,String> map){
 
         StringBuilder sb = new StringBuilder();
