@@ -1,4 +1,7 @@
 import com.model.utills.constants.Constant;
+import com.model.utills.http.SendHttp;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -82,8 +85,91 @@ public class WeiXinSend {
     @Test
     public void add(){
 
-        String url = Constant.ADD_MENU_URL.replace("ACCESS_TOKEN","");
+        String url = Constant.ADD_MENU_URL.replace("ACCESS_TOKEN",Constant.ACCESSTOKEN);
 
+        String jsonParams = objToJsonstr();
+        System.out.println(jsonParams);
+
+        String jsonStr = SendHttp.sendPost(url,jsonParams);
+
+        System.out.println(jsonStr);
+    }
+
+
+    public static String objToJsonstr(){
+
+        //根菜单
+        JSONObject root = new JSONObject();
+
+        //一级菜单集合
+        JSONArray oneLevelMenus = new JSONArray();
+
+        //*一级菜单*//*
+        //进入、广告、关于我们
+        JSONObject input = new JSONObject();
+        input.put("name","进入");
+
+        JSONObject advertising = new JSONObject();
+        advertising.put("name","校园趣事");
+        advertising.put("type","view");
+        advertising.put("url","http://www.baidu.com");
+
+        JSONObject aboutUs = new JSONObject();
+        aboutUs.put("name","关于我们");
+
+        //*二级菜单*//*
+        //进入有连个二级菜单
+        JSONArray twoLevelMenus1 = new JSONArray();
+
+        //我要购买
+        JSONObject toBuy = new JSONObject();
+        toBuy.put("type","view");
+        toBuy.put("name","我要购买");
+        toBuy.put("url","http://www.baidu.com");
+
+        //我要发布
+        JSONObject toRealse = new JSONObject();
+        toRealse.put("type","view");
+        toRealse.put("name","我要发布");
+        toRealse.put("url","https://www.taobao.com/");
+
+        //加入集合
+        twoLevelMenus1.add(toBuy);
+        twoLevelMenus1.add(toRealse);
+
+        //将集合放到一级菜单下
+        input.put("sub_button",twoLevelMenus1);
+
+        //关于我们有两个二级菜单
+        JSONArray twoLevelMenus2 = new JSONArray();
+
+        //我要购买
+        JSONObject introduceOur = new JSONObject();
+        introduceOur.put("type","view");
+        introduceOur.put("name","我的建议");
+        introduceOur.put("url","http://www.baidu.com");
+
+        //我要发布
+        JSONObject myAdvice = new JSONObject();
+        myAdvice.put("type","view");
+        myAdvice.put("name","关于我们");
+        myAdvice.put("url","https://www.taobao.com/");
+
+        //加入集合
+        twoLevelMenus2.add(introduceOur);
+        twoLevelMenus2.add(myAdvice);
+
+        //将集合加入一级菜单
+        aboutUs.put("sub_button",twoLevelMenus2);
+
+        oneLevelMenus.add(input);
+        oneLevelMenus.add(advertising);
+        oneLevelMenus.add(aboutUs);
+
+        //*全部整合到根菜单下*//*
+        root.put("button",oneLevelMenus);
+
+        return root.toString();
     }
 
 

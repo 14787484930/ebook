@@ -9,13 +9,12 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.junit.Test;
 
 import java.io.IOException;
 
 public class SendHttp {
 
-    public String sengGet() {
+    public static String sengGet() {
 
         String url = Constant.GET_ACCESS_TOKEN_URL.replace("APPID",Constant.APPID).replace("APPSECRET",Constant.APPSECRET);
 
@@ -52,8 +51,7 @@ public class SendHttp {
      * zxl
      * 自定义菜单
      * */
-    @Test
-    public String sendPost(String url,String paramsJson){
+    public static String sendPost(String url,String paramsJson){
 
         /*发送post请求*/
         //创建执行对象
@@ -62,7 +60,7 @@ public class SendHttp {
         HttpPost httpPost = new HttpPost(url);
         try {
             //设置请求参数
-            httpPost.setEntity(new StringEntity(paramsJson,"utf-8"));
+            httpPost.setEntity(new StringEntity(paramsJson,"UTF-8"));
             //发送请求，得到响应结果
             HttpResponse response = httpClient.execute(httpPost);
             /*解析响应结果*/
