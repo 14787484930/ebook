@@ -92,19 +92,19 @@
 
     <!--servlet api 由于tomcat中存在此api，所以设置成<scope>provided</scope>，即部署时自动替除-->
     <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
-    <dependency>
+    <!--<dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
       <version>2.5</version>
       <scope>provided</scope>
-    </dependency>
+    </dependency>-->
 
-    <!--<dependency>
+    <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>3.0.1</version>
       <scope>provided</scope>
-    </dependency>-->
+    </dependency>
 
     <!--单元测试依赖-->
     <!--<dependency>

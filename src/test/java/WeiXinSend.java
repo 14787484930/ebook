@@ -132,13 +132,13 @@ public class WeiXinSend {
         JSONObject toBuy = new JSONObject();
         toBuy.put("type","view");
         toBuy.put("name","我要购买");
-        toBuy.put("url","http://554dd61a.ngrok.io/weixin/getNumber");
+        toBuy.put("url","http://45aec5c4.ngrok.io/weixin/getNumber");
 
         //我要发布
         JSONObject toRealse = new JSONObject();
         toRealse.put("type","view");
         toRealse.put("name","我要发布");
-        toRealse.put("url","http://554dd61a.ngrok.io");
+        toRealse.put("url","http://45aec5c4.ngrok.io");
 
         //加入集合
         twoLevelMenus1.add(toBuy);

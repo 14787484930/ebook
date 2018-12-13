@@ -164,9 +164,11 @@ public class WeiXin {
      * 获取用户微信号进行绑定
      * */
     @RequestMapping(value="getNumber",method = RequestMethod.GET)
-    public void getWeiXinNumber(){
+    public void getWeiXinNumber(HttpServletRequest request, HttpServletResponse response){
 
         System.out.println("获取用户微信号！");
+        String weixin = (String)request.getSession().getAttribute("fromUserName");
+        System.out.println(weixin);
     }
 
 }
