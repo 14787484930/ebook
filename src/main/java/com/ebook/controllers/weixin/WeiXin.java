@@ -158,4 +158,15 @@ public class WeiXin {
         return sb.toString();
     }
 
+    /**
+     * zxl
+     * 2018-12-13
+     * 获取用户微信号进行绑定
+     * */
+    @RequestMapping(value="getNumber",method = RequestMethod.GET)
+    public void getWeiXinNumber(){
+
+        System.out.println("获取用户微信号！");
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.model.utills.http;
 
-import com.model.utills.constants.Constant;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -14,9 +13,7 @@ import java.io.IOException;
 
 public class SendHttp {
 
-    public static String sengGet() {
-
-        String url = Constant.GET_ACCESS_TOKEN_URL.replace("APPID",Constant.APPID).replace("APPSECRET",Constant.APPSECRET);
+    public static String sengGet(String url) {
 
         /*使用HttpClient发送请求,3步*/
         //获取执行对象

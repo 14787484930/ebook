@@ -18,12 +18,16 @@ public  class Constant {
     //第三方用户唯一凭证密钥
     public static final String APPSECRET = "332493c05a5932737400ada0f4a61109";
     //调用接口凭据
-    public static String ACCESSTOKEN = "16_wiydMT5NaVWiRJhddFx0FFx8uM5PP6eQFVM3g7b1BafqACWp_wNxctBY4b9rtq4c2kwpvvnXePpwkd7c9_fgtK3Zg99rOGBnDds_7o3khAsVsn85f7SyFWCk6p4LPYeAHAAEN";
+    public static String ACCESSTOKEN = "16_PQ4T9mrOlLyhAwkcP_ugH005RPl7_xPujmyIkpbt5QjDfUCsU_yMyw9aAT8iW_feGi8P8kKAkUrOjIi3gBkn01qRrvITd281pwZfu_sbld8eSWh9QSpiDhbEPuQ7BVNmD63PCFSBuD_8px23TCHiAGAHQV";
     //查询菜单
     public static final String GET_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=ACCESS_TOKEN";
     //删除菜单
     public static final String DEL_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN";
     //添加菜单
     public static final String ADD_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
+    //发起授权请求
+    public static final String WEB_AUTH_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect";
+    //获取用户信息
+    public static final String GET_USERINFO_URL = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code";
 
 }
