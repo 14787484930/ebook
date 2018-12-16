@@ -132,13 +132,13 @@ public class WeiXinSend {
         JSONObject toBuy = new JSONObject();
         toBuy.put("type","view");
         toBuy.put("name","我要购买");
-        toBuy.put("url","http://45aec5c4.ngrok.io/weixin/getNumber");
+        toBuy.put("url","http://321f11a4.ngrok.io/weixin/getNumber");
 
         //我要发布
         JSONObject toRealse = new JSONObject();
         toRealse.put("type","view");
         toRealse.put("name","我要发布");
-        toRealse.put("url","http://45aec5c4.ngrok.io");
+        toRealse.put("url","http://321f11a4.ngrok.io");
 
         //加入集合
         twoLevelMenus1.add(toBuy);
@@ -204,6 +204,19 @@ public class WeiXinSend {
         String url = Constant.DEL_MENU_URL.replace("ACCESS_TOKEN",Constant.ACCESSTOKEN);
         String str = SendHttp.sengGet(url);
         System.out.println(str);
+    }
+
+    @Test
+    public void getUserMassage(){
+
+        String str = "16_BsC9tqc_bM1Ath0YKEZDZgabQG4wDE1iZcCdZOY2uNN3bilRvKLQ8gwIYIqFJTxFnG9w8a_Fq8q2vyRFppLvaTXtt30nPiL7J31B9LKISP6HrSPe94V_1tCBZ3m71YM5dU5gCBw16S1Gi7G9TSFeABAONA";
+        String url = "https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN";
+        url = url.replace("ACCESS_TOKEN",str);
+        url = url.replace("OPENID","og4jG1LVi3tcqeWIU_Dw4c1SdfGk");
+
+        String s = SendHttp.sengGet(url);
+        System.out.println(s);
+
     }
 
 }

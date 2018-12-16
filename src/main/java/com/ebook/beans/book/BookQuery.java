@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class BookQuery {
-    private String id;
+    private Integer id;
 }

@@ -51,7 +51,7 @@ public class BookController {
     public Object getById(@PathVariable("id") String id){
 
         BookQuery query = new BookQuery();
-        query.setId(id);
+        query.setId(1);
         return ResultInfo.success().add("info",bookService.getById(query));
     }
 
@@ -73,7 +73,7 @@ public class BookController {
 
     @RequestMapping(value="/delete/{id}")
     @ResponseBody
-    public Object delete(@PathVariable("id") String id){
+    public Object delete(@PathVariable("id") Integer id){
 
         BookQuery query = new BookQuery();
         query.setId(id);

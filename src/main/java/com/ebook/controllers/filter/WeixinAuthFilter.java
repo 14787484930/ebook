@@ -13,13 +13,20 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ebook.beans.book.Book;
+import com.ebook.beans.book.BookQuery;
+import com.ebook.services.BookService;
 import com.model.utills.constants.Constant;
 import com.model.utills.http.SendHttp;
 import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 @WebFilter("/*")
 public class WeixinAuthFilter implements Filter {
+
+    @Autowired
+    public BookService bookService;
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -33,15 +40,21 @@ public class WeixinAuthFilter implements Filter {
 	 * */
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+			FilterChain chain)  {
+        BookQuery bookQuery = new BookQuery();
+        bookQuery.setId(1);
+	    Book book = bookService.getById(bookQuery);
+        System.out.println("校验吗数据："+book.toString());
+
         HttpServletRequest hRequest = (HttpServletRequest) request;
         HttpServletResponse hResponse = (HttpServletResponse) response;
         System.out.println("====================123");
         String agent = hRequest.getHeader("User-Agent");
         //如果session中已经存在微信号了，就不用获取了，否则要获取，获取到以后要存放sesion
         String fromUserName = (String) hRequest.getSession().getAttribute("fromUserName");
-        if (fromUserName == null)
-        {
+        //if (fromUserName == null)
+        //{
+        try {
         	  //只有在微信端才做里面的操作
             if (agent != null && agent.toLowerCase().indexOf("micromessenger") >= 0)
             {
@@ -58,6 +71,10 @@ public class WeixinAuthFilter implements Filter {
                     		.replace("CODE", code);
                     String json = SendHttp.sengGet(url);
                     String openid = JSONObject.fromObject(json).getString("openid");
+                    String access_token = JSONObject.fromObject(json).getString("access_token");
+                    String a = Constant.GET_USER_URL.replace("ACCESS_TOKEN",access_token).replace("OPENID",openid);
+                    String jsonStr = SendHttp.sengGet(a);
+                    System.out.println("打印数据："+jsonStr);
                     hRequest.getSession().setAttribute("fromUserName", openid);
                     System.out.println(openid+"jjjjjjjjjjjjjjj");
                 }
@@ -82,8 +99,14 @@ public class WeixinAuthFilter implements Filter {
                     return;
                 }
             }
+       // }
+
+            chain.doFilter(hRequest, hResponse);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ServletException e) {
+            e.printStackTrace();
         }
-        chain.doFilter(hRequest, hResponse);
     }
 
 	@Override

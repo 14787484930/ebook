@@ -30,7 +30,7 @@ public class SendHttp {
             System.out.println("=========="+code);
             //得到响应内容
             HttpEntity httpEntity = response.getEntity();
-            String jsonStr = EntityUtils.toString(httpEntity);
+            String jsonStr = EntityUtils.toString(httpEntity,"utf-8");
             System.out.println(jsonStr);
             return jsonStr;
         } catch (Exception e) {
