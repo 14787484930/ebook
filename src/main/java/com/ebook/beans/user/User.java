@@ -8,8 +8,10 @@ import java.util.Date;
 public class User {
 
     private Integer id;
-    public Date createTime;  //创建时间
-    public String updateUser; //修改人
-    public Date updateTime; //修改时间
-    public Integer dataStatus; //数据状态
+    private Date createTime;  //创建时间
+    private String updateUser; //修改人
+    private Date updateTime; //修改时间
+    private String openId; //用户唯一标识
+    private String nickname; //微信昵称你
+    private Integer dataStatus; //数据状态
 }
