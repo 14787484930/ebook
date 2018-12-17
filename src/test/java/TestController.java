@@ -63,7 +63,7 @@ public class TestController {
         System.out.println("输出图书数据：");
         List<Book> list = pageInfo.getList();
         for(Book book:list){
-            System.out.println("书名："+book.getName()+" 图片："+book.getPic()+" 价格："+book.getPrice());
+            //System.out.println("书名："+book.getName()+" 图片："+book.getPic()+" 价格："+book.getPrice());
         }
 
     }

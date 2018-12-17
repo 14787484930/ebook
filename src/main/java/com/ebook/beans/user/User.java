@@ -2,16 +2,19 @@ package com.ebook.beans.user;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class User {
+public class User implements Serializable {
 
     private Integer id;
     private Date createTime;  //创建时间
     private String updateUser; //修改人
     private Date updateTime; //修改时间
     private String openId; //用户唯一标识
+    private String weiXin; //用户微信
     private String nickname; //微信昵称你
+    private String email; //用户邮箱
     private Integer dataStatus; //数据状态
 }

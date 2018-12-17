@@ -1,4 +1,5 @@
 import com.ebook.beans.book.Book;
+import com.ebook.beans.book.BookQuery;
 import com.ebook.daos.BookDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +19,7 @@ public class Hello {
     @Test
     public void test(){
 
-        List<Book> list = bookDao.getBooks();
+        List<Book> list = bookDao.getBooks(new BookQuery());
         for(Book book:list){
             System.out.println(book.toString());
         }

@@ -4,39 +4,99 @@
 
     <cache type="com.model.utills.redis.RedisCache" />
 
-    <select id="getBooks" resultType="Book">
-        select * from bookinfo order by id desc
+
+    <resultMap id="bookinfo" type="Book">
+        <id property="id" column="id"/>
+        <result property="bookName" column="bookName"/>
+        <result property="author" column="author"/>
+        <result property="bookPrice" column="bookPrice"/>
+        <result property="pubDate" column="pubDate"/>
+        <result property="bookPub" column="bookPub"/>
+        <result property="bookPic" column="bookPic"/>
+        <result property="weiXin" column="weiXin"/>
+        <result property="phone" column="phone"/>
+        <result property="describe" column="describe"/>
+        <result property="createTime" column="createTime"/>
+        <association property="createUser" javaType="User" select="getUser" column="createUser"/>
+    </resultMap>
+
+    <!--查询用户信息-->
+    <select id="getUser"  resultType="User">
+        select id,weiXin,nickname,openId from userInfo where id = #{createUser}
     </select>
-    
-    <select id="getById" resultType="Book">
-      select * from bookinfo where id = #{id}
+
+    <!--查看图书table-->
+    <select id="getBooks" resultMap="bookinfo" parameterType="BookQuery">
+        select
+         id, bookName, author, bookPrice, pubDate, bookPub, bookPic, weiXin, phone, describe, createUser, createTime
+        from bookInfo
+        where dataStatus = 1
+        order by createTime desc
+    </select>
+
+    <!--查看图书详情-->
+    <select id="getById" resultMap="bookinfo">
+      select
+       id, bookName, author, bookPrice, pubDate, bookPub, bookPic, weiXin, phone, describe, createUser, createTime
+      from bookInfo where id = #{id}
     </select>
 
     <update id="update" parameterType="Book">
-        update bookinfo
-        set name = #{name},price = #{price},pub_date=#{pubDate},pic = #{pic}
+        update bookInfo
+        <set>
+            <if test="#{bookName}!=null">bookName=#{bookName}</if>
+            <if test="#{author}!=null">author=#{author}</if>
+            <if test="#{bookPrice}!=null">bookPrice=#{bookPrice}</if>
+            <if test="#{pubDate}!=null">pubDate=#{pubDate}</if>
+            <if test="#{bookPub}!=null">bookPub=#{bookPub}</if>
+            <if test="#{bookPic}!=null">bookPic=#{bookPic}</if>
+            <if test="#{weiXin}!=null">weiXin=#{weiXin}</if>
+            <if test="#{phone}!=null">phone=#{phone}</if>
+            <if test="#{describe}!=null">describe=#{describe}</if>
+            <if test="#{createUser}!=null">createUser=#{createUser}</if>
+            <if test="#{createTime}!=null">createTime=#{createTime}</if>
+        </set>
         where id = #{id}
     </update>
 
     <delete id="delete" parameterType="BookQuery">
-        delete from bookinfo
+        update bookInfo
+        set dataStatus = 100
         where id = #{id}
     </delete>
 
     <insert id="save" parameterType="Book">
-        insert into bookinfo
+        insert into bookInfo
         (
-        name,
-        price,
-        pub_Date,
-        pic
+            id,
+            bookName,
+            author,
+            bookPrice,
+            pubDate,
+            bookPub,
+            bookPic,
+            weiXin,
+            phone,
+            describe,
+            createUser,
+            createTime,
+            dataStatus
         )
         values
         (
-        #{name},
-        #{price},
-        #{pubDate},
-        #{pic}
+            #{id},
+            #{bookName},
+            #{author},
+            #{bookPrice},
+            #{pubDate},
+            #{bookPub},
+            #{bookPic},
+            #{weiXin},
+            #{phone},
+            #{describe},
+            #{createUser},
+            #{createTime},
+            #{dataStatus}
         )
     </insert>
 </mapper>

@@ -20,9 +20,9 @@ public class BookServiceImpl implements BookService {
      * 查询图书详细信息
      */
     @Override
-    public List<Book> getBooks() {
+    public List<Book> getBooks(BookQuery query) {
 
-        List<Book> list = bookDao.getBooks();
+        List<Book> list = bookDao.getBooks(query);
         return list;
     }
 

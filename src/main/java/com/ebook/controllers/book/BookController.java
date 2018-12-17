@@ -30,7 +30,27 @@ public class BookController {
     @Autowired
     BookService bookService;
 
+    /*最新的*/
     @RequestMapping("/books")
+    @ResponseBody
+    @SysLog(moduleName = "zxl查看所有信息")
+    public Object getBooks(BookQuery bookQuery , Model model){
+
+        //在查询之前注入页码和页面容量
+        PageHelper.startPage(bookQuery.getPageNumber(),bookQuery.getPageSize());
+        //查询数据
+        List<Book> list = bookService.getBooks(bookQuery);
+        //包装查询后的结果
+        PageInfo<Book> pageInfo = new PageInfo<Book>(list,3);
+        //封装数据
+        return ResultInfo.success().add("pageInfo",pageInfo);
+    }
+
+
+
+    /*原来的*/
+
+    /*@RequestMapping("/books")
     @ResponseBody
     @SysLog(moduleName = "zxl查看所有信息")
     public Object getBooks(@RequestParam(value = "pn", defaultValue = "2") Integer pn , Model model){
@@ -43,7 +63,7 @@ public class BookController {
         PageInfo<Book> pageInfo = new PageInfo<Book>(list,3);
         //封装数据
         return ResultInfo.success().add("pageInfo",pageInfo);
-    }
+    }*/
 
     @RequestMapping(value="/getById/{id}")
     @ResponseBody
