@@ -65,4 +65,6 @@ public class Book extends BaseBean implements Serializable {
 
     private String describe;          //描述
 
+    private Integer viewTimes;        //浏览次数
+
 }

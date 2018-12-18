@@ -41,6 +41,7 @@
       from bookInfo where id = #{id}
     </select>
 
+    <!--编辑图书-->
     <update id="update" parameterType="Book">
         update bookInfo
         <set>
@@ -59,12 +60,14 @@
         where id = #{id}
     </update>
 
+    <!--删除图书（软删）-->
     <delete id="delete" parameterType="BookQuery">
         update bookInfo
         set dataStatus = 100
         where id = #{id}
     </delete>
 
+    <!--添加图书-->
     <insert id="save" parameterType="Book">
         insert into bookInfo
         (
@@ -99,4 +102,11 @@
             #{dataStatus}
         )
     </insert>
+
+
+    <!--浏览量的统计-->
+    <update id="updateViews" parameterType="BookQuery">
+        update bookInfo set viewTimes = viewTimes + 1 where id = #{id}
+    </update>
+
 </mapper>

@@ -34,7 +34,9 @@ public class BookController {
     @RequestMapping("/books")
     @ResponseBody
     @SysLog(moduleName = "zxl查看所有信息")
-    public Object getBooks(BookQuery bookQuery , Model model){
+    public Object getBooks(BookQuery bookQuery,HttpSession session){
+
+        //从session中取出用户信息和请求权限信息，并设置到查询调教bookQuery中
 
         //在查询之前注入页码和页面容量
         PageHelper.startPage(bookQuery.getPageNumber(),bookQuery.getPageSize());
