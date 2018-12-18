@@ -33,4 +33,10 @@ public  class Constant {
     //获取用户基本信息
     public static final String GET_USER_URL = "https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN";
 
+
+    /*实体校验相关常量*/
+    //手机号校验的正则常量
+    public static final String PHONE_NUMBER = "^((17[0-9])|(14[0-9])|(13[0-9])|(15[^4,\\\\D])|(18[0,5-9]))\\\\d{8}$";
+
+
 }
