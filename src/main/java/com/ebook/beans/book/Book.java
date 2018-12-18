@@ -2,13 +2,12 @@ package com.ebook.beans.book;
 
 import com.ebook.beans.base.BaseBean;
 import com.ebook.beans.user.User;
+import com.model.utills.constants.Constant;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -37,12 +36,14 @@ public class Book extends BaseBean implements Serializable {
     @NotEmpty(message = "图书名称不能为空")
     private String bookName;           //图书名称
 
+    @NotEmpty(message = "图书类型不能为空")
     private Integer bookType;          //图书类型
 
     @NotEmpty(message = "作者不能为空")
     private String author;             //作者
 
     @NotNull(message = "价格不能为空")
+    @Max(value = 0,message = "价格不能小于0")
     private Double bookPrice;         //价格
 
     @NotNull(message = "日期不能为空")
@@ -55,10 +56,11 @@ public class Book extends BaseBean implements Serializable {
 
     private String bookPic;           //图书图片
 
-    @NotNull(message = "微信不能为空")
+    //@NotNull(message = "微信不能为空")
     private String weiXin;            //微信
 
     @NotNull(message = "手机不能为空")
+    @Pattern(regexp = Constant.PHONE_NUMBER, message = "输入的手机号不合法")
     private String phone;             //电话
 
     private String describe;          //描述
