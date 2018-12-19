@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 public class User implements Serializable {
 
-    private Integer id;
+    private String id;
     private Date createTime;  //创建时间
     private String updateUser; //修改人
     private Date updateTime; //修改时间
@@ -16,5 +16,6 @@ public class User implements Serializable {
     private String weiXin; //用户微信
     private String nickname; //微信昵称你
     private String email; //用户邮箱
+    private String phone; //用户手机号
     private Integer dataStatus; //数据状态
 }

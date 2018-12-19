@@ -30,24 +30,70 @@ public class BookController {
     @Autowired
     BookService bookService;
 
-    /*最新的*/
+    /**
+     * zxl
+     * @param bookQuery
+     * @param session
+     * @return
+     * 2018-12-18
+     */
     @RequestMapping("/books")
     @ResponseBody
     @SysLog(moduleName = "zxl查看所有信息")
     public Object getBooks(BookQuery bookQuery,HttpSession session){
 
-        //从session中取出用户信息和请求权限信息，并设置到查询调教bookQuery中
+        //权限初始化
+        bookQuery.intiQuery(session);
 
         //在查询之前注入页码和页面容量
-        PageHelper.startPage(bookQuery.getPageNumber(),bookQuery.getPageSize());
+        PageHelper.startPage(bookQuery.getPageNumber(),bookQuery.getPageNumber());
+
         //查询数据
         List<Book> list = bookService.getBooks(bookQuery);
         //包装查询后的结果
-        PageInfo<Book> pageInfo = new PageInfo<Book>(list,3);
+        PageInfo<Book> pageInfo = new PageInfo<Book>(list,bookQuery.getPageSize());
         //封装数据
-        return ResultInfo.success().add("pageInfo",pageInfo);
+        return ResultInfo.success().add("pageInfo",pageInfo).add("userInfo",session.getAttribute("userInfo"));
     }
 
+    /**
+     * zxl
+     * @param id
+     * @return
+     * 2018-12-18
+     */
+    @RequestMapping(value="/getById/{id}")
+    @ResponseBody
+    @SysLog(moduleName = "zxl查看信息")
+    public Object getById(@PathVariable("id") String id){
+
+        BookQuery query = new BookQuery();
+        query.setId(1);
+        return ResultInfo.success().add("info",bookService.getById(query));
+    }
+
+    /**
+     * zxl
+     * @param book
+     * @param result
+     * @return
+     * 2018-12-18
+     */
+    @RequestMapping("/save")
+    @ResponseBody
+    public Object save(@Valid Book book, BindingResult result,HttpSession session){
+
+        /*服务器端校验*/
+        if(result.hasErrors()){
+            //校验失败
+            return ResultInfo.fail().add("errors", ValidateDate.checkDate(result));
+        }
+
+        //校验成功,,进行保存操作
+        bookService.save(book);
+        return ResultInfo.success();
+
+    }
 
 
     /*原来的*/
@@ -67,7 +113,7 @@ public class BookController {
         return ResultInfo.success().add("pageInfo",pageInfo);
     }*/
 
-    @RequestMapping(value="/getById/{id}")
+    /*@RequestMapping(value="/getById/{id}")
     @ResponseBody
     @SysLog(moduleName = "zxl查看信息")
     public Object getById(@PathVariable("id") String id){
@@ -75,7 +121,7 @@ public class BookController {
         BookQuery query = new BookQuery();
         query.setId(1);
         return ResultInfo.success().add("info",bookService.getById(query));
-    }
+    }*/
 
     @RequestMapping("/update")
     @ResponseBody
@@ -103,11 +149,11 @@ public class BookController {
         return ResultInfo.success();
     }
 
-    @RequestMapping("/save")
+   /* @RequestMapping("/save")
     @ResponseBody
     public Object save(@Valid Book book, BindingResult result){
 
-        /*服务器端校验*/
+        *//*服务器端校验*//*
         if(result.hasErrors()){
             //校验失败
             return ResultInfo.fail().add("errors", ValidateDate.checkDate(result));
@@ -117,7 +163,7 @@ public class BookController {
         bookService.save(book);
         return ResultInfo.success();
 
-    }
+    }*/
 
 
     /*@RequestMapping("/books")
