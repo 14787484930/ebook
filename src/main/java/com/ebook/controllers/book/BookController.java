@@ -48,12 +48,14 @@ public class BookController {
         bookQuery.intiQuery(session);
 
         //在查询之前注入页码和页面容量
-        PageHelper.startPage(bookQuery.getPageNumber(),bookQuery.getPageNumber());
+        PageHelper.startPage(bookQuery.getPageNumber(),bookQuery.getPageSize());
 
         //查询数据
         List<Book> list = bookService.getBooks(bookQuery);
-        //包装查询后的结果
-        PageInfo<Book> pageInfo = new PageInfo<Book>(list,bookQuery.getPageSize());
+
+        //包装查询后的结果(10表示导航器连续显示多少条)
+        PageInfo<Book> pageInfo = new PageInfo<Book>(list,10);
+
         //封装数据
         return ResultInfo.success().add("pageInfo",pageInfo).add("userInfo",bookQuery.getUser());
     }
