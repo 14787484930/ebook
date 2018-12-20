@@ -96,10 +96,12 @@ public class BookController {
         book.setUpdateUser((User) session.getAttribute("userInfo"));
         book.setUpdateTime(new Date());
 
+        String picstr = bookService.getById(book.getId()).getBookPic();
+
         //校验成功,,进行保存操作
         bookService.update(book);
         //编辑成功，干掉原来的图片
-        PicUpload.delPic(bookService.getById(book.getId()).getBookPic(),session);
+        PicUpload.delPic(picstr,session);
         return ResultInfo.success();
 
     }
