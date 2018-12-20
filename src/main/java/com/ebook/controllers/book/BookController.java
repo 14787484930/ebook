@@ -2,6 +2,7 @@ package com.ebook.controllers.book;
 
 import com.ebook.beans.book.Book;
 import com.ebook.beans.book.BookQuery;
+import com.ebook.beans.user.User;
 import com.ebook.sys.log.SysLog;
 import com.ebook.services.BookService;
 import com.github.pagehelper.PageHelper;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -53,7 +55,7 @@ public class BookController {
         //包装查询后的结果
         PageInfo<Book> pageInfo = new PageInfo<Book>(list,bookQuery.getPageSize());
         //封装数据
-        return ResultInfo.success().add("pageInfo",pageInfo).add("userInfo",session.getAttribute("userInfo"));
+        return ResultInfo.success().add("pageInfo",pageInfo).add("userInfo",bookQuery.getUser());
     }
 
     /**
@@ -67,9 +69,53 @@ public class BookController {
     @SysLog(moduleName = "zxl查看信息")
     public Object getById(@PathVariable("id") String id){
 
+        return ResultInfo.success().add("info",bookService.getById(id));
+    }
+
+    /**
+     * zxl
+     * @param book
+     * @param result
+     * @return
+     * 编辑图书信息
+     */
+    @RequestMapping("/update")
+    @ResponseBody
+    public Object update(@RequestParam(value="book",required=true) @Valid Book book,@RequestParam(value="files",required=false) MultipartFile[] files, BindingResult result,HttpSession session) throws Exception {
+
+        /*服务器端校验*/
+        if(result.hasErrors()){
+            //校验失败
+            return ResultInfo.fail().add("errors", ValidateDate.checkDate(result));
+        }
+
+        //图片的处理
+        book.setBookPic(PicUpload.uploadPic(files,session,"book"));
+        book.setUpdateUser((User) session.getAttribute("userInfo"));
+        book.setUpdateTime(new Date());
+
+        //校验成功,,进行保存操作
+        bookService.update(book);
+        //编辑成功，干掉原来的图片
+        PicUpload.delPic(bookService.getById(book.getId()).getBookPic(),session);
+        return ResultInfo.success();
+
+    }
+
+    /**
+     * zxl
+     * @param id
+     * @return
+     * 删除图书信息
+     */
+    @RequestMapping(value="/delete/{id}")
+    @ResponseBody
+    public Object delete(@PathVariable("id") String id){
+
         BookQuery query = new BookQuery();
-        query.setId(1);
-        return ResultInfo.success().add("info",bookService.getById(query));
+        query.setId(id);
+        bookService.delete(query);
+        return ResultInfo.success();
     }
 
     /**
@@ -81,13 +127,18 @@ public class BookController {
      */
     @RequestMapping("/save")
     @ResponseBody
-    public Object save(@Valid Book book, BindingResult result,HttpSession session){
+    public Object save(@RequestParam(value="book",required=true) @Valid Book book,@RequestParam(value="files",required=false) MultipartFile[] files, BindingResult result,HttpSession session) throws Exception {
 
         /*服务器端校验*/
         if(result.hasErrors()){
             //校验失败
             return ResultInfo.fail().add("errors", ValidateDate.checkDate(result));
         }
+
+        //图片的处理
+        book.setBookPic(PicUpload.uploadPic(files,session,"book"));
+        book.setCreateUser((User)session.getAttribute("userInfo"));
+        book.setCreateTime(new Date());
 
         //校验成功,,进行保存操作
         bookService.save(book);
@@ -123,11 +174,11 @@ public class BookController {
         return ResultInfo.success().add("info",bookService.getById(query));
     }*/
 
-    @RequestMapping("/update")
+   /* @RequestMapping("/update")
     @ResponseBody
     public Object update(@Valid Book book, BindingResult result){
 
-        /*服务器端校验*/
+        *//*服务器端校验*//*
         if(result.hasErrors()){
             //校验失败
             return ResultInfo.fail().add("errors", ValidateDate.checkDate(result));
@@ -137,9 +188,9 @@ public class BookController {
         bookService.update(book);
         return ResultInfo.success();
 
-    }
+    }*/
 
-    @RequestMapping(value="/delete/{id}")
+    /*@RequestMapping(value="/delete/{id}")
     @ResponseBody
     public Object delete(@PathVariable("id") Integer id){
 
@@ -147,7 +198,7 @@ public class BookController {
         query.setId(id);
         bookService.delete(query);
         return ResultInfo.success();
-    }
+    }*/
 
    /* @RequestMapping("/save")
     @ResponseBody
@@ -196,7 +247,7 @@ public class BookController {
     /**
      * 图片上传测试
      */
-    @RequestMapping("/upload")
+   /* @RequestMapping("/upload")
     public String doFileUpload(@RequestParam(value="Title") String Title, @RequestParam(value="file",required=false) MultipartFile[] file, HttpSession session) throws Exception {
 
 
@@ -207,7 +258,7 @@ public class BookController {
         //PicUpload.delPic(picsPath,session);
 
         return null;
-    }
+    }*/
 
 
 }
