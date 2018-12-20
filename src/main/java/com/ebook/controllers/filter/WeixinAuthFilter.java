@@ -42,7 +42,7 @@ public class WeixinAuthFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain)  {
         BookQuery bookQuery = new BookQuery();
-        bookQuery.setId(1);
+        bookQuery.setId("1");
 	    Book book = bookService.getById(bookQuery);
         System.out.println("校验吗数据："+book.toString());
 
