@@ -15,20 +15,26 @@
         <result property="bookPic" column="bookPic"/>
         <result property="weiXin" column="weiXin"/>
         <result property="phone" column="phone"/>
-        <result property="describe" column="describe"/>
+        <result property="des" column="des"/>
         <result property="createTime" column="createTime"/>
-        <association property="createUser" javaType="User" select="getUser" column="createUser"/>
+        <association property="createUser" javaType="User" select="getUser" column="createUser">
+            <id property="id" column="id"/>
+            <result property="studNo" column="studNo"/>
+            <result property="weiXin" column="weiXin"/>
+            <result property="nickname" column="nickname"/>
+            <result property="openId" column="openId"/>
+        </association>
     </resultMap>
 
     <!--查询用户信息-->
     <select id="getUser"  resultType="User">
-        select id,weiXin,nickname,openId from userInfo where id = #{createUser}
+        select id,weiXin,studNo,nickname,openId from userInfo where id = #{createUser}
     </select>
 
     <!--查看图书table-->
     <select id="getBooks" resultMap="bookinfo" parameterType="BookQuery">
         select
-         id, bookName, author, bookPrice, pubDate, bookPub, bookPic, weiXin, phone, describe, createUser, createTime
+         id, bookName, author, bookPrice, pubDate, bookPub, bookPic, weiXin, phone, des, createUser, createTime
         from bookInfo
         where dataStatus = 1
         order by createTime desc
@@ -37,7 +43,7 @@
     <!--查看图书详情-->
     <select id="getById" resultMap="bookinfo">
       select
-       id, bookName, author, bookPrice, pubDate, bookPub, bookPic, weiXin, phone, describe, createUser, createTime
+       id, bookName, author, bookPrice, pubDate, bookPub, bookPic, weiXin, phone, des, createUser, createTime
       from bookInfo where id = #{id}
     </select>
 
@@ -53,9 +59,9 @@
             <if test="#{bookPic}!=null">bookPic=#{bookPic}</if>
             <if test="#{weiXin}!=null">weiXin=#{weiXin}</if>
             <if test="#{phone}!=null">phone=#{phone}</if>
-            <if test="#{describe}!=null">describe=#{describe}</if>
-            <if test="#{createUser}!=null">createUser=#{createUser}</if>
-            <if test="#{createTime}!=null">createTime=#{createTime}</if>
+            <if test="#{des}!=null">des=#{des}</if>
+            <if test="#{updateUser}!=null">updateUser=#{updateUser.id}</if>
+            <if test="#{updateTime}!=null">updateTime=#{updateTime}</if>
         </set>
         where id = #{id}
     </update>
@@ -80,7 +86,7 @@
             bookPic,
             weiXin,
             phone,
-            describe,
+            des,
             createUser,
             createTime,
             dataStatus
@@ -96,8 +102,8 @@
             #{bookPic},
             #{weiXin},
             #{phone},
-            #{describe},
-            #{createUser},
+            #{des},
+            #{createUser.id},
             #{createTime},
             #{dataStatus}
         )

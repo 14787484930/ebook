@@ -13,8 +13,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-
-<center>
+<h1>123</h1>
+<%--<center>
     <div class="container">
         <!-- 标题      123-->
         <div class="row">
@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <%--操作按钮--%>
+        &lt;%&ndash;操作按钮&ndash;%&gt;
         <div class="row">
             <div class="col-md-4 col-md-offset-8">
                 <button class="btn btn-primary" id="book_add">新增</button>
@@ -31,7 +31,7 @@
             </div>
         </div>
 
-        <%--table--%>
+        &lt;%&ndash;table&ndash;%&gt;
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-hover" id="books_table">
@@ -52,7 +52,7 @@
             </div>
         </div>
 
-        <%--分页信息--%>
+        &lt;%&ndash;分页信息&ndash;%&gt;
         <div class="row">
             <!--分页文字信息  -->
             <div class="col-md-6" id="page_info_area"></div>
@@ -112,7 +112,7 @@
     </div>
 </div>
 
-<%--修改图书--%>
+&lt;%&ndash;修改图书&ndash;%&gt;
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -505,7 +505,7 @@
         }
     });
 
-</script>
+</script>--%>
 
 </body>
 </html>

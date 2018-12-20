@@ -18,7 +18,7 @@ import java.net.URLEncoder;
  * @describe
  */
 
-@WebFilter("/*")
+//@WebFilter("/*")
 public class SysFilter implements Filter {
 
 

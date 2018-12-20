@@ -22,7 +22,7 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-@WebFilter("/*")
+//@WebFilter("/*")
 public class WeixinAuthFilter implements Filter {
 
     @Autowired

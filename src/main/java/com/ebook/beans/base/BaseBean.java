@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 public class BaseBean {
 
-    private String id;       //图书编号
+    public String id;       //图书编号
     public User createUser; //创建者，后续会用微信来做
     public Date createTime;  //创建时间
     public User updateUser; //修改人
