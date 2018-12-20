@@ -31,7 +31,6 @@ public class Book extends BaseBean implements Serializable {
     @NotEmpty(message = "图片不能为空")
     private String pic;*/
 
-    private String id;                  //图书编号
 
     @NotEmpty(message = "图书名称不能为空")
     private String bookName;           //图书名称
@@ -63,8 +62,6 @@ public class Book extends BaseBean implements Serializable {
     @Pattern(regexp = Constant.PHONE_NUMBER, message = "输入的手机号不合法")
     private String phone;             //电话
 
-    private String describe;          //描述
-
-    private Integer viewTimes;        //浏览次数
+    private String des;          //描述
 
 }
