@@ -38,5 +38,9 @@ public  class Constant {
     //手机号校验的正则常量
     public static final String PHONE_NUMBER = "^((17[0-9])|(14[0-9])|(13[0-9])|(15[^4,\\\\D])|(18[0,5-9]))\\\\d{8}$";
 
-
+    /*网站内容抓取相关常量*/
+    //登陆url地址
+    public static final String SWFU_WEB_URL = "http://202.203.132.204:8019";
+    //验证码地址
+    public static final String SWFU_LOGIN_CHECKCODE = "/CheckCode.aspx";
 }
