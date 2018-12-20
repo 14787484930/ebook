@@ -131,7 +131,7 @@ public class Crawler {
         System.out.println("输入数据：" + read);
         return read;
     }
-    public static void main(String[] args) throws Exception{
+/*    public static void main(String[] args) throws Exception{
         String location = GetLocation(Constant.SWFU_WEB_URL);
         System.out.println(location);
         Map map = new HashMap();
@@ -142,5 +142,5 @@ public class Crawler {
         Boolean b = WebLogin(map);
         if(b == Boolean.TRUE)
             System.out.println("ffff");
-    }
+    }*/
 }
