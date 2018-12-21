@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface ElectronicsService {
 
-    public List<Electronics> getElectronics();
+    public List<Electronics> getElectronics(ElectronicsQuery query);
     public void save(Electronics electronics);
-    public Electronics getById(ElectronicsQuery query);
+    public Electronics getById(String id);
     public void update(Electronics electronics);
     public void delete(ElectronicsQuery query);
 }
