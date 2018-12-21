@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface TutoringDao {
 
-    public List<Tutoring> getTutoring();
+    public List<Tutoring> getTutorings(TutoringQuery query);
     public void save(Tutoring tutoring);
-    public Tutoring getById(TutoringQuery query);
+    public Tutoring getById(String id);
     public void update(Tutoring tutoring);
     public void delete(TutoringQuery query);
 }

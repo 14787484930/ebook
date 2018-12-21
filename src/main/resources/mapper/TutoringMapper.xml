@@ -4,23 +4,105 @@
 
     <cache type="com.model.utills.redis.RedisCache" />
 
-    <select id="getTutoring" resultType="Tutoring">
 
+    <resultMap id="bookinfo" type="Book">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="price" column="price"/>
+        <result property="startTime" column="startTime"/>
+        <result property="endTime" column="endTime"/>
+        <result property="endDate" column="endDate"/>
+        <result property="place" column="place"/>
+        <result property="weiXin" column="weiXin"/>
+        <result property="phone" column="phone"/>
+        <result property="des" column="des"/>
+        <result property="createTime" column="createTime"/>
+        <association property="createUser" javaType="User" select="getUser" column="createUser">
+            <id property="id" column="id"/>
+            <result property="studNo" column="studNo"/>
+            <result property="weiXin" column="weiXin"/>
+            <result property="nickname" column="nickname"/>
+            <result property="openId" column="openId"/>
+        </association>
+    </resultMap>
+
+    <!--查询用户信息-->
+    <select id="getUser"  resultType="User">
+        select id,weiXin,studNo,nickname,openId from userInfo where id = #{createUser}
     </select>
 
-    <select id="getById" resultType="Tutoring">
+    <select id="getTutorings" resultMap="tutoringinfo">
+        select id,name,type,price,startTime,endTime,endDate,place,weiXin,phone,des,createTime,updateTime,createUser
+        from tutoringinfo
+        where dataStatus = 1;
+    </select>
 
+    <select id="getById" resultMap="tutoringinfo">
+        select id,name,type,price,startTime,endTime,endDate,place,weiXin,phone,des,createTime,updateTime,createUser
+        from tutoringinfo
+        where id = #{id}
     </select>
 
     <update id="update" parameterType="Tutoring">
-
+        update bookInfo
+        <set>
+            <if test="#{name}!=null">name=#{name}</if>
+            <if test="#{type}!=null">type=#{type}</if>
+            <if test="#{price}!=null">price=#{price}</if>
+            <if test="#{startTime}!=null">startTime=#{startTime}</if>
+            <if test="#{endTime}!=null">endTime=#{endTime}</if>
+            <if test="#{endDate}!=null">endDate=#{endDate}</if>
+            <if test="#{place}!=null">place=#{place}</if>
+            <if test="#{weiXin}!=null">weiXin=#{weiXin}</if>
+            <if test="#{phone}!=null">phone=#{phone}</if>
+            <if test="#{des}!=null">des=#{des}</if>
+            <if test="#{updateUser}!=null">updateUser=#{updateUser.id}</if>
+            <if test="#{updateTime}!=null">updateTime=#{updateTime}</if>
+        </set>
+        where id = #{id}
     </update>
 
     <delete id="delete" parameterType="TutoringQuery">
-
+        update tutoringinfo
+        set dataStatus = 100
+        where id = #{id}
     </delete>
 
     <insert id="save" parameterType="Tutoring">
-
+      insert into tutoringinfo
+      (
+        id,
+        name,
+        type,
+        price,
+        startTime,
+        endTime,
+        endDate,
+        place,
+        weiXin,
+        phone,
+        des,
+        createTime,
+        createUser,
+        dataStatus
+      )
+      values
+      (
+        #{id},
+        #{name},
+        #{type},
+        #{price},
+        #{startTime},
+        #{endTime},
+        #{endDate},
+        #{place},
+        #{weiXin},
+        #{phone},
+        #{des},
+        #{createTime},
+        #{createUser.id},
+        1
+      )
     </insert>
 </mapper>
