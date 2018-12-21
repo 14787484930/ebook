@@ -42,7 +42,7 @@ public class Book extends BaseBean implements Serializable {
     private String author;             //作者
 
     @NotNull(message = "价格不能为空")
-    @Max(value = 0,message = "价格不能小于0")
+    @Min(value = 0,message = "价格不能小于0")
     private Double bookPrice;         //价格
 
     @NotNull(message = "日期不能为空")
