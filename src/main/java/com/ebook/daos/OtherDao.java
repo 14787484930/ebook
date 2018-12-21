@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface OtherDao {
 
-    public List<Other> getOther();
+    public List<Other> getOthers();
     public void save(Other other);
-    public Other getById(OtherQuery query);
+    public Other getById(String id);
     public void update(Other other);
     public void delete(OtherQuery query);
 }
