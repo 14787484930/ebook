@@ -5,7 +5,7 @@
     <cache type="com.model.utills.redis.RedisCache" />
 
 
-    <resultMap id="otherinfo" type="">
+    <resultMap id="otherinfo" type="Other">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="buyTime" column="buyTime"/>
@@ -30,13 +30,13 @@
         select id,weiXin,studNo,nickname,openId from userInfo where id = #{createUser}
     </select>
 
-    <select id="getOthers" resultType="OtherQuery">
+    <select id="getOthers" resultMap="otherinfo">
        select  id,name,buyTime,originalPrice,presentPrice,hasInvoice,otherPic,weiXin,phone,des,createTime,createUser
       from otherInfo
       where dataStatus = 1
     </select>
 
-    <select id="getById" resultMap="OtherQuery">
+    <select id="getById" resultMap="otherinfo">
       select  id,name,buyTime,originalPrice,presentPrice,hasInvoice,otherPic,weiXin,phone,des,createTime,createUser
       from otherInfo
       where id = #{id}
@@ -98,7 +98,7 @@
             #{phone},
             #{des},
             #{createTime},
-            #{createUser},
+            #{createUser.id},
             #{viewTimes},
             1
         )
