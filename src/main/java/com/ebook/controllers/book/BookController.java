@@ -108,17 +108,15 @@ public class BookController {
 
     /**
      * zxl
-     * @param id
+     * @param bookQuery
      * @return
      * 删除图书信息
      */
-    @RequestMapping(value="/delete/{id}")
+    @RequestMapping(value="/delete")
     @ResponseBody
-    public Object delete(@PathVariable("id") String id){
+    public Object delete(BookQuery bookQuery){
 
-        BookQuery query = new BookQuery();
-        query.setId(id);
-        bookService.delete(query);
+        bookService.delete(bookQuery);
         return ResultInfo.success();
     }
 
