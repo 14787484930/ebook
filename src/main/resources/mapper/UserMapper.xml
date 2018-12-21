@@ -4,23 +4,59 @@
 
     <cache type="com.model.utills.redis.RedisCache" />
 
-   <!-- <select id="getUserAdvice" resultType="User">
-
+    <select id="getUserAdvice" resultType="User">
+      select id,studNo,weiXin,sex,phone,email,score,createTime,updateTime,openId,nicname
+      from userinfo
+      where dataStatus = 1
     </select>
 
     <select id="getById" resultType="User">
-
+      select id,studNo,weiXin,sex,phone,email,score,createTime,updateTime,openId,nicname
+      from userinfo
+      where id = #{id}
     </select>
 
     <update id="update" parameterType="User">
-
+      update userinfo
+        <set>
+            <if test="#{phone}!=null">phone=#{phone}</if>
+            <if test="#{email}!=null">email=#{email}</if>
+        </set>
+        where id = #{id}
     </update>
 
     <delete id="delete" parameterType="User">
-
+      update userinfo set dataStatus = 100 where id = #{id}
     </delete>
 
     <insert id="save" parameterType="User">
-
-    </insert>-->
+      insert into userinfo
+        (
+            id,
+            studNo,
+            weiXin,
+            sex,
+            phone,
+            email,
+            score,
+            openId,
+            nicname
+            createTime,
+            dataStatus
+        )
+        values
+        (
+            #{id},
+            #{studNo},
+            #{weiXin},
+            #{sex},
+            #{phone},
+            #{email},
+            #{score},
+            #{openId},
+            #{nicname}
+            #{createTime},
+            1
+        )
+    </insert>
 </mapper>

@@ -1,11 +1,12 @@
-package com.ebook.daos;
+package com.ebook.services;
 
 import com.ebook.beans.book.Book;
 import com.ebook.beans.user.User;
 import com.ebook.beans.user.UserQuery;
+
 import java.util.List;
 
-public interface UserDao {
+public interface UserService {
 
     public List<User> getUsers(UserQuery query);
     public void save(User user);

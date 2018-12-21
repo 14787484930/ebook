@@ -10,6 +10,7 @@ public class User implements Serializable {
 
     private String id;
     private Date createTime;  //创建时间
+    private Date updateTime;
     private String studNo;     //学号
     private String openId; //用户唯一标识
     private String weiXin; //用户微信
