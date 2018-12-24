@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ebook.daos.BookTypeDao">
+
+    <cache type="com.model.utills.redis.RedisCache" />
+
+
+    <!--查看图书table-->
+    <select id="getElectronicsType" resultType="ElectronicsType" parameterType="ElectronicsTypeQuery">
+        select id, name, des from booktypeInfo
+    </select>
+
+    <!--查看图书详情-->
+    <select id="getById" resultType="ElectronicsType">
+      select
+       id, name, des
+      from booktypeInfo where id = #{id}
+    </select>
+
+    <!--编辑图书-->
+    <update id="update" parameterType="ElectronicsType">
+        update booktypeInfo
+        <set>
+            <if test="#{name}!=null">name=#{name}</if>
+            <if test="#{des}!=null">des=#{des}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--删除图书（软删）-->
+    <delete id="delete" parameterType="ElectronicsTypeQuery">
+        update booktypeInfo
+        set dataStatus = 100
+        where id = #{id}
+    </delete>
+
+    <!--添加图书-->
+    <insert id="save" parameterType="ElectronicsType">
+        insert into booktypeInfo
+        (
+            id,
+            name,
+            des,
+            dataStatus
+        )
+        values
+        (
+            #{id},
+            #{name},
+            #{des},
+            1
+        )
+    </insert>
+
+
+</mapper>

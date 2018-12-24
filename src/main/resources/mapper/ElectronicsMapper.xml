@@ -4,23 +4,106 @@
 
     <cache type="com.model.utills.redis.RedisCache" />
 
-    <select id="getElectronics" resultType="Electronics">
 
+    <resultMap id="tutoringinfo" type="Tutoring">
+        <id property="id" column="id"/>
+        <result property="elecName" column="elecName"/>
+        <result property="electronicsType" column="electronicsType"/>
+        <result property="originalPrice" column="originalPrice"/>
+        <result property="presentPrice" column="presentPrice"/>
+        <result property="buyDate" column="buyDate"/>
+        <result property="hasInvoice" column="hasInvoice"/>
+        <result property="elecPic" column="elecPic"/>
+        <result property="weiXin" column="weiXin"/>
+        <result property="phone" column="phone"/>
+        <result property="des" column="des"/>
+        <result property="createTime" column="createTime"/>
+        <association property="createUser" javaType="User" select="getUser" column="createUser">
+            <id property="id" column="id"/>
+            <result property="studNo" column="studNo"/>
+            <result property="weiXin" column="weiXin"/>
+            <result property="nickname" column="nickname"/>
+            <result property="openId" column="openId"/>
+        </association>
+    </resultMap>
+
+    <!--查询用户信息-->
+    <select id="getUser"  resultType="User">
+        select id,weiXin,studNo,nickname,openId from userInfo where id = #{createUser}
+    </select>
+
+
+    <select id="getElectronics" resultMap="Electronics">
+      select id,elecName,electronicsType,originalPrice,presentPrice,buyDate,hasInvoice,elecPic,weiXin,phone,des,createTime,createUser from electronicsinfo
+      where dataStatus = 1
     </select>
 
     <select id="getById" resultType="Electronics">
-
+      select id,elecName,electronicsType,originalPrice,presentPrice,buyDate,hasInvoice,elecPic,weiXin,phone,des,createTime,createUser from electronicsinfo
+      where id = #{id}
     </select>
 
     <update id="update" parameterType="Electronics">
-
+        update bookInfo
+        <set>
+            <if test="#{elecName}!=null">elecName=#{elecName}</if>
+            <if test="#{electronicsType}!=null">electronicsType=#{electronicsType}</if>
+            <if test="#{originalPrice}!=null">originalPrice=#{originalPrice}</if>
+            <if test="#{presentPrice}!=null">presentPrice=#{presentPrice}</if>
+            <if test="#{buyDate}!=null">buyDate=#{buyDate}</if>
+            <if test="#{hasInvoice}!=null">hasInvoice=#{hasInvoice}</if>
+            <if test="#{elecPic}!=null">elecPic=#{elecPic}</if>
+            <if test="#{weiXin}!=null">weiXin=#{weiXin}</if>
+            <if test="#{phone}!=null">phone=#{phone}</if>
+            <if test="#{des}!=null">des=#{des}</if>
+            <if test="#{updateUser}!=null">updateUser=#{updateUser.id}</if>
+            <if test="#{updateTime}!=null">updateTime=#{updateTime}</if>
+        </set>
+        where id = #{id}
     </update>
 
     <delete id="delete" parameterType="ElectronicsQuery">
-
+      update electronicsinfo
+        set dataStatus = 100
+        where id = #{id}
     </delete>
 
     <insert id="save" parameterType="Electronics">
-
+      insert into electronicsinfo
+      (
+        id,
+        elecName,
+        electronicsType,
+        originalPrice,
+        presentPrice,
+        buyDate,
+        hasInvoice,
+        elecPic,
+        weiXin,
+        phone,
+        des,
+        viewTime,
+        createTime,
+        createUser,
+        dataStatus
+      )
+      values
+      (
+        #{id},
+        #{elecName},
+        #{electronicsType},
+        #{originalPrice},
+        #{presentPrice},
+        #{buyDate},
+        #{hasInvoice},
+        #{elecPic},
+        #{weiXin},
+        #{phone},
+        #{des},
+        #{viewTime},
+        #{createTime},
+        #{createUser},
+        1
+      )
     </insert>
 </mapper>
