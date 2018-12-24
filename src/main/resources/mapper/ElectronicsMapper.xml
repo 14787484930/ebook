@@ -5,7 +5,7 @@
     <cache type="com.model.utills.redis.RedisCache" />
 
 
-    <resultMap id="tutoringinfo" type="Tutoring">
+    <resultMap id="tutoringinfo" type="Electronics">
         <id property="id" column="id"/>
         <result property="elecName" column="elecName"/>
         <result property="electronicsType" column="electronicsType"/>
@@ -102,7 +102,7 @@
         #{des},
         #{viewTime},
         #{createTime},
-        #{createUser},
+        #{createUser.id},
         1
       )
     </insert>
