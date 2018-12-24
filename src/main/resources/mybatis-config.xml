@@ -13,10 +13,10 @@
         <setting name="cacheEnabled" value="true"/>
 
         <!-- 对于级联延迟加载 -->
-        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="false"/>
 
         <!-- 对于懒加载的数据按需加载，不一次性加载 -->
-        <setting name="aggressiveLazyLoading" value="false"/>
+        <setting name="aggressiveLazyLoading" value="true"/>
 
         <!--配置打印sql-->
         <setting name="logImpl" value="STDOUT_LOGGING" />

@@ -6,12 +6,8 @@
 
 
     <!--查看图书table-->
-    <select id="getBooks" resultType="BookType" parameterType="BookTypeQuery">
-        select
-         id, name, des
-        from booktypeInfo
-        where dataStatus = 1
-        order by createTime desc
+    <select id="getBookTypes" resultType="BookType" parameterType="BookTypeQuery">
+        select id, name, des from booktypeInfo
     </select>
 
     <!--查看图书详情-->

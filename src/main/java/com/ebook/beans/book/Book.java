@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class Book extends BaseBean implements Serializable {
+public class Book extends BaseBean {
 
     /*private Integer id;
 

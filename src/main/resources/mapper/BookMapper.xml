@@ -9,6 +9,7 @@
         <id property="id" column="id"/>
         <result property="bookName" column="bookName"/>
         <result property="author" column="author"/>
+        <result property="bookType" column="bookType"/>
         <result property="bookPrice" column="bookPrice"/>
         <result property="pubDate" column="pubDate"/>
         <result property="bookPub" column="bookPub"/>
@@ -34,7 +35,7 @@
     <!--查看图书table-->
     <select id="getBooks" resultMap="bookinfo" parameterType="BookQuery">
         select
-         id, bookName, author, bookPrice, pubDate, bookPub, bookPic, weiXin, phone, des, createUser, createTime
+         id, bookName, author,bookType, bookPrice, pubDate, bookPub, bookPic, weiXin, phone, des, createTime, createUser
         from bookInfo
         where dataStatus = 1
         order by createTime desc

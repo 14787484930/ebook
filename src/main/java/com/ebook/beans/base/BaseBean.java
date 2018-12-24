@@ -3,10 +3,11 @@ package com.ebook.beans.base;
 import com.ebook.beans.user.User;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class BaseBean {
+public class BaseBean implements Serializable {
 
     public String id;       //图书编号
     public User createUser; //创建者，后续会用微信来做

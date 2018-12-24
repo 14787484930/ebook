@@ -18,7 +18,7 @@ import java.net.URLEncoder;
  * @describe
  */
 
-//@WebFilter("/*")
+@WebFilter("/*")
 public class SysFilter implements Filter {
 
 
@@ -39,12 +39,12 @@ public class SysFilter implements Filter {
         if(userInfo == null) {
             //如果session中不存在用户信息，创建用户信息
             User user = new User();
-            user.setId("00cc34833799460fb4e9ea7fbc5c1da2");
-            user.setNickname("小野菊");
-            user.setWeiXin("weixin");
+            user.setId("ea0b33ba3b65429f976a6514ae9296e8");
+            user.setNickname("绿箭");
+            user.setWeiXin("ZXL690345407");
             user.setPhone("14787484930");
-            user.setOpenId("bbb");
-            hRequest.getSession().setAttribute("userInfo",userInfo);
+            user.setOpenId("123456");
+            hRequest.getSession().setAttribute("userInfo",user);
         }
 
 
