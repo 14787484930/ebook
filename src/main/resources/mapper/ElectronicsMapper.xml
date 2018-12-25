@@ -5,7 +5,7 @@
     <cache type="com.model.utills.redis.RedisCache" />
 
 
-    <resultMap id="tutoringinfo" type="Electronics">
+    <resultMap id="electronicsinfo" type="Electronics">
         <id property="id" column="id"/>
         <result property="elecName" column="elecName"/>
         <result property="electronicsType" column="electronicsType"/>
@@ -33,18 +33,18 @@
     </select>
 
 
-    <select id="getElectronics" resultMap="Electronics">
+    <select id="getElectronics" resultMap="electronicsinfo">
       select id,elecName,electronicsType,originalPrice,presentPrice,buyDate,hasInvoice,elecPic,weiXin,phone,des,createTime,createUser from electronicsinfo
       where dataStatus = 1
     </select>
 
-    <select id="getById" resultType="Electronics">
+    <select id="getById" resultMap="electronicsinfo">
       select id,elecName,electronicsType,originalPrice,presentPrice,buyDate,hasInvoice,elecPic,weiXin,phone,des,createTime,createUser from electronicsinfo
       where id = #{id}
     </select>
 
     <update id="update" parameterType="Electronics">
-        update bookInfo
+        update electronicsinfo
         <set>
             <if test="#{elecName}!=null">elecName=#{elecName}</if>
             <if test="#{electronicsType}!=null">electronicsType=#{electronicsType}</if>
