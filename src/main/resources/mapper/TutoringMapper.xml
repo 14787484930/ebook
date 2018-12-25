@@ -35,7 +35,7 @@
     <select id="getTutorings" resultMap="tutoringinfo">
         select id,name,type,price,startTime,endTime,endDate,place,weiXin,phone,des,createTime,updateTime,createUser
         from tutoringinfo
-        where dataStatus = 1;
+        where dataStatus = 1
     </select>
 
     <select id="getById" resultMap="tutoringinfo">

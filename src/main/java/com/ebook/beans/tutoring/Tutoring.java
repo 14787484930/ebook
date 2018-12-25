@@ -14,14 +14,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class Tutoring extends BaseBean implements Serializable {
+public class Tutoring extends BaseBean  {
 
 
     @NotEmpty(message = "名称不能为空")
     private String name; //辅导名称
 
     @NotNull(message = "类型不能为空")
-    private Integer type; //辅导类型
+    private Integer type; //辅导类型{0：辅导，1：讲座}
 
     @NotNull(message = "价格不能为空")
     @Min(value = 0, message = "价格不能为空")
@@ -48,5 +48,5 @@ public class Tutoring extends BaseBean implements Serializable {
     @Pattern(regexp = Constant.PHONE_NUMBER, message = "输入的手机号不合法")
     private String phone; //手机号
 
-    private String describe; //描述
+    private String des; //描述
 }
