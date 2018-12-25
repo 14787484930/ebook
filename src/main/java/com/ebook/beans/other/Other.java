@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class Other extends BaseBean implements Serializable {
+public class Other extends BaseBean {
 
     @NotEmpty(message = "产品名称不能为空")
     private String name; //产品名称

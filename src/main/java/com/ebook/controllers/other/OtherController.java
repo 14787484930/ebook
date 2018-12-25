@@ -41,7 +41,7 @@ public class OtherController {
      * 2018/12/21
      *查看其他产品列表
      */
-    @RequestMapping("/getOthers")
+    @RequestMapping("/others")
     @ResponseBody
     public Object getOthers(OtherQuery otherQuery, HttpSession session){
 
