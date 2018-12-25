@@ -37,7 +37,7 @@ public class ElectronicsController {
      * @param session
      * @return
      */
-    @RequestMapping("/electronics")
+    @RequestMapping("/electronicses")
     @ResponseBody
     @SysLog(moduleName = "gpj查看所有信息")
     public Object getElectronics(ElectronicsQuery electronicsQuery, HttpSession session) {

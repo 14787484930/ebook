@@ -7,21 +7,19 @@
 
     <!--查看图书table-->
     <select id="getElectronicsType" resultType="ElectronicsType" parameterType="ElectronicsTypeQuery">
-        select id, name, des from booktypeInfo
+        select id,typeName name,des from electronicstypeinfo
     </select>
 
     <!--查看图书详情-->
     <select id="getById" resultType="ElectronicsType">
-      select
-       id, name, des
-      from booktypeInfo where id = #{id}
+      select id,typeName name,des from electronicstypeinfo where id = #{id}
     </select>
 
     <!--编辑图书-->
     <update id="update" parameterType="ElectronicsType">
-        update booktypeInfo
+        update electronicstypeinfo
         <set>
-            <if test="#{name}!=null">name=#{name}</if>
+            <if test="#{typeName}!=null">name=#{typeName}</if>
             <if test="#{des}!=null">des=#{des}</if>
         </set>
         where id = #{id}
@@ -29,7 +27,7 @@
 
     <!--删除图书（软删）-->
     <delete id="delete" parameterType="ElectronicsTypeQuery">
-        update booktypeInfo
+        update electronicstypeinfo
         set dataStatus = 100
         where id = #{id}
     </delete>
@@ -39,16 +37,14 @@
         insert into booktypeInfo
         (
             id,
-            name,
-            des,
-            dataStatus
+            typeName,
+            des
         )
         values
         (
             #{id},
-            #{name},
-            #{des},
-            1
+            #{typeName},
+            #{des}
         )
     </insert>
 

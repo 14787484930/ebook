@@ -15,7 +15,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class Electronics extends BaseBean implements Serializable {
+public class Electronics extends BaseBean{
 
     @NotEmpty(message = "产品名称不能为空")
     private String elecName;
@@ -49,6 +49,6 @@ public class Electronics extends BaseBean implements Serializable {
     @Pattern(regexp = Constant.PHONE_NUMBER, message = "输入的手机号不合法")
     private String phone;
 
-    private String describe;
+    private String des;
 
 }
