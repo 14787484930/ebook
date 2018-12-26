@@ -4,23 +4,56 @@
 
     <cache type="com.model.utills.redis.RedisCache" />
 
-    <select id="getReportProduct" resultType="ReportProduct">
-
+    <select id="getReportProducts" resultType="ReportProduct">
+      select id,productId,productName,productType,reportType,des,createTime,weiXin from reportproductinfo
     </select>
 
     <select id="getById" resultType="ReportProduct">
-
+      select id,productId,productName,productType,reportType,des,createTime,weiXin from reportproductinfo
+      where id = #{id}
     </select>
 
     <update id="update" parameterType="ReportProduct">
 
     </update>
 
+    <!--直接删除-->
     <delete id="delete" parameterType="ReportProductQuery">
-
+      update reportproductinfo
+      set dataStatus = 100
+      where id = #{id}
     </delete>
 
-    <insert id="save" parameterType="ReportProduct">
+    <!--处理举报-->
+   <!-- <delete id="updateEdit" parameterType="ReportProductQuery">
 
+    </delete>-->
+
+    <!--插入举报信息-->
+    <insert id="save" parameterType="ReportProduct">
+      insert into
+      (
+        id,
+        productId,
+        productName,
+        productType,
+        reportType,
+        des,
+        createTime,
+        weiXin,
+        dataStatus
+      )
+      values
+      (
+        #{id}
+        #{productId},
+        #{productName},
+        #{productType},
+        #{reportType},
+        #{des},
+        #{createTime},
+        #{weiXin},
+        1
+      )
     </insert>
 </mapper>

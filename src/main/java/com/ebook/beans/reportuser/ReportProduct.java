@@ -1,5 +1,6 @@
 package com.ebook.beans.reportuser;
 
+import com.ebook.beans.base.BaseBean;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,26 +11,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class ReportProduct implements Serializable {
-    @NotEmpty(message = "举报编号不能为空")
-    private String id;
+public class ReportProduct extends BaseBean {
 
     @NotEmpty(message = "产品编号不能为空")
-    private String productId;
+    private String productId; //产品编号
+
+    @NotEmpty(message = "产品名称不能为空")
+    private String productName; //产品名称
+
+    @NotEmpty(message = "产品类型不能为空")
+    private Integer productType; //产品类型 {1：图书，2：电子，3：其他}
 
     @NotEmpty(message = "举报类型不能为空")
-    private String reportType;
+    private String reportType; //举报类型
 
-    private String describe;
+    private String weiXin; //举报者
 
-    @NotNull(message = "创建日期不能为空")
-    @Past(message = "日期不合法")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date createTime;
+    private String des; //描述
 
-    @NotEmpty(message = "创建人不能为空")
-    private String createUser;
 
-    @NotNull(message = "数据状态不能为空")
-    private Integer dataStatus;
 }

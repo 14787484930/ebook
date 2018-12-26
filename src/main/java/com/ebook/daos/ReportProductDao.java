@@ -6,9 +6,9 @@ import com.ebook.beans.reportuser.ReportProductQuery;
 import java.util.List;
 
 public interface ReportProductDao {
-    public List<ReportProduct> getReportProduct();
+    public List<ReportProduct> getReportProducts(ReportProductQuery reportProductQuery);
     public void save(ReportProduct other);
-    public ReportProduct getById(ReportProductQuery query);
+    public ReportProduct getById(String id);
     public void update(ReportProduct other);
     public void delete(ReportProductQuery query);
 }

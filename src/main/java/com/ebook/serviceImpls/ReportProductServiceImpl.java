@@ -4,6 +4,7 @@ import com.ebook.beans.reportuser.ReportProduct;
 import com.ebook.beans.reportuser.ReportProductQuery;
 import com.ebook.daos.ReportProductDao;
 import com.ebook.services.ReportProductService;
+import com.model.utills.uuid.GeneratingId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,18 +16,22 @@ public class ReportProductServiceImpl implements ReportProductService {
     ReportProductDao reportProductDao;
 
     @Override
-    public List<ReportProduct> getReportProduct() {
-        return null;
+    public List<ReportProduct> getReportProducts(ReportProductQuery reportProductQuery) {
+
+        return reportProductDao.getReportProducts(reportProductQuery);
     }
 
     @Override
-    public void save(ReportProduct other) {
+    public void save(ReportProduct reportProduct) {
 
+        reportProduct.setId(GeneratingId.getId());
+        reportProductDao.save(reportProduct);
     }
 
     @Override
-    public ReportProduct getById(ReportProductQuery query) {
-        return null;
+    public ReportProduct getById(String id) {
+
+        return reportProductDao.getById(id);
     }
 
     @Override
