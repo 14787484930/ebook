@@ -1,4 +1,4 @@
-package com.ebook.controllers.report;
+package com.ebook.controllers.reporttype;
 
 import com.ebook.beans.reportuser.ReportTypeInfo;
 import com.ebook.beans.reportuser.ReportTypeInfoQuery;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author gpj
@@ -20,7 +21,7 @@ import javax.validation.Valid;
  */
 
 @Controller
-@RequestMapping("/report")
+@RequestMapping("/reporttype")
 public class ReportTypeInfoController {
     @Autowired
     ReportTypeInfoService reportTypeInfoService;
@@ -36,7 +37,8 @@ public class ReportTypeInfoController {
     @RequestMapping("/reporttypeinfo")
     @ResponseBody
     public Object getReportTypes(ReportTypeInfoQuery reportTypeInfoQuery, HttpSession session){
-        return ResultInfo.success().add("reporttypeinfo",reportTypeInfoService.getReportTypeInfo(reportTypeInfoQuery));
+        List<ReportTypeInfo>  reporttypeinfo = reportTypeInfoService.getReportTypeInfo(reportTypeInfoQuery);
+        return ResultInfo.success().add("pageinfo",reporttypeinfo);
     }
 
     /**

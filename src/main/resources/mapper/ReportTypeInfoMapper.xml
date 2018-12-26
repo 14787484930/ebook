@@ -4,23 +4,47 @@
 
     <cache type="com.model.utills.redis.RedisCache" />
 
-    <select id="getReportTypeInfo" resultType="ReportTypeInfo">
-
+    <!--查看举报table-->
+    <select id="getReportTypeInfo" resultType="ReportTypeInfo" parameterType="ReportTypeInfoQuery">
+        select id, name, des from reporttypeinfo
     </select>
 
+    <!--查看举报详情-->
     <select id="getById" resultType="ReportTypeInfo">
-
+        select
+           id, name, des
+        from reporttypeinfo where id = #{id}
     </select>
 
+    <!--编辑举报-->
     <update id="update" parameterType="ReportTypeInfo">
-
+        update reporttypeinfo
+        <set>
+            <if test="#{name}!=null">name=#{name}</if>
+            <if test="#{des}!=null">des=#{des}</if>
+        </set>
+        where id = #{id}
     </update>
 
+    <!--删除举报-->
     <delete id="delete" parameterType="ReportTypeInfoQuery">
-
+       delete from reporttypeinfo
+        where id = #{id}
     </delete>
 
+    <!--添加举报-->
     <insert id="save" parameterType="ReportTypeInfo">
-
+         insert into reporttypeinfo
+                (
+                    id,
+                    name,
+                    des,
+                )
+                values
+                (
+                    #{id},
+                    #{name},
+                    #{des},
+                )
     </insert>
 </mapper>
