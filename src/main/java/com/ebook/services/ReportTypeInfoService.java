@@ -6,9 +6,10 @@ import com.ebook.beans.reportuser.ReportTypeInfoQuery;
 import java.util.List;
 
 public interface ReportTypeInfoService {
-    public List<ReportTypeInfo> getReportTypeInfo();
+    public List<ReportTypeInfo> getReportTypeInfo(ReportTypeInfoQuery query);
     public void save(ReportTypeInfo other);
-    public ReportTypeInfo getById(ReportTypeInfoQuery query);
+    public ReportTypeInfo getById(String id);
     public void update(ReportTypeInfo other);
     public void delete(ReportTypeInfoQuery query);
+
 }

@@ -16,7 +16,7 @@ public class ReportTypeInfoServiceImpl implements ReportTypeInfoService {
     ReportTypeInfoDao reportTypeInfoDao;
 
     @Override
-    public List<ReportTypeInfo> getReportTypeInfo() {
+    public List<ReportTypeInfo> getReportTypeInfo(ReportTypeInfoQuery query) {
         return null;
     }
 
@@ -26,7 +26,7 @@ public class ReportTypeInfoServiceImpl implements ReportTypeInfoService {
     }
 
     @Override
-    public ReportTypeInfo getById(ReportTypeInfoQuery query) {
+    public ReportTypeInfo getById(String id) {
         return null;
     }
 
