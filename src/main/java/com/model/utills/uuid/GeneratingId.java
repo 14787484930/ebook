@@ -15,8 +15,15 @@ public class GeneratingId {
         return UUID.randomUUID().toString().replaceAll("-","");
     }
 
+    //生成四位随机数
+    public static final int getRandomNumber(){
+
+        return (int)Math.ceil((Math.random()*9+1)*1000);
+
+    }
+
     public static void main(String[] args) {
 
-        System.out.println(getId());
+        System.out.println(getRandomNumber());
     }
 }

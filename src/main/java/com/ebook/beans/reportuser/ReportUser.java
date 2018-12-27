@@ -22,7 +22,7 @@ public class ReportUser implements Serializable {
     @NotNull(message = "辅导编号不能为空")
     private Tutoring TutoringId;
 
-    private String describe;
+    private String des;
 
     @NotNull(message = "创建日期不能为空")
     @Past(message = "日期不合法")

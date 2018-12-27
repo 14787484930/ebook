@@ -74,4 +74,42 @@ public class TutoringServiceImpl implements TutoringService {
     public void delete(TutoringQuery query) {
         tutoringDao.delete(query);
     }
+
+    /**
+     * zxl
+     * @param query
+     * 2018-12-21
+     * 用户接单的操作
+     */
+    @Override
+    public void updateOrderUser(TutoringQuery query) {
+
+        tutoringDao.updateOrderUser(query);
+    }
+
+    /**
+     * zxl
+     * @param query
+     * 2018-12-21
+     * 拒绝接单
+     */
+    @Override
+    public void deleteOrderUser(TutoringQuery query) {
+
+        tutoringDao.deleteOrderUser(query);
+    }
+
+    /**
+     * zxl
+     * @param tutoringQuery
+     * 2018-12-21
+     * 评分
+     */
+    @Override
+    public void updateUserScore(TutoringQuery tutoringQuery) {
+
+        tutoringDao.updateUserScore(tutoringQuery);
+    }
+
+
 }

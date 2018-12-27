@@ -18,4 +18,6 @@ public class User implements Serializable {
     private String email; //用户邮箱
     private String phone; //用户手机号
     private Integer dataStatus; //数据状态
+    private Double score; //用户评分
+    private Integer scoreNumber; //评分次数
 }

@@ -48,5 +48,13 @@ public class Tutoring extends BaseBean  {
     @Pattern(regexp = Constant.PHONE_NUMBER, message = "输入的手机号不合法")
     private String phone; //手机号
 
+    private String orderUser; //接单人
+
+    private String checkCode; //接单校验
+
+    private Integer isScore; //是否评价了{0：没有评分过，1：已经评分过了}
+
+    private Integer scoreNumber; //评分次数
+
     private String des; //描述
 }

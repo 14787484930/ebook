@@ -9,7 +9,9 @@ import com.ebook.services.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.model.utills.messages.ResultInfo;
+import com.model.utills.uuid.GeneratingId;
 import com.model.utills.validate.ValidateDate;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -34,6 +36,9 @@ public class TutoringController {
 
     @Autowired
     TutoringService tutoringService;
+
+    @Autowired
+    UserService userService;
 
     /**
      *zxl
@@ -135,6 +140,89 @@ public class TutoringController {
         tutoring.setCreateUser((User)session.getAttribute("userInfo"));
 
         tutoringService.save(tutoring);
+
+        return ResultInfo.success();
+    }
+
+    /**
+     * zxl
+     * @return
+     * 2018/12/27
+     * 用户接单
+     */
+    public Object getOrder(TutoringQuery tutoringQuery,HttpSession session){
+
+        //判断当前用户是否认证过
+        if(StringUtils.isEmpty(((User)session.getAttribute("userinfo")).getId())){
+
+            return ResultInfo.success().add("msg","进行学生身份认证后才能接单！");
+        }
+
+        //需要得到校验码并判断是否正确
+        String checkCode1 = tutoringQuery.getCheckCode(); //用户提交过来的校验码
+        String checkCode2 = tutoringService.getById(tutoringQuery.getId()).getCheckCode(); //数据库中获取的校验码
+
+        if(!checkCode1.equals(checkCode2)){
+            return ResultInfo.success().add("msg","您输入的接单码有误！");
+        }
+
+        //需要得到接单用户id（从session中取）
+        tutoringQuery.setOrderUser(((User)session.getAttribute("userinfo")).getId());
+
+        //调用service接单操作
+        tutoringService.updateOrderUser(tutoringQuery);
+
+        return ResultInfo.success().add("msg","接单成功！");
+    }
+
+    /**
+     * zxl
+     * @return
+     * 2018/12/27
+     * 撤销接单
+     */
+    public Object deleteOrderUser(TutoringQuery tutoringQuery){
+
+        //生成校验码覆盖原来的
+        tutoringQuery.setCheckCode(GeneratingId.getRandomNumber()+"");
+
+        //接单人覆盖为null
+        tutoringQuery.setOrderUser(null);
+
+        //调用service更新接单
+
+        return ResultInfo.success();
+    }
+
+    /**
+     * zxl
+     * @return
+     * 2018/12/27
+     * 评价用户
+     */
+    public Object updateUserScore(TutoringQuery tutoringQuery){
+
+        //获取接单人信息
+        User user = userService.getById(tutoringQuery.getOrderUser());
+
+        //获取辅导信息
+        Tutoring tutoring = tutoringService.getById(tutoringQuery.getId());
+
+        //计算新的平均分
+        int scoreNumber;
+        double score;
+        if(tutoring.getScoreNumber() != null){
+            scoreNumber = tutoring.getScoreNumber();
+            score = user.getScore();
+            score = (score * scoreNumber + tutoringQuery.getScore())/(scoreNumber+=1);
+        }
+
+        //UserQuery userQuery = new UserQuery();
+        //userQuery.set
+
+
+
+        tutoringService.updateUserScore(tutoringQuery);
 
         return ResultInfo.success();
     }

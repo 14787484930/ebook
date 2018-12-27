@@ -105,4 +105,31 @@
         1
       )
     </insert>
+
+    <!--用户接单-->
+    <update id="updateOrderUser" parameterType="TutoringQuery">
+      update tutoringinfo
+        set orderUser = #{orderUser}
+        where id = #{id}
+    </update>
+
+    <!--拒绝接单-->
+    <update id="deleteOrderUser" parameterType="TutoringQuery">
+        update tutoringinfo
+        set orderUser = null,checkCode = #{checkCode}
+        where id = #{id}
+    </update>
+
+    <!--给用户评分-->
+    <update id="updateUserScore">
+      update userinfo
+      set score = #{score}
+      where id = #{orderUser}
+    </update>
+
+    <!--举报用户-->
+    <insert id="" >
+
+    </insert>
+
 </mapper>

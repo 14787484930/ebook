@@ -12,4 +12,7 @@ public interface TutoringDao {
     public Tutoring getById(String id);
     public void update(Tutoring tutoring);
     public void delete(TutoringQuery query);
+    public void updateOrderUser(TutoringQuery query);
+    public void deleteOrderUser(TutoringQuery query);
+    public void updateUserScore(TutoringQuery tutoringQuery);
 }
