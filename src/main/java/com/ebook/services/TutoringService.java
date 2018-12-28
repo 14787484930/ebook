@@ -1,7 +1,9 @@
 package com.ebook.services;
 
+import com.ebook.beans.reportuser.ReportUser;
 import com.ebook.beans.tutoring.Tutoring;
 import com.ebook.beans.tutoring.TutoringQuery;
+import com.ebook.beans.user.User;
 
 import java.util.List;
 
@@ -14,5 +16,5 @@ public interface TutoringService {
     public void delete(TutoringQuery query);
     public void updateOrderUser(TutoringQuery query);
     public void deleteOrderUser(TutoringQuery query);
-    public void updateUserScore(TutoringQuery tutoringQuery);
+    public void updateUserScore(User user, ReportUser reportUser);
 }

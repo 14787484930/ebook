@@ -59,4 +59,11 @@
             1
         )
     </insert>
+
+    <!--用户进行评分-->
+    <update id="updateScore" parameterType="User">
+        update userinfo set score = #{score},scoreNumber = #{scoreNumber}
+        where id = #{id}
+    </update>
+
 </mapper>

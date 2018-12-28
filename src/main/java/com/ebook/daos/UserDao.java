@@ -12,4 +12,5 @@ public interface UserDao {
     public User getById(String id);
     public void update(User user);
     public void delete(UserQuery query);
+    public void updateScore(User user);
 }

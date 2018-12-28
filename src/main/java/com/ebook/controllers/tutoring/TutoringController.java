@@ -1,5 +1,6 @@
 package com.ebook.controllers.tutoring;
 
+import com.ebook.beans.reportuser.ReportUser;
 import com.ebook.beans.tutoring.Tutoring;
 import com.ebook.beans.tutoring.TutoringQuery;
 import com.ebook.beans.user.User;
@@ -150,6 +151,8 @@ public class TutoringController {
      * 2018/12/27
      * 用户接单
      */
+    @RequestMapping("/getOrder")
+    @ResponseBody
     public Object getOrder(TutoringQuery tutoringQuery,HttpSession session){
 
         //判断当前用户是否认证过
@@ -181,6 +184,8 @@ public class TutoringController {
      * 2018/12/27
      * 撤销接单
      */
+    @RequestMapping("/delOrder")
+    @ResponseBody
     public Object deleteOrderUser(TutoringQuery tutoringQuery){
 
         //生成校验码覆盖原来的
@@ -190,6 +195,7 @@ public class TutoringController {
         tutoringQuery.setOrderUser(null);
 
         //调用service更新接单
+        tutoringService.deleteOrderUser(tutoringQuery);
 
         return ResultInfo.success();
     }
@@ -200,7 +206,9 @@ public class TutoringController {
      * 2018/12/27
      * 评价用户
      */
-    public Object updateUserScore(TutoringQuery tutoringQuery){
+    @RequestMapping("/updateScore")
+    @ResponseBody
+    public Object updateUserScore(TutoringQuery tutoringQuery,HttpSession session){
 
         //获取接单人信息
         User user = userService.getById(tutoringQuery.getOrderUser());
@@ -209,21 +217,30 @@ public class TutoringController {
         Tutoring tutoring = tutoringService.getById(tutoringQuery.getId());
 
         //计算新的平均分
-        int scoreNumber;
-        double score;
-        if(tutoring.getScoreNumber() != null){
-            scoreNumber = tutoring.getScoreNumber();
-            score = user.getScore();
+        int scoreNumber = user.getScoreNumber(); //获取评分次数
+        double score = user.getScore();
+
+        if(user.getScoreNumber() != 0){
             score = (score * scoreNumber + tutoringQuery.getScore())/(scoreNumber+=1);
+        }else{
+            score = tutoringQuery.getScore();
+            scoreNumber = scoreNumber += 1;
         }
 
-        //UserQuery userQuery = new UserQuery();
-        //userQuery.set
+        //封装给用户打分的参数
+        user.setScore(score);
+        user.setScoreNumber(scoreNumber);
 
+        ReportUser reportUser = new ReportUser();
+        //判断是否进行了举报
+        if(tutoringQuery.getFlag() == 1){
+            reportUser.setCreateTime(new Date());
+            reportUser.setCreateUser((User)session.getAttribute("userInfo"));
+            reportUser.setTutoringId(tutoringQuery.getId());
+            reportUser.setId(GeneratingId.getId());
+        }
 
-
-        tutoringService.updateUserScore(tutoringQuery);
-
+        tutoringService.updateUserScore(user,reportUser);
         return ResultInfo.success();
     }
 }

@@ -21,6 +21,25 @@
     </delete>
 
     <insert id="save" parameterType="ReportUser">
-
+      insert into reportuserinfo
+      (
+        id,
+        userId,
+        TutoringId,
+        des,
+        createTime,
+        createUser,
+        dataStatus
+      )
+      values
+      (
+        #{id},
+        #{userId.id},
+        #{TutoringId},
+        #{des},
+        #{createTime},
+        #{createUser.id},
+        1
+      )
     </insert>
 </mapper>

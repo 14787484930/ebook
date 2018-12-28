@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ReportUserDao {
     public List<ReportUser> getReportUser();
-    public void save(ReportUser other);
+    public void save(ReportUser reportUser);
     public ReportUser getById(ReportUserQuery query);
     public void update(ReportUser other);
 

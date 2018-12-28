@@ -120,16 +120,9 @@
         where id = #{id}
     </update>
 
-    <!--给用户评分-->
-    <update id="updateUserScore">
-      update userinfo
-      set score = #{score}
-      where id = #{orderUser}
+    <!--标记为已评论-->
+    <update id="updateTutoring">
+      update tutoringinfo set isScore = 1 ;
     </update>
-
-    <!--举报用户-->
-    <insert id="" >
-
-    </insert>
 
 </mapper>

@@ -13,14 +13,12 @@ import java.util.Date;
 
 @Data
 public class ReportUser implements Serializable {
-    @NotEmpty(message = "举报编号不能为空")
+
     private String id;
 
-    @NotNull(message = "用户编号不能为空")
     private User userId;
 
-    @NotNull(message = "辅导编号不能为空")
-    private Tutoring TutoringId;
+    private String TutoringId;
 
     private String des;
 
@@ -30,8 +28,7 @@ public class ReportUser implements Serializable {
     private Date createTime;
 
     @NotEmpty(message = "创建人不能为空")
-    private String createUser;
+    private User createUser;
 
-    @NotNull(message = "数据状态不能空")
     private Integer dataStatus;
 }

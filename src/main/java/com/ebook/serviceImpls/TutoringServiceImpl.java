@@ -1,9 +1,15 @@
 package com.ebook.serviceImpls;
 
+import com.ebook.beans.reportuser.ReportUser;
 import com.ebook.beans.tutoring.Tutoring;
 import com.ebook.beans.tutoring.TutoringQuery;
+import com.ebook.beans.user.User;
+import com.ebook.daos.ReportUserDao;
 import com.ebook.daos.TutoringDao;
+import com.ebook.daos.UserDao;
+import com.ebook.services.ReportUserService;
 import com.ebook.services.TutoringService;
+import com.ebook.services.UserService;
 import com.model.utills.uuid.GeneratingId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +20,12 @@ import java.util.List;
 public class TutoringServiceImpl implements TutoringService {
     @Autowired
     TutoringDao tutoringDao;
+
+    @Autowired
+    UserDao userDao;
+
+    @Autowired
+    ReportUserDao reportUserDao;
 
     /**
      * zxl
@@ -101,14 +113,23 @@ public class TutoringServiceImpl implements TutoringService {
 
     /**
      * zxl
-     * @param tutoringQuery
+     * @param user, reportUser
      * 2018-12-21
      * 评分
      */
     @Override
-    public void updateUserScore(TutoringQuery tutoringQuery) {
+    public void updateUserScore(User user, ReportUser reportUser) {
 
-        tutoringDao.updateUserScore(tutoringQuery);
+        //给用户进行评分
+        userDao.updateScore(user);
+
+        //判断是否进行举报，是的话进行举报操作
+        if(reportUser != null){
+            reportUserDao.save(reportUser);
+        }
+
+        //将辅导编辑为已经举报过的
+        tutoringDao.updateTutoring();
     }
 
 

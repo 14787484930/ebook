@@ -54,7 +54,5 @@ public class Tutoring extends BaseBean  {
 
     private Integer isScore; //是否评价了{0：没有评分过，1：已经评分过了}
 
-    private Integer scoreNumber; //评分次数
-
     private String des; //描述
 }
