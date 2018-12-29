@@ -16,8 +16,9 @@ public class ReportUserServiceImpl implements ReportUserService {
     ReportUserDao reportUserDao;
 
     @Override
-    public List<ReportUser> getReportUser() {
-        return null;
+    public List<ReportUser> getReportUser(ReportUserQuery query) {
+
+        return reportUserDao.getReportUser(query);
     }
 
     @Override
@@ -26,17 +27,20 @@ public class ReportUserServiceImpl implements ReportUserService {
     }
 
     @Override
-    public ReportUser getById(ReportUserQuery query) {
-        return null;
+    public ReportUser getById(String id) {
+
+        return reportUserDao.getById(id);
     }
 
     @Override
-    public void update(ReportUser other) {
+    public void update(ReportUserQuery query) {
 
+        reportUserDao.update(query);
     }
 
     @Override
     public void delete(ReportUserQuery query) {
 
+        reportUserDao.delete(query);
     }
 }

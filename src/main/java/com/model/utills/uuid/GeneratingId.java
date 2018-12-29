@@ -24,6 +24,6 @@ public class GeneratingId {
 
     public static void main(String[] args) {
 
-        System.out.println(getRandomNumber());
+        System.out.println(getId());
     }
 }

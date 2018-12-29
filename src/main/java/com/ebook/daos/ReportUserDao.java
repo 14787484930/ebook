@@ -6,10 +6,10 @@ import com.ebook.beans.reportuser.ReportUserQuery;
 import java.util.List;
 
 public interface ReportUserDao {
-    public List<ReportUser> getReportUser();
+    public List<ReportUser> getReportUser(ReportUserQuery query);
     public void save(ReportUser reportUser);
-    public ReportUser getById(ReportUserQuery query);
-    public void update(ReportUser other);
+    public ReportUser getById(String id);
+    public void update(ReportUserQuery query);
 
     public void delete(ReportUserQuery query);
 }
