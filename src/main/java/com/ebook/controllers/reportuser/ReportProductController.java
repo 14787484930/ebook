@@ -1,8 +1,11 @@
 package com.ebook.controllers.reportuser;
 
 import com.ebook.beans.book.Book;
+import com.ebook.beans.book.BookQuery;
 import com.ebook.beans.electronics.Electronics;
+import com.ebook.beans.electronics.ElectronicsQuery;
 import com.ebook.beans.other.Other;
+import com.ebook.beans.other.OtherQuery;
 import com.ebook.beans.reportuser.ReportProduct;
 import com.ebook.beans.reportuser.ReportProductQuery;
 import com.ebook.beans.user.User;
@@ -81,7 +84,7 @@ public class ReportProductController {
 
     /**
      * zxl
-     * @param reportProduct
+     * @param reportProductQuery
      * @param session
      * @return
      * 2018/12/26
@@ -89,9 +92,31 @@ public class ReportProductController {
      */
     @RequestMapping("/update")
     @ResponseBody
-    public Object update(ReportProduct reportProduct, HttpSession session){
+    public Object update(ReportProductQuery reportProductQuery, HttpSession session){
 
-        reportProductService.update(reportProduct);
+        Integer productType =  reportProductQuery.getProductType();
+        String productId = reportProductQuery.getProductId();
+        if(productType == null && StringUtils.isEmpty(productId)){
+            return ResultInfo.fail().add("errors","传参有误");
+        }
+
+        switch (productType){
+            case 1:
+                BookQuery bookQuery = new BookQuery();
+                bookQuery.setId(productId);
+                bookService.delete(bookQuery);
+                break;
+            case 2:
+                ElectronicsQuery electronicsQuery = new ElectronicsQuery();
+                electronicsQuery.setId(productId);
+                electronicsService.delete(electronicsQuery);
+                break;
+            case 3:
+                OtherQuery otherQuery = new OtherQuery();
+                otherQuery.setId(productId);
+                otherService.delete(otherQuery);
+                break;
+        }
         return ResultInfo.success();
     }
 
