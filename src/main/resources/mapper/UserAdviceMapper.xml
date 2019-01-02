@@ -5,22 +5,47 @@
     <cache type="com.model.utills.redis.RedisCache" />
 
     <select id="getUserAdvice" resultType="UserAdvice">
-
+        select
+           createUser, createTime, dataStatus
+        from useradvice
+        where dataStatus = 1
+        order by createTime desc
     </select>
 
     <select id="getById" resultType="UserAdvice">
-
+        select
+          createUser, des, createTime, dataStatus
+        from useradvice
+        where id = #{id}
     </select>
 
-    <update id="update" parameterType="UserAdvice">
-
+    <update id="update">
+        update useradvice
+        set dataStatus = 0
+        where id = #{id}
     </update>
 
     <delete id="delete" parameterType="UserAdviceQuery">
-
+        delete from useradvice
+        where id = #{id}
     </delete>
 
     <insert id="save" parameterType="UserAdvice">
-
+        insert into useradvice
+        (
+            id,
+            des,
+            createUser,
+            createTime,
+            dataStatus
+        )
+        values
+        (
+            #{id},
+            #{des},
+            #{createUser.nickname},
+            #{createTime},
+            #{dataStatus}
+        )
     </insert>
 </mapper>

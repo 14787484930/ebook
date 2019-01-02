@@ -14,28 +14,35 @@ public class UserAdviceServiceImpl implements UserAdviceService {
     @Autowired
     UserAdviceDao useradviceDao;
 
+    /**
+     * gpj
+     * @return
+     * 查询用户建议详细信息列表
+     */
     @Override
-    public List<UserAdvice> getUserAdvice() {
-        return null;
+    public List<UserAdvice> getUserAdvice(UserAdviceQuery query) {
+        List<UserAdvice> list = useradviceDao.getUserAdvice(query);
+        return list;
     }
 
     @Override
     public void save(UserAdvice userAdvice) {
-
+        useradviceDao.save(userAdvice);
     }
 
     @Override
-    public UserAdvice getById(UserAdviceQuery query) {
-        return null;
+    public UserAdvice getById(String id) {
+        UserAdvice userAdvice = useradviceDao.getById(id);
+        return userAdvice;
     }
 
     @Override
-    public void update(UserAdvice userAdvice) {
-
+    public void update(String id) {
+        useradviceDao.update(id);
     }
 
     @Override
     public void delete(UserAdviceQuery query) {
-
+        useradviceDao.delete(query);
     }
 }
