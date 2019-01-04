@@ -2,20 +2,23 @@ package com.ebook.serviceImpls;
 
 import com.ebook.beans.about.AboutUs;
 import com.ebook.beans.about.AboutUsQuery;
+import com.ebook.daos.AboutUsDao;
 import com.ebook.services.AboutUsService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Data
+@Service
 public class AboutUsServiceImpl implements AboutUsService {
     @Autowired
-    AboutUsService aboutUsService;
+    AboutUsDao aboutUsDao;
 
     @Override
     public List<AboutUs> getAboutUs() {
-        return null;
+        List<AboutUs> list = aboutUsDao.getAboutUs();
+        return list;
     }
 
     @Override
@@ -24,8 +27,9 @@ public class AboutUsServiceImpl implements AboutUsService {
     }
 
     @Override
-    public AboutUs getById(AboutUsQuery query) {
-        return null;
+    public AboutUs getById(String id) {
+
+        return aboutUsDao.getById(id);
     }
 
     @Override

@@ -13,5 +13,5 @@ public class AboutUs implements Serializable {
     private String title;
 
     @NotEmpty(message = "内容描述不能为空")
-    private String describe;
+    private String des;
 }

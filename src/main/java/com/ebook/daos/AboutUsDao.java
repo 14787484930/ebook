@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface AboutUsDao {
     public List<AboutUs> getAboutUs();
-    public void save(AboutUs aboutUs);
-    public AboutUs getById(AboutUsQuery query);
-    public void update(AboutUs aboutUs);
-    public void delete(AboutUsQuery query);
+//    public void save(AboutUs aboutUs);
+    public AboutUs getById(String id);
+//    public void update(AboutUs aboutUs);
+//    public void delete(AboutUsQuery query);
 }
