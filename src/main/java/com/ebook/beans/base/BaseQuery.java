@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 public class BaseQuery {
 
-    public String id; //图书编号
+    public String id; //编号
     public User user; //用户信息
     public String createUser; //创建者
 

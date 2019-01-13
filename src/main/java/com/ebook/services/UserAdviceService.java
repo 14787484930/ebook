@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface UserAdviceService {
 
-    public List<UserAdvice> getUserAdvice();
+    public List<UserAdvice> getUserAdvice(UserAdviceQuery query);
     public void save(UserAdvice userAdvice);
-    public UserAdvice getById(UserAdviceQuery query);
-    public void update(UserAdvice userAdvice);
+    public UserAdvice getById(String id);
+    public void update(String id);
     public void delete(UserAdviceQuery query);
 }
