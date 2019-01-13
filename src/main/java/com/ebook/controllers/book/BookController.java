@@ -14,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -39,6 +36,7 @@ public class BookController {
      * @return
      * 2018-12-18
      */
+    @CrossOrigin
     @RequestMapping("/books")
     @ResponseBody
     @SysLog(moduleName = "zxl查看所有信息")
@@ -66,6 +64,7 @@ public class BookController {
      * @return
      * 2018-12-18
      */
+    @CrossOrigin
     @RequestMapping(value="/getById/{id}")
     @ResponseBody
     @SysLog(moduleName = "zxl查看信息")
@@ -81,9 +80,10 @@ public class BookController {
      * @return
      * 编辑图书信息
      */
+    @CrossOrigin
     @RequestMapping("/update")
     @ResponseBody
-    public Object update(@RequestParam(value="book",required=true) @Valid Book book,@RequestParam(value="files",required=false) MultipartFile[] files, BindingResult result,HttpSession session) throws Exception {
+    public Object update(@Valid Book book, BindingResult result, @RequestParam(value="files",required=false) MultipartFile[] files, HttpSession session) throws Exception {
 
         /*服务器端校验*/
         if(result.hasErrors()){
@@ -112,6 +112,7 @@ public class BookController {
      * @return
      * 删除图书信息
      */
+    @CrossOrigin
     @RequestMapping(value="/delete")
     @ResponseBody
     public Object delete(BookQuery bookQuery){
@@ -127,9 +128,10 @@ public class BookController {
      * @return
      * 2018-12-18
      */
+    @CrossOrigin
     @RequestMapping("/save")
     @ResponseBody
-    public Object save(@RequestParam(value="book",required=true) @Valid Book book,@RequestParam(value="files",required=false) MultipartFile[] files, BindingResult result,HttpSession session) throws Exception {
+    public Object save(@Valid Book book, BindingResult result, @RequestParam(value="files",required=false) MultipartFile[] files,HttpSession session) throws Exception {
 
         /*服务器端校验*/
         if(result.hasErrors()){

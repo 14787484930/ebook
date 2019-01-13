@@ -80,6 +80,7 @@
         (
             id,
             bookName,
+            bookType,
             author,
             bookPrice,
             pubDate,
@@ -96,6 +97,7 @@
         (
             #{id},
             #{bookName},
+            #{bookType},
             #{author},
             #{bookPrice},
             #{pubDate},
@@ -106,7 +108,7 @@
             #{des},
             #{createUser.id},
             #{createTime},
-            #{dataStatus}
+            1
         )
     </insert>
 
