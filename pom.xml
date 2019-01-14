@@ -252,7 +252,15 @@
       <version>4.5.2</version>
     </dependency>
 
-    <!--引入json-lib-->
+      <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpmime -->
+      <dependency>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpmime</artifactId>
+          <version>4.5.2</version>
+      </dependency>
+
+
+      <!--引入json-lib-->
     <!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
     <dependency>
       <groupId>net.sf.json-lib</groupId>
