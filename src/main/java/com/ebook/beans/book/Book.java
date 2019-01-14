@@ -35,7 +35,7 @@ public class Book extends BaseBean {
     @NotEmpty(message = "图书名称不能为空")
     private String bookName;           //图书名称
 
-    @NotEmpty(message = "图书类型不能为空")
+    @NotNull(message = "图书类型不能为空")
     private Integer bookType;          //图书类型
 
     @NotEmpty(message = "作者不能为空")
