@@ -109,12 +109,13 @@ public class WeiXinTest {
     @Test
     public void test3() throws IOException {
 
+        //请求链接
         String url1 = "https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=ACCESS_TOKEN";
         url1 = url1.replace("ACCESS_TOKEN",Constant.ACCESSTOKEN);
 
         URL url = new URL(url1);
         String result = null;
-        File file = new File("F:/pic","123.png");
+        File file = new File("F:/pic","1.jpg");
 
         if (!file.exists() || !file.isFile()) {
             throw new IOException("上传的文件不存在");
@@ -189,6 +190,13 @@ public class WeiXinTest {
         System.out.println(result);
     }
 
+    @Test
+    public void test(){
+
+        String url = "https://api.weixin.qq.com/cgi-bin/media/uploadnews?access_token=ACCESS_TOKEN";
+        String str = "http://mmbiz.qpic.cn/mmbiz_jpg/6sGemdgERQk7wosk0NI32ibibMCOO440O536ltKII2murU2FBqibvpsibwMMwU9cC6ryzSWYCPCSRWpHELHds70UrA/0";
+
+    }
 
 
 }
