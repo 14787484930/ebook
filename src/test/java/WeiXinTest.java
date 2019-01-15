@@ -1,7 +1,9 @@
 import com.fasterxml.jackson.core.JsonParser;
 import com.model.utills.constants.Constant;
+import com.model.utills.http.SendHttp;
 import com.model.utills.uuid.GeneratingId;
 import net.sf.json.JSON;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -27,6 +29,7 @@ import javax.swing.text.html.parser.Entity;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -151,7 +154,7 @@ public class WeiXinTest {
         url1 = url1.replace("ACCESS_TOKEN",Constant.ACCESSTOKEN);
 
         try {
-            String media_id = uploadFile("F:/pic/666.png",Constant.ACCESSTOKEN,"image");
+            String media_id = uploadFile("F:/pic/3.jpg",Constant.ACCESSTOKEN,"image");
             System.out.println(media_id);
         } catch (Exception e) {
             e.printStackTrace();
@@ -164,6 +167,19 @@ public class WeiXinTest {
          * 	"media_id": "TfsARwNriFKsPBPEfW-H7HLVPEotCKhNFAQjKH0tGekyLC3j5IPkgUWMqwauOOs_",
          * 	"created_at": 1547542396
          * }
+         *
+         *{
+         * 	"type": "image",
+         * 	"media_id": "7yJFrNCiAG5snIKYFYPwiAypSvPdd9BhBiIhb-ddvMDB26MKN7GHLD2tbP6oTDzG",
+         * 	"created_at": 1547565519
+         * }
+         *
+         *{
+         * 	"type": "image",
+         * 	"media_id": "auy7p7hCnYtW3bisSIEkPhVG9Q0lKc_fjmVoTB-U_Jau7qdhWgp0qn0_x2lg-YIC",
+         * 	"created_at": 1547566313
+         * }
+         *
          */
     }
 
@@ -173,8 +189,33 @@ public class WeiXinTest {
     @Test
     public void tuwen(){
 
+        //请求接口的url
+        String url = "https://api.weixin.qq.com/cgi-bin/media/uploadnews?access_token=ACCESS_TOKEN";
+        url = url.replace("ACCESS_TOKEN",url);
 
+        //初始化图文消息
+        List<Article> articles = new ArrayList<Article>();
+        Article article = new Article();
+        String[] mediaIds = {"TfsARwNriFKsPBPEfW-H7HLVPEotCKhNFAQjKH0tGekyLC3j5IPkgUWMqwauOOs_","7yJFrNCiAG5snIKYFYPwiAypSvPdd9BhBiIhb-ddvMDB26MKN7GHLD2tbP6oTDzG","auy7p7hCnYtW3bisSIEkPhVG9Q0lKc_fjmVoTB-U_Jau7qdhWgp0qn0_x2lg-YIC"};
 
+        article.setAuthor("zxl");
+        article.setTitle("第一个图文消息");
+
+        for(int i = 0;i < 3;i++){
+
+            article.setThumb_media_id(mediaIds[i]);
+            article.setTitle("标题"+i);
+            article.setContent("<p>希望大家齐心协力</p>");
+            articles.add(article);
+        }
+
+        //将list转成JsonArray传给工具类
+        String articlesStr =  JSONArray.fromObject(articles).toString();
+
+        System.out.println(articlesStr);
+
+        String resutl = SendHttp.sendPost(url,articlesStr);
+        System.out.println(resutl);
 
     }
 
