@@ -191,34 +191,143 @@ public class WeiXinTest {
 
         //请求接口的url
         String url = "https://api.weixin.qq.com/cgi-bin/media/uploadnews?access_token=ACCESS_TOKEN";
-        url = url.replace("ACCESS_TOKEN",url);
+        url = url.replace("ACCESS_TOKEN",Constant.ACCESSTOKEN);
+
+        System.out.println(url);
 
         //初始化图文消息
         List<Article> articles = new ArrayList<Article>();
         Article article = new Article();
-        String[] mediaIds = {"TfsARwNriFKsPBPEfW-H7HLVPEotCKhNFAQjKH0tGekyLC3j5IPkgUWMqwauOOs_","7yJFrNCiAG5snIKYFYPwiAypSvPdd9BhBiIhb-ddvMDB26MKN7GHLD2tbP6oTDzG","auy7p7hCnYtW3bisSIEkPhVG9Q0lKc_fjmVoTB-U_Jau7qdhWgp0qn0_x2lg-YIC"};
+        String[] mediaIds = {"TfsARwNriFKsPBPEfW-H7HLVPEotCKhNFAQjKH0tGekyLC3j5IPkgUWMqwauOOs_",
+                "7yJFrNCiAG5snIKYFYPwiAypSvPdd9BhBiIhb-ddvMDB26MKN7GHLD2tbP6oTDzG",
+                "auy7p7hCnYtW3bisSIEkPhVG9Q0lKc_fjmVoTB-U_Jau7qdhWgp0qn0_x2lg-YIC"};
 
-        article.setAuthor("zxl");
-        article.setTitle("第一个图文消息");
+        /*article.setAuthor("zxl");
+        article.setTitle("第一个图文消息");*/
+
+        StringBuffer sb = new StringBuffer();
+        sb.append("<h1>希望大家齐心协力</h1>").append("<p style=\"color:green\">").
+                append("前几天看到一个小区的电梯和墙上搞广告的收入给小区居民发了好多钱，说明广告的收入是可观的，希望大家是发自内心的去做，一起加油。</p>");
 
         for(int i = 0;i < 3;i++){
 
+            article = new Article();
+            article.setAuthor("zxl");
+            article.setTitle("第一个图文消息");
             article.setThumb_media_id(mediaIds[i]);
-            article.setTitle("标题"+i);
-            article.setContent("<p>希望大家齐心协力</p>");
+            if(i == 1){
+                article.setTitle("什么叫全力以赴做一件事");
+            }else if(i == 2){
+                article.setTitle("既然选择了出发就不要徘徊不前");
+            }else{
+                article.setTitle("一起加油，但不勉强，也不强求");
+            }
+            article.setContent(sb.toString());
             articles.add(article);
         }
 
+        JSONObject jsonStr = new JSONObject();
+
         //将list转成JsonArray传给工具类
-        String articlesStr =  JSONArray.fromObject(articles).toString();
+        JSONArray articlesStr =  JSONArray.fromObject(articles);
+        jsonStr.put("articles",articlesStr);
 
-        System.out.println(articlesStr);
+        String scStr = jsonStr.toString();
 
-        String resutl = SendHttp.sendPost(url,articlesStr);
+        System.out.println(scStr);
+
+        String resutl = SendHttp.sendPost(url,scStr);
         System.out.println(resutl);
+        /**
+         * 得到的结果
+         * {
+         * 	"type": "news",
+         * 	"media_id": "1TA15BQ4slN5fKJKZW-e3a6B2L1EboSgK_vSkbSyvYKhixMCpVYwC2H_FHR-Ep5D",
+         * 	"created_at": 1547603802
+         * }
+         *
+         * {
+         * 	"type": "news",
+         * 	"media_id": "T9w6S113LMOVzOL1xkT2y4pwMdsP3t_3t5FWX_BBAbdMl-p4dxIZTJueildeX_-9",
+         * 	"created_at": 1547626354
+         * }
+         *
+         * {
+         * 	"type": "news",
+         * 	"media_id": "R-xtO27T3WyPTeWjTjGRnEwJdl4YQSAUfzApIvl3PSsOqgJgQGJMg7-VLcaExWgB",
+         * 	"created_at": 1547627004
+         * }
+         *
+         */
+    }
+
+    /**
+     * 群发图文消息
+     *
+     * {
+     *    "filter":{
+     *       "is_to_all":false,
+     *       "tag_id":2
+     *    },
+     *    "mpnews":{z
+     *       "media_id":"123dsdajkasd231jhksad"
+     *    },
+     *     "msgtype":"mpnews",
+     *     "send_ignore_reprint":0
+     * }
+     */
+    @Test
+    public void sendMessageAll(){
+
+        //String url = "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token=ACCESS_TOKEN";
+        //预览接口
+        String url = "https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token=ACCESS_TOKEN";
+        url = url.replace("ACCESS_TOKEN",Constant.ACCESSTOKEN);
+
+        JSONObject jsonObject = new JSONObject();
+
+        //filter
+        JSONObject jsonFilter = new JSONObject();
+        jsonFilter.put("is_to_all",true);
+        //jsonFilter.put("tag_id",2);
+
+        //jsonObject.put("filter",jsonFilter);
+
+        String[] openids = {"og4jG1LVi3tcqeWIU_Dw4c1SdfGk","og4jG1Jtwh11ke6GKZudLGHcEGho","og4jG1LuCIuwtvTPPzrSN6wTbSv4","og4jG1PAHCx2OvTAbtCN3nLS-ZJ8"};
+        List<String> list = new ArrayList<>();
+        for(String str : openids){
+
+            list.add(str);
+        }
+
+//        jsonObject.put("touser",JSONArray.fromObject(openids));
+        jsonObject.put("touser","og4jG1Di02DF-sel9Tker8aJue-s");
+
+        //mpnews
+        JSONObject jsonMpnews = new JSONObject();
+        jsonMpnews.put("media_id","A2MPxcSlRT7SRWkVo_n836astWbvShBdMAtvcNPDHUDt7-rA1UUDaco9msjv-Ps2");
+
+        jsonObject.put("mpnews",jsonMpnews);
+
+        //msgtype
+        jsonObject.put("msgtype","mpnews");
+
+        //send_ignore_reprint
+        jsonObject.put("send_ignore_reprint",0);
+
+        String jsonStr = jsonObject.toString();
+
+        System.out.println(jsonStr);
+
+        String result = SendHttp.sendPost(url,jsonStr);
+
+        //System.out.println(result);
 
     }
 
+    /**
+     * 图文消息中图片上传
+     */
     private static final String UPLOAD_URL = "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=ACCESS_TOKEN&type=TYPE";
     public static String uploadFile(String filePath, String accessToken, String type) throws Exception{
         File file = new File(filePath);
