@@ -18,7 +18,7 @@ public  class Constant {
     //第三方用户唯一凭证密钥
     public static final String APPSECRET = "332493c05a5932737400ada0f4a61109";
     //调用接口凭据
-    public static String ACCESSTOKEN = "17_xzQSStCUTRugoFkCam66s0VBxwFtvCsyrde9L-l_yKyxkNirzf2dfGktnl7JegdJYRQcnQmttpcNSf9sUr_bOSXdreotsChZnKYhh-W3WANnjpD4n-0BT9JmgG4RL3thhD-iNAHsZkSxElreSWBgAAANRW";
+    public static String ACCESSTOKEN = "17_E0QGHrWWW8F1xadAxkqNqKY6JYGU6AkGVZTUe6QDrnsr5sKYVZrgUGdgnNM5mZCV2BpWA8O2gT4U4F-jYeN2pGi3ctkAsHDEAxO7g6fgp9NWQOPpiylb0LB1kWnvflXlSrgfVPAFiKB4u04SUQNcACAMIF";
     //查询菜单
     public static final String GET_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=ACCESS_TOKEN";
     //删除菜单
@@ -32,6 +32,19 @@ public  class Constant {
 
     //获取用户基本信息
     public static final String GET_USER_URL = "https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN";
+
+    //消息推送相关
+    //上传图消息中用到的图片
+   public static final String UPLOAD_IMG_URL = "https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=ACCESS_TOKEN";
+   //上传素材（图片（image）: 2M，支持PNG\JPEG\JPG\GIF格式；语音（voice）：2M，播放长度不超过60s，支持AMR\MP3格式；视频（video）：10MB，支持MP4格式；缩略图（thumb）：64KB，支持JPG格式）
+   public static final String UPLOAD_MATERIAL_PIC_URL = "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=ACCESS_TOKEN&type=TYPE";
+   //上传图文素材(最多8条)
+   public static final String UPLOAD_MATERIAL_NEWS = "https://api.weixin.qq.com/cgi-bin/media/uploadnews?access_token=ACCESS_TOKEN";
+   //推送图文消息（根据分组进行群推）
+   public static final String MESSAGE_SEND_URL = "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token=ACCESS_TOKEN";
+   //预览图文消息
+   public static final String MESSAGE_PREVIEW_URL = "https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token=ACCESS_TOKEN";
+
 
 
     /*实体校验相关常量*/

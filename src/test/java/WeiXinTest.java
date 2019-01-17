@@ -207,7 +207,7 @@ public class WeiXinTest {
 
         StringBuffer sb = new StringBuffer();
         sb.append("<h1>希望大家齐心协力</h1>").append("<p style=\"color:green\">").
-                append("前几天看到一个小区的电梯和墙上搞广告的收入给小区居民发了好多钱，说明广告的收入是可观的，希望大家是发自内心的去做，一起加油。</p>");
+                append("前几天看到一个小区的电梯和墙上搞广告的收入给小区居民发了好多钱，说明广告的收入是可观的，希望大家是发自内心的去做，一起加油。</p>").append("<br/><img src=\"http://mmbiz.qpic.cn/mmbiz_jpg/6sGemdgERQk7wosk0NI32ibibMCOO440O536ltKII2murU2FBqibvpsibwMMwU9cC6ryzSWYCPCSRWpHELHds70UrA/0\"");
 
         for(int i = 0;i < 3;i++){
 
@@ -293,7 +293,7 @@ public class WeiXinTest {
 
         //jsonObject.put("filter",jsonFilter);
 
-        String[] openids = {"og4jG1LVi3tcqeWIU_Dw4c1SdfGk","og4jG1Jtwh11ke6GKZudLGHcEGho","og4jG1LuCIuwtvTPPzrSN6wTbSv4","og4jG1PAHCx2OvTAbtCN3nLS-ZJ8"};
+        String[] openids = {"og4jG1LVi3tcqeWIU_Dw4c1SdfGk","og4jG1Di02DF-sel9Tker8aJue-s","og4jG1PAHCx2OvTAbtCN3nLS-ZJ8","og4jG1LuCIuwtvTPPzrSN6wTbSv4","og4jG1Jtwh11ke6GKZudLGHcEGho"};
         List<String> list = new ArrayList<>();
         for(String str : openids){
 
@@ -301,11 +301,11 @@ public class WeiXinTest {
         }
 
 //        jsonObject.put("touser",JSONArray.fromObject(openids));
-        jsonObject.put("touser","og4jG1Di02DF-sel9Tker8aJue-s");
+        jsonObject.put("touser","og4jG1LVi3tcqeWIU_Dw4c1SdfGk");
 
         //mpnews
         JSONObject jsonMpnews = new JSONObject();
-        jsonMpnews.put("media_id","A2MPxcSlRT7SRWkVo_n836astWbvShBdMAtvcNPDHUDt7-rA1UUDaco9msjv-Ps2");
+        jsonMpnews.put("media_id","tobhyZkRIifne9JtlvhJrRbi4_DLnS67hBK2i2gny81CFEN7x2Nz2je_dEVqSt2z");
 
         jsonObject.put("mpnews",jsonMpnews);
 
@@ -319,7 +319,13 @@ public class WeiXinTest {
 
         System.out.println(jsonStr);
 
-        String result = SendHttp.sendPost(url,jsonStr);
+        for(int i=0;i<openids.length;i++){
+
+            jsonObject.put("touser",openids[i]);
+            String result = SendHttp.sendPost(url,jsonStr);
+        }
+
+        //String result = SendHttp.sendPost(url,jsonStr);
 
         //System.out.println(result);
 
