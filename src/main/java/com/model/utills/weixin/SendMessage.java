@@ -26,10 +26,7 @@ public class SendMessage {
 
         JSONObject jsonObject = new JSONObject();
 
-        //filter
-        JSONObject jsonFilter = new JSONObject();
-        jsonFilter.put("is_to_all",true);
-        //jsonFilter.put("tag_id",2);
+        jsonObject.put("touser",openId);
 
         //mpnews
         JSONObject jsonMpnews = new JSONObject();
@@ -40,14 +37,10 @@ public class SendMessage {
         //msgtype
         jsonObject.put("msgtype","mpnews");
 
-        //send_ignore_reprint
-        jsonObject.put("send_ignore_reprint",0);
-
         String jsonStr = jsonObject.toString();
 
         System.out.println(jsonStr);
 
-        jsonObject.put("touser",openId);
         return SendHttp.sendPost(url,jsonStr);
 
     }

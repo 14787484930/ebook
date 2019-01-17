@@ -18,7 +18,7 @@ public  class Constant {
     //第三方用户唯一凭证密钥
     public static final String APPSECRET = "332493c05a5932737400ada0f4a61109";
     //调用接口凭据
-    public static String ACCESSTOKEN = "17_E0QGHrWWW8F1xadAxkqNqKY6JYGU6AkGVZTUe6QDrnsr5sKYVZrgUGdgnNM5mZCV2BpWA8O2gT4U4F-jYeN2pGi3ctkAsHDEAxO7g6fgp9NWQOPpiylb0LB1kWnvflXlSrgfVPAFiKB4u04SUQNcACAMIF";
+    public static String ACCESSTOKEN = "17_uJBHxd55DocGY8bE-MX0RRG1IB4zqs-pcW8jvh1RjB5QmWHYHwo3pkNSX-f7A4kmYSM78fnZiFx9ERjwddZXkONftugvhmfdEE_lLcNpXgS6aafCn8-IEM4iE5WlwHU5I1cDA5lviuP7JnlQLGYeAAADYQ";
     //查询菜单
     public static final String GET_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=ACCESS_TOKEN";
     //删除菜单

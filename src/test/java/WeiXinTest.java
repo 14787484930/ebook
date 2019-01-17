@@ -2,6 +2,8 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.model.utills.constants.Constant;
 import com.model.utills.http.SendHttp;
 import com.model.utills.uuid.GeneratingId;
+import com.model.utills.weixin.SendMessage;
+import com.model.utills.weixin.UploadMaterial;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -414,4 +416,48 @@ public class WeiXinTest {
     }
 
 
+    /**
+     * 测试封装后的方法
+     */
+    @Test
+    public void testFZ(){
+
+        //一、测试图文消息中用到的图片的上传，返回url
+        /*String url = Constant.UPLOAD_IMG_URL.replace("ACCESS_TOKEN",Constant.ACCESSTOKEN);
+        System.out.println(url);
+        File file = new File("F:/pic/6.jpg");
+        try {
+            UploadMaterial.uploadImg(url,file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+        /*
+        {
+	"       url":"http://mmbiz.qpic.cn/mmbiz_jpg/6sGemdgERQkcORibU8dgXIPA5pLibBRUEckMVvL37sVnhOfNaKOFZhqSJvjRZVAZxdakOkBhEl9soQ4L3OhHyu4A/0"
+        }
+        */
+
+        /*String url = Constant.UPLOAD_MATERIAL_PIC_URL.replace("ACCESS_TOKEN",Constant.ACCESSTOKEN);
+        File file = new File("F:/pic/6.jpg");
+        try {
+            UploadMaterial.uploadMaterialPic(file,url,"image");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+        /*
+        {
+        "type":"image",
+        "media_id":"gIV3afSArG6jFez7i8lBxGUpF1zeNpcoOjyUp-bQv0WwxBekwalmXrcQmf4zN7Kl",
+        "created_at":1547734730
+        }
+        */
+
+        String url = Constant.MESSAGE_PREVIEW_URL.replace("ACCESS_TOKEN",Constant.ACCESSTOKEN);
+        String media_id = "tobhyZkRIifne9JtlvhJrRbi4_DLnS67hBK2i2gny81CFEN7x2Nz2je_dEVqSt2z";
+        String openId = "og4jG1LVi3tcqeWIU_Dw4c1SdfGk";
+        SendMessage.previewMessage(url,openId,media_id);
+
+
+
+    }
 }
