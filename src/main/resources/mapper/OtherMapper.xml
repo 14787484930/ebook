@@ -71,19 +71,19 @@
     <insert id="save" parameterType="Other">
       insert into otherInfo
         (
-            id
-            otherName
-            buyDate
-            originalPrice
-            presentPrice
-            hasInvoice
-            otherPic
-            weiXin
-            phone
-            des
-            createTime
-            createUser
-            viewTimes
+            id,
+            otherName,
+            buyDate,
+            originalPrice,
+            presentPrice,
+            hasInvoice,
+            otherPic,
+            weiXin,
+            phone,
+            des,
+            createTime,
+            createUser,
+            viewTimes,
             dataStatus
         )
         values

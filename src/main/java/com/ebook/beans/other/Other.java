@@ -33,7 +33,7 @@ public class Other extends BaseBean {
     private Double presentPrice; //现价
 
     @NotNull(message = "是否有发票不能为空")
-    @Pattern(regexp = "0|1",message = "是否有发票的值不合法")
+    //@Pattern(regexp = "0|1",message = "是否有发票的值不合法")
     private Integer hasInvoice; //是否有发票不能为空(0-没有 1-有)
 
     private String otherPic; //产品图片
