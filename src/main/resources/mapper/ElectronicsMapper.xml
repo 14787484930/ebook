@@ -84,7 +84,7 @@
         weiXin,
         phone,
         des,
-        viewTime,
+        viewTimes,
         createTime,
         createUser,
         dataStatus
@@ -102,7 +102,7 @@
         #{weiXin},
         #{phone},
         #{des},
-        #{viewTime},
+        #{viewTimes},
         #{createTime},
         #{createUser.id},
         1

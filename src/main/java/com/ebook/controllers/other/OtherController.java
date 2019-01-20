@@ -41,6 +41,7 @@ public class OtherController {
      * 2018/12/21
      *查看其他产品列表
      */
+    @CrossOrigin
     @RequestMapping("/others")
     @ResponseBody
     public Object getOthers(OtherQuery otherQuery, HttpSession session){
@@ -62,6 +63,7 @@ public class OtherController {
      * 2018/12/21
      *查看其他产品详情
      */
+    @CrossOrigin
     @RequestMapping("/getById/{id}")
     @ResponseBody
     public Object getById(@PathVariable("id") String id){
@@ -80,6 +82,7 @@ public class OtherController {
      * 2018/12/21
      *编辑其他产品
      */
+    @CrossOrigin
     @RequestMapping("/update")
     @ResponseBody
     public Object update(@RequestParam(value="other",required=true) @Valid Other other,@RequestParam(value="files",required=false) MultipartFile[] files, BindingResult result,HttpSession session) throws Exception {
@@ -108,6 +111,7 @@ public class OtherController {
      * 2018/12/21
      *删除其他产品
      */
+    @CrossOrigin
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(OtherQuery otherQuery){
@@ -127,6 +131,7 @@ public class OtherController {
      * 2018/12/21
      * 保存其他产品
      */
+    @CrossOrigin
     @RequestMapping("/save")
     @ResponseBody
     public Object save(@RequestParam(value="other",required=true) @Valid Other other, @RequestParam(value="files",required=false) MultipartFile[] files, BindingResult result, HttpSession session) throws Exception {

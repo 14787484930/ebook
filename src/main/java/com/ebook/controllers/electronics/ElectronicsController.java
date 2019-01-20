@@ -127,9 +127,9 @@ public class ElectronicsController {
     @CrossOrigin
     @RequestMapping(value = "/save")
     @ResponseBody
-    public Object save(@RequestParam(value = "electronics", required = true) @Valid Electronics electronics,
+    public Object save(@Valid Electronics electronics, BindingResult result,
                        @RequestParam(value = "files", required = false) MultipartFile[] files,
-                       BindingResult result, HttpSession session) throws Exception {
+                        HttpSession session) throws Exception {
 
         /*服务器端校验*/
         if(result.hasErrors()){
