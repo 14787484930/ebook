@@ -18,7 +18,7 @@ import java.util.Date;
 public class Electronics extends BaseBean{
 
     @NotEmpty(message = "产品名称不能为空")
-    private String elecName;
+    private String electronicsName;
 
     @NotNull(message = "产品类型不能为空")
     private Integer electronicsType;
@@ -40,7 +40,7 @@ public class Electronics extends BaseBean{
     private Integer hasInvoice;
 
     //@NotEmpty(message = "图片不能为空")
-    private String elecPic;
+    private String electronicsPic;
 
     //@NotEmpty(message = "微信不能为空")
     private String weiXin;

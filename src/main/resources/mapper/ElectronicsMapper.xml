@@ -7,13 +7,13 @@
 
     <resultMap id="electronicsinfo" type="Electronics">
         <id property="id" column="id"/>
-        <result property="elecName" column="elecName"/>
+        <result property="electronicsName" column="electronicsName"/>
         <result property="electronicsType" column="electronicsType"/>
         <result property="originalPrice" column="originalPrice"/>
         <result property="presentPrice" column="presentPrice"/>
         <result property="buyDate" column="buyDate"/>
         <result property="hasInvoice" column="hasInvoice"/>
-        <result property="elecPic" column="elecPic"/>
+        <result property="electronicsPic" column="electronicsPic"/>
         <result property="weiXin" column="weiXin"/>
         <result property="phone" column="phone"/>
         <result property="des" column="des"/>
@@ -34,27 +34,27 @@
 
 
     <select id="getElectronics" resultMap="electronicsinfo">
-      select id,elecName,electronicsType,originalPrice,presentPrice,buyDate,hasInvoice,elecPic,weiXin,phone,des,createTime,createUser
+      select id,electronicsName,electronicsType,originalPrice,presentPrice,buyDate,hasInvoice,electronicsPic,weiXin,phone,des,createTime,createUser
       from electronicsinfo
       where dataStatus = 1
       order by createTime desc
     </select>
 
     <select id="getById" resultMap="electronicsinfo">
-      select id,elecName,electronicsType,originalPrice,presentPrice,buyDate,hasInvoice,elecPic,weiXin,phone,des,createTime,createUser from electronicsinfo
+      select id,electronicsName,electronicsType,originalPrice,presentPrice,buyDate,hasInvoice,electronicsPic,weiXin,phone,des,createTime,createUser from electronicsinfo
       where id = #{id}
     </select>
 
     <update id="update" parameterType="Electronics">
         update electronicsinfo
         <set>
-            <if test="#{elecName}!=null">elecName=#{elecName}</if>
+            <if test="#{electronicsName}!=null">electronicsName=#{electronicsName}</if>
             <if test="#{electronicsType}!=null">electronicsType=#{electronicsType}</if>
             <if test="#{originalPrice}!=null">originalPrice=#{originalPrice}</if>
             <if test="#{presentPrice}!=null">presentPrice=#{presentPrice}</if>
             <if test="#{buyDate}!=null">buyDate=#{buyDate}</if>
             <if test="#{hasInvoice}!=null">hasInvoice=#{hasInvoice}</if>
-            <if test="#{elecPic}!=null">elecPic=#{elecPic}</if>
+            <if test="#{electronicsPic}!=null">electronicsPic=#{electronicsPic}</if>
             <if test="#{weiXin}!=null">weiXin=#{weiXin}</if>
             <if test="#{phone}!=null">phone=#{phone}</if>
             <if test="#{des}!=null">des=#{des}</if>
@@ -74,13 +74,13 @@
       insert into electronicsinfo
       (
         id,
-        elecName,
+        electronicsName,
         electronicsType,
         originalPrice,
         presentPrice,
         buyDate,
         hasInvoice,
-        elecPic,
+        electronicsPic,
         weiXin,
         phone,
         des,
@@ -92,13 +92,13 @@
       values
       (
         #{id},
-        #{elecName},
+        #{electronicsName},
         #{electronicsType},
         #{originalPrice},
         #{presentPrice},
         #{buyDate},
         #{hasInvoice},
-        #{elecPic},
+        #{electronicsPic},
         #{weiXin},
         #{phone},
         #{des},

@@ -35,7 +35,7 @@ public class ElectronicsController {
      * @return
      */
     @CrossOrigin
-    @RequestMapping("/electronicses")
+    @RequestMapping("/electronics")
     @ResponseBody
     @SysLog(moduleName = "gpj查看所有信息")
     public Object getElectronics(ElectronicsQuery electronicsQuery, HttpSession session) {
@@ -90,11 +90,11 @@ public class ElectronicsController {
         }
 
         //图片的处理
-        electronics.setElecPic(PicUpload.uploadPic(files, session, "electronics"));
+        electronics.setElectronicsPic(PicUpload.uploadPic(files, session, "electronics"));
         electronics.setUpdateUser((User) session.getAttribute("userInfo"));
         electronics.setUpdateTime(new Date());
 
-        String picstr = electronicsService.getById(electronics.getId()).getElecPic();
+        String picstr = electronicsService.getById(electronics.getId()).getElectronicsPic();
 
         //校验成功,,进行保存操作
         electronicsService.update(electronics);
@@ -138,7 +138,7 @@ public class ElectronicsController {
         }
 
         //图片处理
-        electronics.setElecPic(PicUpload.uploadPic(files,session,"electronics"));
+        electronics.setElectronicsPic(PicUpload.uploadPic(files,session,"electronics"));
         electronics.setCreateUser((User)session.getAttribute("userInfo"));
         electronics.setCreateTime(new Date());
 
