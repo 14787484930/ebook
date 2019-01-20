@@ -17,12 +17,12 @@ import java.util.Date;
 public class Other extends BaseBean {
 
     @NotEmpty(message = "产品名称不能为空")
-    private String name; //产品名称
+    private String otherName; //产品名称
 
     @NotNull(message = "购买日期不能为空")
     @Past(message = "日期不合法")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date buyTime; //购买时间
+    private Date buyDate; //购买时间
 
     @NotNull(message = "原价不能为空")
     @Min(value = 0, message = "原价不能小于0")

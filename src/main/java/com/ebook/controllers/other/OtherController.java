@@ -1,6 +1,5 @@
 package com.ebook.controllers.other;
 
-import com.ebook.beans.book.Book;
 import com.ebook.beans.other.Other;
 import com.ebook.beans.other.OtherQuery;
 import com.ebook.beans.user.User;
@@ -49,11 +48,11 @@ public class OtherController {
         //分页参数
         PageHelper.startPage(otherQuery.getPageNumber(),otherQuery.getPageSize());
 
-        List<Other> list = otherService.getOthers();
+        List<Other> list = otherService.getOthers(otherQuery);
 
         PageInfo<Other> pageInfo = new PageInfo<Other>(list,10);
 
-        return ResultInfo.success().add("pageinfo",pageInfo).add("userinfo",otherQuery.getUser());
+        return ResultInfo.success().add("pageInfo",pageInfo).add("userInfo",otherQuery.getUser());
     }
 
     /**
@@ -134,7 +133,9 @@ public class OtherController {
     @CrossOrigin
     @RequestMapping("/save")
     @ResponseBody
-    public Object save(@RequestParam(value="other",required=true) @Valid Other other, @RequestParam(value="files",required=false) MultipartFile[] files, BindingResult result, HttpSession session) throws Exception {
+    public Object save(@Valid Other other, BindingResult result,
+                       @RequestParam(value="files",required=false) MultipartFile[] files,
+                       HttpSession session) throws Exception {
 
         /*服务器端校验*/
         if(result.hasErrors()){

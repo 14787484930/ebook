@@ -7,8 +7,8 @@
 
     <resultMap id="otherinfo" type="Other">
         <id property="id" column="id"/>
-        <result property="name" column="name"/>
-        <result property="buyTime" column="buyTime"/>
+        <result property="otherName" column="otherName"/>
+        <result property="buyDate" column="buyDate"/>
         <result property="originalPrice" column="originalPrice"/>
         <result property="presentPrice" column="presentPrice"/>
         <result property="hasInvoice" column="hasInvoice"/>
@@ -31,14 +31,14 @@
     </select>
 
     <select id="getOthers" resultMap="otherinfo">
-       select  id,name,buyTime,originalPrice,presentPrice,hasInvoice,otherPic,weiXin,phone,des,createTime,createUser
+       select  id,otherName,buyDate,originalPrice,presentPrice,hasInvoice,otherPic,weiXin,phone,des,createTime,createUser
       from otherInfo
       where dataStatus = 1
       order by createTime desc
     </select>
 
     <select id="getById" resultMap="otherinfo">
-      select  id,name,buyTime,originalPrice,presentPrice,hasInvoice,otherPic,weiXin,phone,des,createTime,createUser
+      select  id,otherName,buyDate,originalPrice,presentPrice,hasInvoice,otherPic,weiXin,phone,des,createTime,createUser
       from otherInfo
       where id = #{id}
 
@@ -47,8 +47,8 @@
     <update id="update" parameterType="Other">
         update otherInfo
         <set>
-            <if test="#{name}!=null"> name = #{name}</if>
-            <if test="#{buyTime}!=null"> buyTime = #{buyTime}</if>
+            <if test="#{otherName}!=null"> otherName = #{otherName}</if>
+            <if test="#{buyDate}!=null"> buyDate = #{buyDate}</if>
             <if test="#{originalPrice}!=null"> originalPrice = #{originalPrice}</if>
             <if test="#{presentPrice}!=null"> presentPrice = #{presentPrice}</if>
             <if test="#{hasInvoice}!=null"> hasInvoice = #{hasInvoice}</if>
@@ -72,8 +72,8 @@
       insert into otherInfo
         (
             id
-            name
-            buyTime
+            otherName
+            buyDate
             originalPrice
             presentPrice
             hasInvoice
@@ -89,8 +89,8 @@
         values
         (
             #{id},
-            #{name},
-            #{buyTime},
+            #{otherName},
+            #{buyDate},
             #{originalPrice},
             #{presentPrice},
             #{hasInvoice},

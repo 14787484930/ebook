@@ -16,9 +16,8 @@ public class OtherServiceImpl implements OtherService {
     OtherDao otherDao;
 
     @Override
-    public List<Other> getOthers() {
-
-        return otherDao.getOthers();
+    public List<Other> getOthers(OtherQuery query) {
+        return otherDao.getOthers(query);
     }
 
     @Override

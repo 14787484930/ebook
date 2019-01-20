@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 public class OtherQuery extends BaseQuery {
 
-    private String name; //产品名称
-    private Date buyTime; //购买时间
+    private String otherName; //产品名称
+    private Date buyDate; //购买时间
     private Integer hasInvoice; //是否有发票不能为空(0-没有 1-有)
 }

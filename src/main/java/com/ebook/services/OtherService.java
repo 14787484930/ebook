@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface OtherService {
 
-    public List<Other> getOthers();
+    public List<Other> getOthers(OtherQuery query);
     public void save(Other other);
     public Other getById(String id);
     public void update(Other other);
