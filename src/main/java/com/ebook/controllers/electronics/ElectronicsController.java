@@ -13,10 +13,7 @@ import com.model.utills.validate.ValidateDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -37,6 +34,7 @@ public class ElectronicsController {
      * @param session
      * @return
      */
+    @CrossOrigin
     @RequestMapping("/electronicses")
     @ResponseBody
     @SysLog(moduleName = "gpj查看所有信息")
@@ -63,6 +61,7 @@ public class ElectronicsController {
      * @param id
      * @return
      */
+    @CrossOrigin
     @RequestMapping(value = "/getById/{id}")
     @ResponseBody
     @SysLog(moduleName = "gpj查看信息")
@@ -77,6 +76,7 @@ public class ElectronicsController {
      * @param result
      * @return 编辑电子信息
      */
+    @CrossOrigin
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(@RequestParam(value = "electronics", required = true) @Valid Electronics electronics,
@@ -109,6 +109,7 @@ public class ElectronicsController {
      * @param electronicsQuery
      * @return 删除电子信息
      */
+    @CrossOrigin
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Object delete(ElectronicsQuery electronicsQuery) {
@@ -123,6 +124,9 @@ public class ElectronicsController {
      * @param result
      * @return
      */
+    @CrossOrigin
+    @RequestMapping(value = "/save")
+    @ResponseBody
     public Object save(@RequestParam(value = "electronics", required = true) @Valid Electronics electronics,
                        @RequestParam(value = "files", required = false) MultipartFile[] files,
                        BindingResult result, HttpSession session) throws Exception {

@@ -34,8 +34,10 @@
 
 
     <select id="getElectronics" resultMap="electronicsinfo">
-      select id,elecName,electronicsType,originalPrice,presentPrice,buyDate,hasInvoice,elecPic,weiXin,phone,des,createTime,createUser from electronicsinfo
+      select id,elecName,electronicsType,originalPrice,presentPrice,buyDate,hasInvoice,elecPic,weiXin,phone,des,createTime,createUser
+      from electronicsinfo
       where dataStatus = 1
+      order by createTime desc
     </select>
 
     <select id="getById" resultMap="electronicsinfo">

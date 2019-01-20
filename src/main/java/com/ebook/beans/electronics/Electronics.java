@@ -20,7 +20,7 @@ public class Electronics extends BaseBean{
     @NotEmpty(message = "产品名称不能为空")
     private String elecName;
 
-    @NotEmpty(message = "产品类型不能为空")
+    @NotNull(message = "产品类型不能为空")
     private Integer electronicsType;
 
     @NotNull(message = "原价不能为空")
