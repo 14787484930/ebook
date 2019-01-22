@@ -16,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,6 +50,7 @@ public class TutoringController {
      * 2018/12/21
      * 查询辅导列表
      */
+    @CrossOrigin
     @RequestMapping("/tutorings")
     @ResponseBody
     public Object getUsers(TutoringQuery tutoringQuery, HttpSession session){
