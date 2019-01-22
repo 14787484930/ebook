@@ -63,7 +63,7 @@ public class TutoringController {
 
         PageInfo<Tutoring> pageInfo = new PageInfo<Tutoring>(list,10);
 
-        return ResultInfo.success().add("pageinfo",pageInfo).add("userinfo",tutoringQuery.getUser());
+        return ResultInfo.success().add("pageInfo",pageInfo).add("userInfo",tutoringQuery.getUser());
     }
 
 
