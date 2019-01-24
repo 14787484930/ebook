@@ -38,6 +38,13 @@
          id, bookName, author,bookType, bookPrice, pubDate, bookPub, bookPic, weiXin, phone, des, createTime, createUser
         from bookInfo
         where dataStatus = 1
+       <if test="bookName != null">and bookName like '%' #{bookName} '%'</if>
+        <if test="bookType != null">and bookType = #{bookType} </if>
+        <if test="startPrice != null">and bookPrice &gt;= #{startPrice} </if>
+        <if test="endPrice != null">and bookPrice &lt;= #{endPrice} </if>
+        <if test="startTime != null">and bookType &gt;= #{startTime} </if>
+        <if test="endTime != null">and bookType &lt;= #{endTime} </if>
+        <if test="flag != null">and createUser = #{user.id} </if>
         order by createTime desc
     </select>
 
