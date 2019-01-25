@@ -2,6 +2,7 @@ package com.ebook.beans.base;
 
 import com.ebook.beans.user.User;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -18,7 +19,9 @@ public class BaseQuery {
     public User user; //用户信息
     public String createUser; //创建者
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     public Date startTime; //开始日期
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     public Date endTime; //结束日期
 
     public Double startPrice; //起始价格

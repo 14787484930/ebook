@@ -36,6 +36,14 @@
         select id,name,type,price,startTime,endTime,endDate,place,weiXin,phone,des,createTime,updateTime,createUser
         from tutoringinfo
         where dataStatus = 1
+        <if test="name != null">and name like '%' #{name} '%'</if>
+        <if test="type != null">and type = #{type} </if>
+        <if test="hasInvoice != null">and hasInvoice &gt;= #{hasInvoice} </if>
+        <if test="startPrice != null">and price &gt;= #{startPrice} </if>
+        <if test="endPrice != null">and price &lt;= #{endPrice} </if>
+        <if test="startTime != null">and startTime &gt;= #{startTime} and endDate &gt; #{startTime} </if>
+        <if test="endTime != null">and endTime &lt;= #{endTime} and endDate &lt;= #{endTime}</if>
+        <if test="flag != null">and createUser = #{createUser} </if>
     </select>
 
     <select id="getById" resultMap="tutoringinfo">

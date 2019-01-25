@@ -45,6 +45,8 @@ public class OtherController {
     @ResponseBody
     public Object getOthers(OtherQuery otherQuery, HttpSession session){
 
+        //权限初始化
+        otherQuery.intiQuery(session);
         //分页参数
         PageHelper.startPage(otherQuery.getPageNumber(),otherQuery.getPageSize());
 

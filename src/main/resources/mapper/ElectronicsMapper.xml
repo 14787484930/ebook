@@ -37,6 +37,14 @@
       select id,electronicsName,electronicsType,originalPrice,presentPrice,buyDate,hasInvoice,electronicsPic,weiXin,phone,des,createTime,createUser
       from electronicsinfo
       where dataStatus = 1
+        <if test="electronicsName != null">and electronicsName like '%' #{electronicsName} '%'</if>
+        <if test="electronicsType != null">and electronicsType = #{electronicsType} </if>
+        <if test="hasInvoice != null">and hasInvoice &gt;= #{hasInvoice} </if>
+        <if test="startPrice != null">and presentPrice &gt;= #{startPrice} </if>
+        <if test="endPrice != null">and presentPrice &lt;= #{endPrice} </if>
+        <if test="startTime != null">and buyDate &gt;= #{startTime} </if>
+        <if test="endTime != null">and buyDate &lt;= #{endTime} </if>
+        <if test="flag != null">and createUser = #{createUser} </if>
       order by createTime desc
     </select>
 

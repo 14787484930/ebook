@@ -9,6 +9,6 @@ import java.util.Date;
 public class OtherQuery extends BaseQuery {
 
     private String otherName; //产品名称
-    //private Date buyDate; //购买时间
-    //private Integer hasInvoice; //是否有发票不能为空(0-没有 1-有)
+    private Date buyDate; //购买时间
+    private Integer hasInvoice; //是否有发票不能为空(0-没有 1-有)
 }
