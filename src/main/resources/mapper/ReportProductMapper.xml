@@ -6,6 +6,10 @@
 
     <select id="getReportProducts" resultType="ReportProduct">
       select id,productId,productName,productType,reportType,des,createTime,weiXin from reportproductinfo
+      where dataStatus = 1
+        <if test="productName != null">and productName like '%' #{productName} '%'</if>
+        <if test="productType != null">and productType = #{productType}</if>
+        <if test="reportType != null">and reportType = #{reportType}</if>
     </select>
 
     <select id="getById" resultType="ReportProduct">
