@@ -25,11 +25,11 @@ public class Tutoring extends BaseBean  {
     private Double price; //辅导价格
 
     @Future(message = "日期不合法")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH-mm-ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date startTime; //开始时间
 
     @Future(message = "日期不合法")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH-mm-ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date endTime; //结束时间
 
     @Future(message = "日期不合法")
