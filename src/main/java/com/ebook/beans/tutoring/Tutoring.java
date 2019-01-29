@@ -6,10 +6,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -27,15 +24,15 @@ public class Tutoring extends BaseBean  {
     @Min(value = 0, message = "价格不能为空")
     private Double price; //辅导价格
 
-    @Past(message = "日期不合法")
+    @Future(message = "日期不合法")
     @DateTimeFormat(pattern="yyyy-MM-dd HH-mm-ss")
     private Date startTime; //开始时间
 
-    @Past(message = "日期不合法")
+    @Future(message = "日期不合法")
     @DateTimeFormat(pattern="yyyy-MM-dd HH-mm-ss")
     private Date endTime; //结束时间
 
-    @Past(message = "日期不合法")
+    @Future(message = "日期不合法")
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date endDate; //辅导截止日期
 
