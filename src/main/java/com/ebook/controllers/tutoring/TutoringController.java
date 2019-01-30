@@ -76,6 +76,7 @@ public class TutoringController {
      */
     @RequestMapping("/getById/{id}")
     @ResponseBody
+    @CrossOrigin
     public Object getById(@PathVariable("id") String id){
 
         return ResultInfo.success().add("info",tutoringService.getById(id));
@@ -115,6 +116,7 @@ public class TutoringController {
      */
     @RequestMapping("/delete")
     @ResponseBody
+    @CrossOrigin
     public Object delete(TutoringQuery tutoringQuery){
 
         tutoringService.delete(tutoringQuery);
@@ -130,6 +132,7 @@ public class TutoringController {
      */
     @RequestMapping("/save")
     @ResponseBody
+    @CrossOrigin
     public Object save(@Valid Tutoring tutoring, BindingResult result,HttpSession session){
 
         /*服务器端校验*/
