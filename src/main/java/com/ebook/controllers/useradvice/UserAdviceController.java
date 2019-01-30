@@ -10,6 +10,7 @@ import com.model.utills.messages.ResultInfo;
 import com.model.utills.uuid.GeneratingId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,6 +42,7 @@ public class UserAdviceController {
      * 2018/12/27
      * 查询用户建议列表
      */
+    @CrossOrigin
     @RequestMapping("/useradvices")
     @ResponseBody
     public Object getUsersAdvices(UserAdviceQuery userAdviceQuery, HttpSession session){
@@ -66,6 +68,7 @@ public class UserAdviceController {
      * 2018/12/21
      * 查询建议详情
      */
+    @CrossOrigin
     @RequestMapping("/getById/{id}")
     @ResponseBody
     public Object getById(@PathVariable("id") String id){
@@ -80,6 +83,7 @@ public class UserAdviceController {
      * 2019/1/2
      * 标记建议信息已读
      */
+    @CrossOrigin
     @RequestMapping("/updata/{id}")
     @ResponseBody
     public void updataById(@PathVariable("id") String id){
@@ -94,6 +98,7 @@ public class UserAdviceController {
      * 2019/1/2
      * 提交建议信息
      */
+    @CrossOrigin
     @RequestMapping("/save")
     @ResponseBody
     public Object Save(UserAdvice userAdvice, HttpSession session){
@@ -116,6 +121,7 @@ public class UserAdviceController {
      * @return
      * 删除图书信息
      */
+    @CrossOrigin
     @RequestMapping(value="/delete/{id}")
     @ResponseBody
     public Object delete(UserAdviceQuery userAdviceQuery, @PathVariable("id") String id){

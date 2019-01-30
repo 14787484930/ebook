@@ -5,11 +5,11 @@
     <cache type="com.model.utills.redis.RedisCache" />
 
     <select id="getAboutUs" resultType="AboutUs">
-
+      select id,title,des from aboutus
     </select>
 
-    <select id="getById" resultType="AboutUs">
-
+    <select id="getById" resultType="AboutUs" parameterType="String">
+      select  id,title,des from aboutus where id=#{id}
     </select>
 
     <update id="update" parameterType="AboutUs">
@@ -23,4 +23,5 @@
     <insert id="save" parameterType="AboutUs">
 
     </insert>
+
 </mapper>
