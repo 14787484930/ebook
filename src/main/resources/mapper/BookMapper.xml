@@ -59,17 +59,17 @@
     <update id="update" parameterType="Book">
         update bookInfo
         <set>
-            <if test="#{bookName}!=null">bookName=#{bookName}</if>
-            <if test="#{author}!=null">author=#{author}</if>
-            <if test="#{bookPrice}!=null">bookPrice=#{bookPrice}</if>
-            <if test="#{pubDate}!=null">pubDate=#{pubDate}</if>
-            <if test="#{bookPub}!=null">bookPub=#{bookPub}</if>
-            <if test="#{bookPic}!=null">bookPic=#{bookPic}</if>
-            <if test="#{weiXin}!=null">weiXin=#{weiXin}</if>
-            <if test="#{phone}!=null">phone=#{phone}</if>
-            <if test="#{des}!=null">des=#{des}</if>
-            <if test="#{updateUser}!=null">updateUser=#{updateUser.id}</if>
-            <if test="#{updateTime}!=null">updateTime=#{updateTime}</if>
+            <if test="#{bookName}!=null">bookName=#{bookName},</if>
+            <if test="#{author}!=null">author=#{author},</if>
+            <if test="#{bookPrice}!=null">bookPrice=#{bookPrice},</if>
+            <if test="#{pubDate}!=null">pubDate=#{pubDate},</if>
+            <if test="#{bookPub}!=null">bookPub=#{bookPub},</if>
+            <if test="#{bookPic}!=null">bookPic=#{bookPic},</if>
+            <if test="#{weiXin}!=null">weiXin=#{weiXin},</if>
+            <if test="#{phone}!=null">phone=#{phone},</if>
+            <if test="#{des}!=null">des=#{des},</if>
+            <if test="#{updateUser}!=null">updateUser=#{updateUser.id},</if>
+            <if test="#{updateTime}!=null">updateTime=#{updateTime},</if>
         </set>
         where id = #{id}
     </update>

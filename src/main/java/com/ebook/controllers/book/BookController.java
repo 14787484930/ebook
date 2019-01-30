@@ -83,7 +83,9 @@ public class BookController {
     @CrossOrigin
     @RequestMapping("/update")
     @ResponseBody
-    public Object update(@Valid Book book, BindingResult result, @RequestParam(value="files",required=false) MultipartFile[] files, HttpSession session) throws Exception {
+    public Object update(@Valid Book book, BindingResult result,
+                         @RequestParam(value="files",required=false) MultipartFile[] files,
+                         HttpSession session) throws Exception {
 
         /*服务器端校验*/
         if(result.hasErrors()){
@@ -131,7 +133,9 @@ public class BookController {
     @CrossOrigin
     @RequestMapping("/save")
     @ResponseBody
-    public Object save(@Valid Book book, BindingResult result, @RequestParam(value="files",required=false) MultipartFile[] files,HttpSession session) throws Exception {
+    public Object save(@Valid Book book, BindingResult result,
+                       @RequestParam(value="files",required=false) MultipartFile[] files,
+                       HttpSession session) throws Exception {
 
         /*服务器端校验*/
         if(result.hasErrors()){
