@@ -5,22 +5,40 @@
     <cache type="com.model.utills.redis.RedisCache" />
 
     <select id="getSensitiveWords" resultType="SensitiveWords">
-
+      select id,word from sensitivewords
+      <where>
+          <if test="word != null">word like '%'#{word}'%'</if>
+      </where>
     </select>
 
     <select id="getById" resultType="SensitiveWords">
-
+      select id,word from sensitivewords where id = #{id}
     </select>
 
     <update id="update" parameterType="SensitiveWords">
-
+      update sensitivewords set word = #{word} where id = #{id}
     </update>
 
     <delete id="delete" parameterType="SensitiveWordsQuery">
-
+      delete from sensitivewords
+      <where>
+          id in
+          (
+            <foreach collection="ids" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+          )
+      </where>
     </delete>
 
     <insert id="save" parameterType="SensitiveWords">
-
+      insert into sensitivewords
+      (
+        word
+      )
+      values
+      (
+        #{word}
+      )
     </insert>
 </mapper>
