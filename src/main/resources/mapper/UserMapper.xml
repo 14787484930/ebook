@@ -40,7 +40,7 @@
             email,
             score,
             openId,
-            nicname
+            nicname,
             createTime,
             dataStatus
         )
@@ -54,7 +54,7 @@
             #{email},
             #{score},
             #{openId},
-            #{nicname}
+            #{nicname},
             #{createTime},
             1
         )
