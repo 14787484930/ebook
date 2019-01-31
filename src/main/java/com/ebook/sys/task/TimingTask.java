@@ -43,8 +43,8 @@ import java.util.regex.Pattern;
  * Year:可出现", - * /"四个字符，有效范围为1970-2099年
  */
 
-@Component
-@Lazy(false)
+/*@Component
+@Lazy(false)*/
 public class TimingTask {
 
     @Autowired

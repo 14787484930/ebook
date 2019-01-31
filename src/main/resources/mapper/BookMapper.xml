@@ -120,14 +120,14 @@
     </insert>
 
     <!--系统将数据标注为敏感信息-->
-    <update id="">
+    <!--<update id="">
 
-    </update>
+    </update>-->
 
     <!--对系统过滤敏感词的处理-->
-    <update id="">
+   <!-- <update id="">
 
-    </update>
+    </update>-->
 
 
     <!--浏览量的统计-->
