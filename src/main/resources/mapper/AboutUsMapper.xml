@@ -13,15 +13,18 @@
     </select>
 
     <update id="update" parameterType="AboutUs">
-
+      update aboutus set title = #{title},des = #{des} where id = #{id}
     </update>
 
     <delete id="delete" parameterType="AboutUsQuery">
-
+      delete from aboutus where id = #{id}
     </delete>
 
     <insert id="save" parameterType="AboutUs">
-
+      insert into aboutus
+      (id,title,des)
+      values
+      (#{id},#{title},#{des})
     </insert>
 
 </mapper>
