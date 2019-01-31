@@ -15,5 +15,5 @@ public class BaseBean implements Serializable {
     public User updateUser; //修改人
     public Date updateTime; //修改时间
     public Integer viewTimes; //浏览次数
-    public Integer dataStatus; //数据状态 (1:正常，100；删除)
+    public Integer dataStatus; //数据状态 (1:正常，100；删除，101：存在敏感信息)
 }

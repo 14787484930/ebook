@@ -43,7 +43,7 @@ public class SensitiveWordsController {
 
         PageInfo<SensitiveWords> pageInfo = new PageInfo<SensitiveWords>(list,10);
 
-        return ResultInfo.success().add("pageinfo",sensitiveWordsService.getSensitiveWords(sensitiveWordsQuery));
+        return ResultInfo.success().add("pageinfo",pageInfo);
     }
 
     /**

@@ -12,4 +12,5 @@ public interface BookDao {
     public Book getById(String id);
     public void update(Book book);
     public void delete(BookQuery query);
+    //public void update
 }

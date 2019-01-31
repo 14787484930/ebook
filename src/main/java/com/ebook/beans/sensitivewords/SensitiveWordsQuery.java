@@ -7,4 +7,5 @@ import lombok.Data;
 public class SensitiveWordsQuery extends BaseQuery {
     private String id;
     private String[] ids[];
+    private String word;
 }

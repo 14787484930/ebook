@@ -1,8 +1,28 @@
 package com.ebook.sys.task;
 
+import com.ebook.beans.book.Book;
+import com.ebook.beans.book.BookQuery;
+import com.ebook.beans.electronics.Electronics;
+import com.ebook.beans.electronics.ElectronicsQuery;
+import com.ebook.beans.other.Other;
+import com.ebook.beans.other.OtherQuery;
+import com.ebook.beans.sensitivewords.SensitiveWords;
+import com.ebook.beans.sensitivewords.SensitiveWordsQuery;
+import com.ebook.beans.tutoring.Tutoring;
+import com.ebook.beans.tutoring.TutoringQuery;
+import com.ebook.services.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author zxl
@@ -27,9 +47,129 @@ import org.springframework.stereotype.Component;
 @Lazy(false)
 public class TimingTask {
 
-    @Scheduled(cron = "0 30 23 * * *")
+    @Autowired
+    SensitiveWordsService sensitiveWordsService;
+
+    @Autowired
+    BookService bookService;
+
+    @Autowired
+    ElectronicsService electronicsService;
+
+    @Autowired
+    TutoringService tutoringService;
+
+    @Autowired
+    OtherService otherService;
+
+    @Scheduled(cron = "0 * 11 * * *")
     public void testdemo(){
+
+        System.out.println(123);
+
        /*编写定时任务*/
-        System.out.println("==============================定时任务执行成功");
+        List<SensitiveWords> list = sensitiveWordsService.getSensitiveWords(new SensitiveWordsQuery());
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        int day=c.get(Calendar.DATE);
+        c.set(Calendar.DATE,day-1);
+
+        Date startTime = c.getTime();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(simpleDateFormat.format(startTime));
+
+
+        /**
+         * 1.图书过滤
+         * 2.电子过滤
+         * 3.辅导过滤
+         * 4.其他过滤
+         */
+
+        //查询出前一天新增的所有图书
+        BookQuery bookQuery = new BookQuery();
+        bookQuery.setStartTime(startTime);
+        List<Book> books = bookService.getBooks(bookQuery);
+
+        //查询出前一天新增的所有电子产品
+        ElectronicsQuery electronicsQuery = new ElectronicsQuery();
+        electronicsQuery.setStartTime(startTime);
+        List<Electronics> electronicses = electronicsService.getElectronics(electronicsQuery);
+
+
+        //查询出前一天新增的所有辅导
+        TutoringQuery tutoringQuery = new TutoringQuery();
+        tutoringQuery.setStartTime(startTime);
+        List<Tutoring> tutorings = tutoringService.getTutorings(tutoringQuery);
+
+        //查询出前一天新增的所有其他
+        OtherQuery otherQuery = new OtherQuery();
+        otherQuery.setStartTime(startTime);
+        List<Other> others = otherService.getOthers(otherQuery);
+
+
+        //进行过滤
+        for(SensitiveWords sensitiveWords : list){
+
+            String word = sensitiveWords.getWord();
+
+            //对图书名称和图书描述进行过滤
+            List<String> idList = new ArrayList<String>();
+            for(Book book:books){
+                String str = book.getBookName()+ " " + book.getDes();
+                if(str.contains(word)){
+                    idList.add(book.getId());
+                }
+            }
+            //修改该数据的数据状态为101
+
+
+            //初始化id集合
+            idList.clear();
+
+            //对电子名称和电子描述进行过滤
+            for(Electronics electronics:electronicses){
+                String str = electronics.getElectronicsName() + " " + electronics.getDes();
+                if(str.contains(word)){
+                    idList.add(electronics.getId());
+                }
+            }
+            //修改该数据的数据状态101
+
+            //初始化id集合
+            idList.clear();
+
+            //对辅导名称和描述进行过滤
+            for(Tutoring tutoring:tutorings){
+                String str = tutoring.getName() + " " + tutoring.getDes();
+                if(str.contains(word)){
+                    idList.add(tutoring.getId());
+                }
+            }
+            //修改该数据的数据状态101
+
+            //初始化id集合
+            idList.clear();
+
+            //对其他产品的名称和辅导进行过滤
+            for(Other other:others){
+                String str = other.getOtherName() + " " + other.getDes();
+                if(str.contains(word)){
+                    idList.add(other.getId());
+                }
+            }
+            //修改该数据的数据状态101
+
+
+        }
+
+
+    }
+
+    public static void main(String[] args) {
+
+        TimingTask t = new TimingTask();
+        t.testdemo();
     }
 }
