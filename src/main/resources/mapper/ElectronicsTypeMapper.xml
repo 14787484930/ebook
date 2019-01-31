@@ -19,7 +19,7 @@
     <update id="update" parameterType="ElectronicsType">
         update electronicstypeinfo
         <set>
-            <if test="#{typeName}!=null">name=#{typeName}</if>
+            <if test="#{typeName}!=null">name=#{typeName},</if>
             <if test="#{des}!=null">des=#{des}</if>
         </set>
         where id = #{id}

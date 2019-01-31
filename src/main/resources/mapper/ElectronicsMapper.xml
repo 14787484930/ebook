@@ -56,17 +56,17 @@
     <update id="update" parameterType="Electronics">
         update electronicsinfo
         <set>
-            <if test="#{electronicsName}!=null">electronicsName=#{electronicsName}</if>
-            <if test="#{electronicsType}!=null">electronicsType=#{electronicsType}</if>
-            <if test="#{originalPrice}!=null">originalPrice=#{originalPrice}</if>
-            <if test="#{presentPrice}!=null">presentPrice=#{presentPrice}</if>
-            <if test="#{buyDate}!=null">buyDate=#{buyDate}</if>
-            <if test="#{hasInvoice}!=null">hasInvoice=#{hasInvoice}</if>
-            <if test="#{electronicsPic}!=null">electronicsPic=#{electronicsPic}</if>
-            <if test="#{weiXin}!=null">weiXin=#{weiXin}</if>
-            <if test="#{phone}!=null">phone=#{phone}</if>
-            <if test="#{des}!=null">des=#{des}</if>
-            <if test="#{updateUser}!=null">updateUser=#{updateUser.id}</if>
+            <if test="#{electronicsName}!=null">electronicsName=#{electronicsName},</if>
+            <if test="#{electronicsType}!=null">electronicsType=#{electronicsType},</if>
+            <if test="#{originalPrice}!=null">originalPrice=#{originalPrice},</if>
+            <if test="#{presentPrice}!=null">presentPrice=#{presentPrice},</if>
+            <if test="#{buyDate}!=null">buyDate=#{buyDate},</if>
+            <if test="#{hasInvoice}!=null">hasInvoice=#{hasInvoice},</if>
+            <if test="#{electronicsPic}!=null">electronicsPic=#{electronicsPic},</if>
+            <if test="#{weiXin}!=null">weiXin=#{weiXin},</if>
+            <if test="#{phone}!=null">phone=#{phone},</if>
+            <if test="#{des}!=null">des=#{des},</if>
+            <if test="#{updateUser}!=null">updateUser=#{updateUser.id},</if>
             <if test="#{updateTime}!=null">updateTime=#{updateTime}</if>
         </set>
         where id = #{id}

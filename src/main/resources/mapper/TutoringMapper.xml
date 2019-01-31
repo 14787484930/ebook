@@ -55,17 +55,17 @@
     <update id="update" parameterType="Tutoring">
         update bookInfo
         <set>
-            <if test="#{name}!=null">name=#{name}</if>
-            <if test="#{type}!=null">type=#{type}</if>
-            <if test="#{price}!=null">price=#{price}</if>
-            <if test="#{startTime}!=null">startTime=#{startTime}</if>
-            <if test="#{endTime}!=null">endTime=#{endTime}</if>
-            <if test="#{endDate}!=null">endDate=#{endDate}</if>
-            <if test="#{place}!=null">place=#{place}</if>
-            <if test="#{weiXin}!=null">weiXin=#{weiXin}</if>
-            <if test="#{phone}!=null">phone=#{phone}</if>
-            <if test="#{des}!=null">des=#{des}</if>
-            <if test="#{updateUser}!=null">updateUser=#{updateUser.id}</if>
+            <if test="#{name}!=null">name=#{name},</if>
+            <if test="#{type}!=null">type=#{type},</if>
+            <if test="#{price}!=null">price=#{price},</if>
+            <if test="#{startTime}!=null">startTime=#{startTime},</if>
+            <if test="#{endTime}!=null">endTime=#{endTime},</if>
+            <if test="#{endDate}!=null">endDate=#{endDate},</if>
+            <if test="#{place}!=null">place=#{place},</if>
+            <if test="#{weiXin}!=null">weiXin=#{weiXin},</if>
+            <if test="#{phone}!=null">phone=#{phone},</if>
+            <if test="#{des}!=null">des=#{des},</if>
+            <if test="#{updateUser}!=null">updateUser=#{updateUser.id},</if>
             <if test="#{updateTime}!=null">updateTime=#{updateTime}</if>
         </set>
         where id = #{id}

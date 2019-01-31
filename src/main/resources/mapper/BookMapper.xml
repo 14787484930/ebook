@@ -69,7 +69,7 @@
             <if test="#{phone}!=null">phone=#{phone},</if>
             <if test="#{des}!=null">des=#{des},</if>
             <if test="#{updateUser}!=null">updateUser=#{updateUser.id},</if>
-            <if test="#{updateTime}!=null">updateTime=#{updateTime},</if>
+            <if test="#{updateTime}!=null">updateTime=#{updateTime}</if>
         </set>
         where id = #{id}
     </update>

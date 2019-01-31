@@ -19,7 +19,7 @@
     <update id="update" parameterType="User">
       update userinfo
         <set>
-            <if test="#{phone}!=null">phone=#{phone}</if>
+            <if test="#{phone}!=null">phone=#{phone},</if>
             <if test="#{email}!=null">email=#{email}</if>
         </set>
         where id = #{id}

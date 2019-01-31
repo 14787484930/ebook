@@ -21,7 +21,7 @@
     <update id="update" parameterType="BookType">
         update booktypeInfo
         <set>
-            <if test="#{name}!=null">name=#{name}</if>
+            <if test="#{name}!=null">name=#{name},</if>
             <if test="#{des}!=null">des=#{des}</if>
         </set>
         where id = #{id}

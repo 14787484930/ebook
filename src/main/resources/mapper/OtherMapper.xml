@@ -54,16 +54,16 @@
     <update id="update" parameterType="Other">
         update otherInfo
         <set>
-            <if test="#{otherName}!=null"> otherName = #{otherName}</if>
-            <if test="#{buyDate}!=null"> buyDate = #{buyDate}</if>
-            <if test="#{originalPrice}!=null"> originalPrice = #{originalPrice}</if>
-            <if test="#{presentPrice}!=null"> presentPrice = #{presentPrice}</if>
-            <if test="#{hasInvoice}!=null"> hasInvoice = #{hasInvoice}</if>
-            <if test="#{otherPic}!=null"> otherPic = #{otherPic}</if>
-            <if test="#{weiXin}!=null"> weiXin = #{weiXin}</if>
-            <if test="#{phone}!=null"> phone = #{phone}</if>
-            <if test="#{des}!=null"> des = #{des}</if>
-            <if test="#{updateTime}!=null"> updateTime = #{updateTime}</if>
+            <if test="#{otherName}!=null"> otherName = #{otherName},</if>
+            <if test="#{buyDate}!=null"> buyDate = #{buyDate},</if>
+            <if test="#{originalPrice}!=null"> originalPrice = #{originalPrice},</if>
+            <if test="#{presentPrice}!=null"> presentPrice = #{presentPrice},</if>
+            <if test="#{hasInvoice}!=null"> hasInvoice = #{hasInvoice},</if>
+            <if test="#{otherPic}!=null"> otherPic = #{otherPic},</if>
+            <if test="#{weiXin}!=null"> weiXin = #{weiXin},</if>
+            <if test="#{phone}!=null"> phone = #{phone},</if>
+            <if test="#{des}!=null"> des = #{des},</if>
+            <if test="#{updateTime}!=null"> updateTime = #{updateTime},</if>
             <if test="#{updateUser}!=null"> updateUser = #{updateUser.id}</if>
         </set>
         where id = #{id}
