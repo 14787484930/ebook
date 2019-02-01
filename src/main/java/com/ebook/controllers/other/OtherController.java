@@ -91,7 +91,9 @@ public class OtherController {
     @CrossOrigin
     @RequestMapping("/update")
     @ResponseBody
-    public Object update(@RequestParam(value="other",required=true) @Valid Other other,@RequestParam(value="files",required=false) MultipartFile[] files, BindingResult result,HttpSession session) throws Exception {
+    public Object update(@Valid Other other, BindingResult result,
+                         @RequestParam(value="files",required=false) MultipartFile[] files,
+                         HttpSession session) throws Exception {
 
         /*服务器端校验*/
         if(result.hasErrors()){

@@ -71,7 +71,7 @@ public class ElectronicsController {
     @ResponseBody
     @SysLog(moduleName = "gpj查看信息")
     public Object getById(@PathVariable("id") String id) {
-        return ResultInfo.success().add("Info", electronicsService.getById(id));
+        return ResultInfo.success().add("info", electronicsService.getById(id));
     }
 
     /**
@@ -84,8 +84,8 @@ public class ElectronicsController {
     @CrossOrigin
     @RequestMapping(value = "/update")
     @ResponseBody
-    public Object update(@RequestParam(value = "electronics", required = true) @Valid Electronics electronics,
-                         @RequestParam(value = "files", required = false) MultipartFile[] files, BindingResult result,
+    public Object update(@Valid Electronics electronics, BindingResult result,
+                         @RequestParam(value = "files", required = false) MultipartFile[] files,
                          HttpSession session) throws Exception {
 
         /*服务器端校验*/

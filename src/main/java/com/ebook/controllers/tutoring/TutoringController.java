@@ -98,6 +98,7 @@ public class TutoringController {
      */
     @RequestMapping("/update")
     @ResponseBody
+    @CrossOrigin
     public Object update(@Valid Tutoring tutoring,BindingResult result){
 
         /*服务器端校验*/
