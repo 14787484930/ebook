@@ -78,7 +78,16 @@
     <delete id="delete" parameterType="BookQuery">
         update bookInfo
         set dataStatus = 100
-        where id = #{id}
+        where
+        <choose>
+            <when test="id != null">id = #{id}</when>
+            <when test="ids != null">
+                id in
+                <foreach collection="ids" item="id" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </when>
+        </choose>
     </delete>
 
     <!--添加图书-->

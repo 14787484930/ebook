@@ -75,7 +75,16 @@
     <delete id="delete" parameterType="ElectronicsQuery">
       update electronicsinfo
         set dataStatus = 100
-        where id = #{id}
+        where
+        <choose>
+            <when test="id != null">id = #{id}</when>
+            <when test="ids != null">
+                id in
+                <foreach collection="ids" item="id" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </when>
+        </choose>
     </delete>
 
     <insert id="save" parameterType="Electronics">
