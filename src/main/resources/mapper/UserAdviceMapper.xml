@@ -27,7 +27,11 @@
 
     <delete id="delete" parameterType="UserAdviceQuery">
         delete from useradvice
-        where id = #{id}
+        where
+        id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
     </delete>
 
     <insert id="save" parameterType="UserAdvice">

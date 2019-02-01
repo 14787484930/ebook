@@ -26,7 +26,12 @@
     </update>
 
     <delete id="delete" parameterType="User">
-      update userinfo set dataStatus = 100 where id = #{id}
+      update userinfo set dataStatus = 100 where
+      id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
     </delete>
 
     <insert id="save" parameterType="User">

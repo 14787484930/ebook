@@ -12,4 +12,5 @@ public class BookTypeQuery {
 
     private String id;
     private String name;
+    private String[] ids;
 }

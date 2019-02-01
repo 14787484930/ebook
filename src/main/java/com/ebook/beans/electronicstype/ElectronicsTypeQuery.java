@@ -14,5 +14,6 @@ import java.io.Serializable;
 public class ElectronicsTypeQuery implements Serializable {
     private String id;
     private String name;
+    private String[] ids;
 
 }
