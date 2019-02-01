@@ -132,5 +132,27 @@ public class TutoringServiceImpl implements TutoringService {
         tutoringDao.updateTutoring();
     }
 
+    /**
+     * zxl
+     * @param query
+     * 系统标记预警信息
+     */
+    @Override
+    public void updateWarning(TutoringQuery query) {
+
+        tutoringDao.updateWarning(query);
+    }
+
+    /**
+     * zxl
+     * @param query
+     * 管理员处理预警信息
+     */
+    @Override
+    public void updateDel(TutoringQuery query) {
+
+        tutoringDao.updateDel(query);
+    }
+
 
 }

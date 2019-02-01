@@ -1,5 +1,6 @@
 package com.ebook.services;
 
+import com.ebook.beans.book.BookQuery;
 import com.ebook.beans.reportuser.ReportUser;
 import com.ebook.beans.tutoring.Tutoring;
 import com.ebook.beans.tutoring.TutoringQuery;
@@ -17,4 +18,6 @@ public interface TutoringService {
     public void updateOrderUser(TutoringQuery query);
     public void deleteOrderUser(TutoringQuery query);
     public void updateUserScore(User user, ReportUser reportUser);
+    public void updateWarning(TutoringQuery query); //系统标记预警信息
+    public void updateDel(TutoringQuery query); //管理员处理预警信息
 }

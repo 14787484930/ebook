@@ -73,4 +73,26 @@ public class BookServiceImpl implements BookService {
 
         bookDao.delete(query);
     }
+
+    /**
+     * zxl
+     * @param query
+     * 系统标记预警信息
+     */
+    @Override
+    public void updateWarning(BookQuery query) {
+
+        bookDao.updateWarning(query);
+    }
+
+    /**
+     * zxl
+     * @param query
+     * 管理员处理预警信息
+     */
+    @Override
+    public void updateDel(BookQuery query) {
+
+        bookDao.updateDel(query);
+    }
 }

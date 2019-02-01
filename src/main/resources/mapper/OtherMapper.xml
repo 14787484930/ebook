@@ -112,6 +112,24 @@
         )
     </insert>
 
+    <!--系统将数据标注为敏感信息-->
+    <update id="updateWarning" parameterType="OtherQuery">
+        update otherInfo set dataStatus = 101
+        where dataStatus in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <!--对系统过滤敏感词的处理-->
+    <update id="updateDel" parameterType="OtherQuery">
+        update otherInfo set dataStatus = 101
+        where dataStatus in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
     <!--浏览量的统计-->
     <update id="updateViews" parameterType="OtherQuery">
         update otherInfo set viewTimes = viewTimes + 1 where id = #{id}

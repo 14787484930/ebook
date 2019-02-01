@@ -16,6 +16,7 @@ import java.util.Date;
 public class BaseQuery {
 
     public String id; //编号
+    public String[] ids;
     public User user; //用户信息
     public String createUser; //创建者
 

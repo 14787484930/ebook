@@ -70,4 +70,26 @@ public class ElectronicsServiceImpl implements ElectronicsService {
     public void delete(ElectronicsQuery query) {
         electronicsDao.delete(query);
     }
+
+    /**
+     * zxl
+     * @param query
+     *系统标记预警信息
+     */
+    @Override
+    public void updateWarning(ElectronicsQuery query) {
+
+        electronicsDao.updateWarning(query);
+    }
+
+    /**
+     * zxl
+     * @param query
+     *管理员处理预警信息
+     */
+    @Override
+    public void updateDel(ElectronicsQuery query) {
+
+        electronicsDao.updateDel(query);
+    }
 }

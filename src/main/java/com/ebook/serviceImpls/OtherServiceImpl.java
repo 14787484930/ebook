@@ -46,4 +46,26 @@ public class OtherServiceImpl implements OtherService {
 
         otherDao.delete(query);
     }
+
+    /**
+     * zxl
+     * @param query
+     *系统标记预警信息
+     */
+    @Override
+    public void updateWarning(OtherQuery query) {
+
+        otherDao.updateWarning(query);
+    }
+
+    /**
+     *
+     * @param query
+     *管理员处理预警信息
+     */
+    @Override
+    public void updateDel(OtherQuery query) {
+
+        otherDao.updateDel(query);
+    }
 }
