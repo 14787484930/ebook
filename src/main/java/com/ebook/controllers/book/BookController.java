@@ -42,6 +42,11 @@ public class BookController {
     @SysLog(moduleName = "zxl查看所有信息")
     public Object getBooks(BookQuery bookQuery,HttpSession session){
 
+        //权限处理
+        if(bookQuery.getFlag() != null){
+            session.setAttribute("flag",bookQuery.getFlag());
+        }
+
         //权限初始化
         bookQuery.intiQuery(session);
 

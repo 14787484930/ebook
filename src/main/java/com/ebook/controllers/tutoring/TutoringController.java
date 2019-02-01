@@ -55,6 +55,12 @@ public class TutoringController {
     @ResponseBody
     public Object getUsers(TutoringQuery tutoringQuery, HttpSession session){
 
+
+        //加入权限
+        if(session.getAttribute("flag") != null) {
+            tutoringQuery.setFlag(Integer.valueOf(session.getAttribute("flag")+""));
+        }
+
         tutoringQuery.intiQuery(session);
 
         PageHelper.startPage(tutoringQuery.getPageNumber(),tutoringQuery.pageSize);

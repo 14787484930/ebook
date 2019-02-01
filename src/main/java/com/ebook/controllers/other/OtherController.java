@@ -45,6 +45,11 @@ public class OtherController {
     @ResponseBody
     public Object getOthers(OtherQuery otherQuery, HttpSession session){
 
+        //加入权限
+        if(session.getAttribute("flag") != null) {
+            otherQuery.setFlag(Integer.valueOf(session.getAttribute("flag")+""));
+        }
+
         //权限初始化
         otherQuery.intiQuery(session);
         //分页参数

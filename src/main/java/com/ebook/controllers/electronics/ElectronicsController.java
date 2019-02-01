@@ -39,6 +39,11 @@ public class ElectronicsController {
     @ResponseBody
     @SysLog(moduleName = "gpj查看所有信息")
     public Object getElectronics(ElectronicsQuery electronicsQuery, HttpSession session) {
+
+        if(session.getAttribute("flag") != null) {
+            electronicsQuery.setFlag(Integer.valueOf(session.getAttribute("flag")+""));
+        }
+
         //权限初始化
         electronicsQuery.intiQuery(session);
 
