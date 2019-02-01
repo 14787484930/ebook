@@ -10,12 +10,14 @@ import com.ebook.beans.sensitivewords.SensitiveWords;
 import com.ebook.beans.sensitivewords.SensitiveWordsQuery;
 import com.ebook.beans.tutoring.Tutoring;
 import com.ebook.beans.tutoring.TutoringQuery;
+import com.ebook.daos.BookDao;
 import com.ebook.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.management.Query;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -123,7 +125,8 @@ public class TimingTask {
                 }
             }
             //修改该数据的数据状态为101
-
+            bookQuery.setIds(idList.toArray(bookQuery.getIds()));
+            bookService.updateWarning(bookQuery);
 
             //初始化id集合
             idList.clear();
@@ -136,6 +139,8 @@ public class TimingTask {
                 }
             }
             //修改该数据的数据状态101
+            electronicsQuery.setIds(idList.toArray(electronicsQuery.getIds()));
+            electronicsService.updateWarning(electronicsQuery);
 
             //初始化id集合
             idList.clear();
@@ -148,6 +153,8 @@ public class TimingTask {
                 }
             }
             //修改该数据的数据状态101
+            tutoringQuery.setIds(idList.toArray(tutoringQuery.getIds()));
+            tutoringService.updateWarning(tutoringQuery);
 
             //初始化id集合
             idList.clear();
@@ -160,16 +167,12 @@ public class TimingTask {
                 }
             }
             //修改该数据的数据状态101
-
+            otherQuery.setIds(idList.toArray(otherQuery.getIds()));
+            otherService.updateWarning(otherQuery);
 
         }
 
 
     }
 
-    public static void main(String[] args) {
-
-        TimingTask t = new TimingTask();
-        t.testdemo();
-    }
 }
