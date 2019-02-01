@@ -74,6 +74,7 @@ public class TutoringServiceImpl implements TutoringService {
     @Override
     public void update(Tutoring tutoring) {
 
+        tutoringDao.update(tutoring);
     }
 
     /**
