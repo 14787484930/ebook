@@ -53,7 +53,7 @@
     </select>
 
     <update id="update" parameterType="Tutoring">
-        update bookInfo
+        update tutoringinfo
         <set>
             <if test="#{name}!=null">name=#{name},</if>
             <if test="#{type}!=null">type=#{type},</if>
