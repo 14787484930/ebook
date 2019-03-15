@@ -277,6 +277,21 @@
       <version>1.11.3</version>
     </dependency>
 
+    <!--引入JavaMail-->
+    <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+      <version>1.4.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>zxl</groupId>
+      <artifactId>zxl-mail</artifactId>
+      <version>1.0</version>
+    </dependency>
+
+
 
   </dependencies>
 
