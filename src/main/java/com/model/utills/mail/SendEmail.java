@@ -14,7 +14,7 @@ public class SendEmail {
 
 		//创建session
 		//qq邮箱
-		Session session = MailUtils.createSession("smtp.qq.com", "690345407", "nqcchlgrbjrpbcbd");
+		Session session = MailUtils.createSession("smtp.qq.com", "690345407", "");
 		//163邮箱
 		//Session session = MailUtils.createSession("smtp.163.com", "14787484930", "xl2013725");
 
