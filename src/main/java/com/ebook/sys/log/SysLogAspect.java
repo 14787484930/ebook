@@ -5,6 +5,8 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -27,6 +29,8 @@ import java.util.Map;
 public class SysLogAspect {
 
 
+    @Autowired
+    private RedisTemplate<String,String> template;
 
     //Controller层切点
     @Pointcut("@annotation(com.ebook.sys.log.SysLog)")
@@ -56,10 +60,20 @@ public class SysLogAspect {
 
             if(map.get("methodName").equals("getById")){
                 //此处做浏览量的统计（调用service）
-                Object[] args = (Object[])map.get("args");
+                /*Object[] args = (Object[])map.get("args");
+                String id = args[0].toString();
+
+                if(template.boundHashOps("viewNumber").hasKey("viewNumber")){
+                    template.boundHashOps("viewNumber").put(id,1);
+                }else{
+                    template.boundHashOps("viewNumber");
+                    template.opsForHash();
+
+                }
+
 
                 System.out.println("===========================");
-                System.out.println(args[0].toString());
+                System.out.println(args[0].toString());*/
             }else{
                 //此处做增删改的日志(调用service)
 

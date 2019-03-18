@@ -39,11 +39,17 @@ public class BookController {
     public Object setRedis(){
 
         System.out.println("========================================");
-        /*template.boundValueOps("zxl").set("123");
-        template.boundValueOps("aaa").set("456");*/
+        template.boundHashOps("zxl").put("aaa","1");
 
-        System.out.println(template.boundValueOps("zxl").get());
-        System.out.println(template.boundValueOps("aaa").get());
+        System.out.println(template.boundHashOps("zxl").get("aaa"));
+
+        template.boundHashOps("zxl").increment("zxl",1);
+        //template.boundValueOps("aaa").set("456");
+
+        System.out.println(template.boundHashOps("zxl").get("zxl"));
+        System.out.println("====================================");
+
+        //System.out.println(template.opsForValue().get("zxl"));
 
         return ResultInfo.success();
     }
