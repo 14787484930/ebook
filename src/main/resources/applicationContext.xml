@@ -70,6 +70,21 @@
         <property name="jedisConnectionFactory" ref="jedisConnectionFactory"/>
     </bean>
 
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <!-- 序列化方式 建议key/hashKey采用StringRedisSerializer -->
+        <!--String类型序列化key和value-->
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+
+        <!--注入连接工厂-->
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+
+    </bean>
+
 
     <!--===============================================================================================-->
     <!--事务控制的配置-->

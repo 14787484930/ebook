@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +25,8 @@ import java.util.Map;
 @Aspect
 @Component
 public class SysLogAspect {
+
+
 
     //Controller层切点
     @Pointcut("@annotation(com.ebook.sys.log.SysLog)")
@@ -53,7 +56,10 @@ public class SysLogAspect {
 
             if(map.get("methodName").equals("getById")){
                 //此处做浏览量的统计（调用service）
+                Object[] args = (Object[])map.get("args");
 
+                System.out.println("===========================");
+                System.out.println(args[0].toString());
             }else{
                 //此处做增删改的日志(调用service)
 

@@ -11,6 +11,7 @@ import com.model.utills.messages.ResultInfo;
 import com.model.utills.upload.PicUpload;
 import com.model.utills.validate.ValidateDate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +29,24 @@ public class BookController {
 
     @Autowired
     BookService bookService;
+
+    @Autowired
+    private RedisTemplate<String,String> template;
+
+    @RequestMapping("/redis")
+    @ResponseBody
+    @SysLog(moduleName = "zxl查看所有信息")
+    public Object setRedis(){
+
+        System.out.println("========================================");
+        /*template.boundValueOps("zxl").set("123");
+        template.boundValueOps("aaa").set("456");*/
+
+        System.out.println(template.boundValueOps("zxl").get());
+        System.out.println(template.boundValueOps("aaa").get());
+
+        return ResultInfo.success();
+    }
 
     /**
      * zxl
