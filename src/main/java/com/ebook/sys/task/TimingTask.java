@@ -14,15 +14,13 @@ import com.ebook.daos.BookDao;
 import com.ebook.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.management.Query;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,7 +62,10 @@ public class TimingTask {
     @Autowired
     OtherService otherService;
 
-    @Scheduled(cron = "0 * 11 * * *")
+    @Autowired
+    private RedisTemplate<String,String> template;
+
+    @Scheduled(cron = "0 * 0 * * *")
     public void testdemo(){
 
         System.out.println(123);
@@ -174,5 +175,27 @@ public class TimingTask {
 
 
     }
+
+    /**
+     * 将redis队列中的浏览量写入数据库并刷新队列
+     */
+    public void readAndWrite(){
+
+        //从缓存中取出数据，清空缓存
+        Set set = template.opsForHash().keys("bookViewNumber");
+        for(Object o:set){
+            System.out.println(123);
+        }
+
+        //将读取到的数据分别写入到数据库
+
+    }
+
+    /*public static void main(String[] args) {
+
+        TimingTask tt = new TimingTask();
+
+        tt.readAndWrite();
+    }*/
 
 }

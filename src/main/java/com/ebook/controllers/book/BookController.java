@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/book")
@@ -45,12 +46,17 @@ public class BookController {
         DefaultStringRedisConnection stringRedisConnection = new DefaultStringRedisConnection(redisConnection);
         stringRedisConnection.select(1);*/
 
-        System.out.println("========================================");
+        Set<Object> set = template.opsForHash().keys("bookViewNumber");
+        for(Object o:set){
+            System.out.println(o);
+        }
+
+        /*System.out.println("========================================");
 
         System.out.println(template.opsForHash().get("bookViewNumber","fe1a9ecf7eb944bb9b6c2fa4888414d4"));
         System.out.println(template.opsForHash().get("electronicsViewNumber","0dd4bc36fcb24a4ebf4b2a62e29ab1cb"));
 
-        template.delete("bookViewNumber");
+        template.delete("bookViewNumber");*/
 
         //System.out.println(template.opsForHash().get("bookViewNumber","fe1a9ecf7eb944bb9b6c2fa4888414d4"));
 
