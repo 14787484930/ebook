@@ -41,7 +41,7 @@ public class RedisCache implements Cache {
         {
             connection = jedisConnectionFactory.getConnection(); //连接清除数据
             connection.flushDb();
-            connection.flushAll();
+            //connection.flushAll();
         }
         catch (JedisConnectionException e)
         {

@@ -4,6 +4,7 @@ import com.ebook.beans.other.Other;
 import com.ebook.beans.other.OtherQuery;
 import com.ebook.beans.user.User;
 import com.ebook.services.OtherService;
+import com.ebook.sys.log.SysLog;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.model.utills.messages.ResultInfo;
@@ -72,7 +73,8 @@ public class OtherController {
     @CrossOrigin
     @RequestMapping("/getById/{id}")
     @ResponseBody
-    public Object getById(@PathVariable("id") String id){
+    @SysLog(moduleName = "查看详细信息")
+    public Object getByIdOther(@PathVariable("id") String id){
 
         return ResultInfo.success().add("info",otherService.getById(id));
     }

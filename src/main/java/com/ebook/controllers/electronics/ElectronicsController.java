@@ -4,9 +4,10 @@ import com.ebook.beans.electronics.Electronics;
 import com.ebook.beans.electronics.ElectronicsQuery;
 import com.ebook.beans.user.User;
 import com.ebook.services.ElectronicsService;
+import com.ebook.sys.log.SysLog;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.model.utills.log.SysLog;
+
 import com.model.utills.messages.ResultInfo;
 import com.model.utills.upload.PicUpload;
 import com.model.utills.validate.ValidateDate;
@@ -70,7 +71,7 @@ public class ElectronicsController {
     @RequestMapping(value = "/getById/{id}")
     @ResponseBody
     @SysLog(moduleName = "gpj查看信息")
-    public Object getById(@PathVariable("id") String id) {
+    public Object getByIdElectronics(@PathVariable("id") String id) {
         return ResultInfo.success().add("info", electronicsService.getById(id));
     }
 

@@ -10,7 +10,10 @@ import com.github.pagehelper.PageInfo;
 import com.model.utills.messages.ResultInfo;
 import com.model.utills.upload.PicUpload;
 import com.model.utills.validate.ValidateDate;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.DefaultStringRedisConnection;
+import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,16 +41,47 @@ public class BookController {
     @SysLog(moduleName = "zxl查看所有信息")
     public Object setRedis(){
 
+        /*RedisConnection redisConnection = template.getConnectionFactory().getConnection();
+        DefaultStringRedisConnection stringRedisConnection = new DefaultStringRedisConnection(redisConnection);
+        stringRedisConnection.select(1);*/
+
         System.out.println("========================================");
-        template.boundHashOps("zxl").put("aaa","1");
 
+        System.out.println(template.opsForHash().get("bookViewNumber","fe1a9ecf7eb944bb9b6c2fa4888414d4"));
+        System.out.println(template.opsForHash().get("electronicsViewNumber","0dd4bc36fcb24a4ebf4b2a62e29ab1cb"));
+
+        template.delete("bookViewNumber");
+
+        //System.out.println(template.opsForHash().get("bookViewNumber","fe1a9ecf7eb944bb9b6c2fa4888414d4"));
+
+        /*template.boundHashOps("zxl").put("aaa","1");
         System.out.println(template.boundHashOps("zxl").get("aaa"));
+        System.out.println(template.boundHashOps("zxl").hasKey("aaa"));
+        System.out.println(template.boundHashOps("zxl").hasKey("bbb"));
+        //template.opsForHash().hasKey("");
+        template.boundHashOps("zxl").put("aaa","a");
+        template.boundHashOps("zxl").put("bbb",2);
+        System.out.println(template.boundHashOps("zxl").get("aaa"));
+        System.out.println(template.boundHashOps("zxl").get("bbb"));
 
-        template.boundHashOps("zxl").increment("zxl",1);
-        //template.boundValueOps("aaa").set("456");
+        //template.boundHashOps("zxl").increment("bbb",1);
+        //template.opsForHash().increment("zxl","bbb",1);
+        Integer number = (Integer)template.boundHashOps("zxl").get("bbb");
+        number++;
+        template.opsForHash().put("zxl","bbb",number);
+        System.out.println(template.boundHashOps("zxl").get("bbb"));
+        String[] str = {"zxl"};*/
+        //template.delete("zxl");
 
-        System.out.println(template.boundHashOps("zxl").get("zxl"));
-        System.out.println("====================================");
+
+
+
+        /*template.boundHashOps("zxl").increment("aaa",1);
+
+        System.out.println(template.boundHashOps("zxl").get("aaa"));*/
+        //template.boundValueOps("zxl").set("123");
+        //System.out.println(template.boundValueOps("zxl").get());
+        //System.out.println("====================================");
 
         //System.out.println(template.opsForValue().get("zxl"));
 
@@ -98,7 +132,7 @@ public class BookController {
     @RequestMapping(value="/getById/{id}")
     @ResponseBody
     @SysLog(moduleName = "zxl查看信息")
-    public Object getById(@PathVariable("id") String id){
+    public Object getByIdBook(@PathVariable("id") String id){
 
         return ResultInfo.success().add("info",bookService.getById(id));
     }

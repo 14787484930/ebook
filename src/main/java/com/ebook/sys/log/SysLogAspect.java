@@ -58,27 +58,54 @@ public class SysLogAspect {
             *
             * */
 
-            if(map.get("methodName").equals("getById")){
-                //此处做浏览量的统计（调用service）
-                /*Object[] args = (Object[])map.get("args");
-                String id = args[0].toString();
+            String methodName = map.get("methodName").toString();
+            if(methodName.startsWith("getById")){
 
-                if(template.boundHashOps("viewNumber").hasKey("viewNumber")){
-                    template.boundHashOps("viewNumber").put(id,1);
-                }else{
-                    template.boundHashOps("viewNumber");
-                    template.opsForHash();
+                /**
+                 *  写入队列的各类型浏览量的键值
+                 *  bookViewNumber  图书
+                 *  electronicsViewNumber   电子
+                 *  otherViewNumber 其他
+                 *  tutoringViewNumber  辅导
+                 * */
+
+                /**
+                 * 方法名结尾判断
+                 * Book
+                 * Electronics
+                 * Other
+                 * Tutoring
+                 */
+
+                /*此处做浏览量的统计(写入缓存队列)*/
+
+                //获取操作的产品的id,此id用来做队列中的键
+                Object[] args = (Object[])map.get("args");
+                String field = args[0].toString();
+
+                //通过操作的方法名判断当前操作的是那种产品
+                if(methodName.endsWith("Book")){
+                    //浏览图书
+                    writeDataToRedis("bookViewNumber",field);
+
+                }else if(methodName.endsWith("Electronics")){
+                    //浏览电子
+                    writeDataToRedis("electronicsViewNumber",field);
+
+                }else if(methodName.endsWith("Other")){
+                    //浏览其他
+                    writeDataToRedis("otherViewNumber",field);
+
+                }else if(methodName.endsWith("Tutoring")){
+                    //浏览辅导
+                    writeDataToRedis("tutoringViewNumber",field);
 
                 }
 
-
-                System.out.println("===========================");
-                System.out.println(args[0].toString());*/
             }else{
                 //此处做增删改的日志(调用service)
 
             }
-
         }  catch (Exception e) {
             e.printStackTrace();
         }
@@ -107,6 +134,18 @@ public class SysLogAspect {
             }
         }
         return map;
+    }
+
+    public void writeDataToRedis(String key,String field){
+
+        if(template.opsForHash().hasKey(key,field)){
+            //表示存在，先取出来，累加，再写入
+            int number = (Integer) template.opsForHash().get(key,field);
+            template.opsForHash().put(key,field,++number);
+        }else{
+            //表示不存在，直接写入
+            template.opsForHash().put(key,field,1);
+        }
     }
 
 }

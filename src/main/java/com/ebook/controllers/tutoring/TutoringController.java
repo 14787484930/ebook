@@ -7,6 +7,7 @@ import com.ebook.beans.user.User;
 import com.ebook.beans.user.UserQuery;
 import com.ebook.services.TutoringService;
 import com.ebook.services.UserService;
+import com.ebook.sys.log.SysLog;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.model.utills.messages.ResultInfo;
@@ -83,7 +84,8 @@ public class TutoringController {
     @RequestMapping("/getById/{id}")
     @ResponseBody
     @CrossOrigin
-    public Object getById(@PathVariable("id") String id){
+    @SysLog(moduleName = "查看详细信息")
+    public Object getByIdTutoring(@PathVariable("id") String id){
 
         return ResultInfo.success().add("info",tutoringService.getById(id));
     }
