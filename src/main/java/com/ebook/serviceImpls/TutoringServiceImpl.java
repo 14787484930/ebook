@@ -156,4 +156,17 @@ public class TutoringServiceImpl implements TutoringService {
     }
 
 
+    /**
+     * zxl
+     * @param query
+     * 2019-03-20
+     * 浏览量的统计
+     */
+    @Override
+    public void updateViews(TutoringQuery query) {
+
+        tutoringDao.updateViews(query);
+    }
+
+
 }

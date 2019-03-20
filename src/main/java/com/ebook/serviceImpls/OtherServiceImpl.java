@@ -68,4 +68,16 @@ public class OtherServiceImpl implements OtherService {
 
         otherDao.updateDel(query);
     }
+
+    /**
+     * zxl
+     * @param query
+     * 2019-03-20
+     * 浏览量的统计
+     */
+    @Override
+    public void updateViews(OtherQuery query) {
+
+        otherDao.updateViews(query);
+    }
 }

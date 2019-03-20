@@ -116,7 +116,7 @@
             #{des},
             #{createTime},
             #{createUser.id},
-            #{viewTimes},
+            0,
             1
         )
     </insert>
@@ -141,7 +141,7 @@
 
     <!--浏览量的统计-->
     <update id="updateViews" parameterType="OtherQuery">
-        update otherInfo set viewTimes = viewTimes + 1 where id = #{id}
+        update otherInfo set viewTimes = viewTimes + #{viewTimes} where id = #{id}
     </update>
 
 </mapper>

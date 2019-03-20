@@ -65,7 +65,7 @@ public class TimingTask {
     @Autowired
     private RedisTemplate<String,String> template;
 
-    @Scheduled(cron = "0 * 0 * * *")
+    //@Scheduled(cron = "0 * 0 * * *")
     public void testdemo(){
 
         System.out.println(123);
@@ -179,23 +179,75 @@ public class TimingTask {
     /**
      * 将redis队列中的浏览量写入数据库并刷新队列
      */
+    @Scheduled(cron = "0 22 14 * * *")
     public void readAndWrite(){
 
         //从缓存中取出数据，清空缓存
-        Set set = template.opsForHash().keys("bookViewNumber");
-        for(Object o:set){
-            System.out.println(123);
-        }
 
-        //将读取到的数据分别写入到数据库
+        writeToDatabase("bookViewNumber",1); //图书
+
+        writeToDatabase("electronicsViewNumber",2); //电子
+
+        writeToDatabase("otherViewNumber",3); //其他
+
+        writeToDatabase("tutoringViewNumber",4); //辅导
 
     }
 
-    /*public static void main(String[] args) {
+    public void writeToDatabase(String typeKey,int type){
 
-        TimingTask tt = new TimingTask();
+        Map<Object ,Object> map = template.opsForHash().entries(typeKey);
+        template.delete(typeKey);
 
-        tt.readAndWrite();
-    }*/
+        if(type == 1) {
+            //图书
+            //bookService
+            BookQuery query = new BookQuery();
+            for(Map.Entry<Object, Object> entry: map.entrySet())
+            {
+                query.setId(entry.getKey().toString());
+                query.setViewTimes((Integer)entry.getValue());
+                bookService.updateViews(query);
+            }
+
+        }else if(type == 2) {
+            //电子
+            //electronicsService
+            ElectronicsQuery query = new ElectronicsQuery();
+            for(Map.Entry<Object, Object> entry: map.entrySet())
+            {
+                query.setId(entry.getKey().toString());
+                query.setViewTimes((Integer)entry.getValue());
+                electronicsService.updateViews(query);
+
+            }
+
+
+        }else if(type == 3) {
+            //其他
+            //otherService
+            OtherQuery query = new OtherQuery();
+            for(Map.Entry<Object, Object> entry: map.entrySet())
+            {
+                query.setId(entry.getKey().toString());
+                query.setViewTimes((Integer)entry.getValue());
+                otherService.updateViews(query);
+
+            }
+
+        }else if(type == 4) {
+            //辅导
+            //tutoringService
+            TutoringQuery query = new TutoringQuery();
+            for(Map.Entry<Object, Object> entry: map.entrySet())
+            {
+                query.setId(entry.getKey().toString());
+                query.setViewTimes((Integer)entry.getValue());
+                tutoringService.updateViews(query);
+            }
+
+        }
+
+    }
 
 }

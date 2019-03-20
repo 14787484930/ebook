@@ -95,4 +95,16 @@ public class BookServiceImpl implements BookService {
 
         bookDao.updateDel(query);
     }
+
+    /**
+     * zxl
+     * @param query
+     * 2019-03-20
+     * 浏览量的统计
+     */
+    @Override
+    public void updateViews(BookQuery query) {
+
+        bookDao.updateViews(query);
+    }
 }

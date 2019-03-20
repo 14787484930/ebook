@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Controller
@@ -45,6 +46,8 @@ public class BookController {
         /*RedisConnection redisConnection = template.getConnectionFactory().getConnection();
         DefaultStringRedisConnection stringRedisConnection = new DefaultStringRedisConnection(redisConnection);
         stringRedisConnection.select(1);*/
+
+        Map<Object ,Object> map = template.opsForHash().entries("bookViewNumber");
 
         Set<Object> set = template.opsForHash().keys("bookViewNumber");
         for(Object o:set){

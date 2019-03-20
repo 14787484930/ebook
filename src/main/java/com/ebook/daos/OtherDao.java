@@ -1,6 +1,5 @@
 package com.ebook.daos;
 
-import com.ebook.beans.book.BookQuery;
 import com.ebook.beans.other.Other;
 import com.ebook.beans.other.OtherQuery;
 
@@ -16,4 +15,5 @@ public interface OtherDao {
 
     public void updateWarning(OtherQuery query); //系统标记预警信息
     public void updateDel(OtherQuery query); //管理员处理预警信息
+    public void updateViews(OtherQuery query); //浏览量的统计
 }

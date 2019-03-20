@@ -28,6 +28,8 @@ public class BaseQuery {
     public Double startPrice; //起始价格
     public Double endPrice; //结束价格
 
+    public Integer viewTimes; //浏览次数
+
     /*设置一个状态参数。用于判断进入我要购买，还是我要发布界面*/
     public Integer flag; //{0：我要购买，1：我要发布}
 

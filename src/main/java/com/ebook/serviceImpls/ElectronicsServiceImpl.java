@@ -92,4 +92,16 @@ public class ElectronicsServiceImpl implements ElectronicsService {
 
         electronicsDao.updateDel(query);
     }
+
+    /**
+     * zxl
+     * @param query
+     * 2019-03-20
+     * 浏览量的统计
+     */
+    @Override
+    public void updateViews(ElectronicsQuery query) {
+
+        electronicsDao.updateViews(query);
+    }
 }

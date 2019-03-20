@@ -13,4 +13,5 @@ public interface ElectronicsDao {
     public void delete(ElectronicsQuery query);
     public void updateWarning(ElectronicsQuery query); //系统标记预警信息
     public void updateDel(ElectronicsQuery query); //管理员处理预警信息
+    public void updateViews(ElectronicsQuery query); //浏览量的统计
 }

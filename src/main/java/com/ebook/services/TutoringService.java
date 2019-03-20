@@ -20,4 +20,5 @@ public interface TutoringService {
     public void updateUserScore(User user, ReportUser reportUser);
     public void updateWarning(TutoringQuery query); //系统标记预警信息
     public void updateDel(TutoringQuery query); //管理员处理预警信息
+    public void updateViews(TutoringQuery query); //浏览量的统计
 }

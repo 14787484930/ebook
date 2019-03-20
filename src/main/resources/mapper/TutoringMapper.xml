@@ -102,7 +102,8 @@
         des,
         createTime,
         createUser,
-        dataStatus
+        dataStatus,
+        viewTimes
       )
       values
       (
@@ -119,7 +120,8 @@
         #{des},
         #{createTime},
         #{createUser.id},
-        1
+        1,
+        0
       )
     </insert>
 
@@ -158,6 +160,10 @@
     <!--标记为已评论-->
     <update id="updateTutoring">
       update tutoringinfo set isScore = 1 ;
+    </update>
+
+    <update id="updateViews" parameterType="BookQuery">
+        update tutoringinfo set viewTimes = viewTimes + #{viewTimes} where id = #{id}
     </update>
 
 </mapper>

@@ -14,4 +14,5 @@ public interface BookDao {
     public void delete(BookQuery query);
     public void updateWarning(BookQuery query); //系统标记预警信息
     public void updateDel(BookQuery query); //管理员处理预警信息
+    public void updateViews(BookQuery query); //浏览量的统计
 }

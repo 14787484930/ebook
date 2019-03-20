@@ -107,7 +107,8 @@
             des,
             createUser,
             createTime,
-            dataStatus
+            dataStatus,
+            viewTimes
         )
         values
         (
@@ -124,7 +125,8 @@
             #{des},
             #{createUser.id},
             #{createTime},
-            1
+            1,
+            0
         )
     </insert>
 
@@ -149,7 +151,7 @@
 
     <!--浏览量的统计-->
     <update id="updateViews" parameterType="BookQuery">
-        update bookInfo set viewTimes = viewTimes + 1 where id = #{id}
+        update bookInfo set viewTimes = viewTimes + #{viewTimes} where id = #{id}
     </update>
 
 </mapper>
