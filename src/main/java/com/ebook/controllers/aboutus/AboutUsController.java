@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
+@CrossOrigin
 @Controller
 @RequestMapping("/aboutus")
 public class AboutUsController {
