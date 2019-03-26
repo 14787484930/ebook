@@ -49,7 +49,7 @@
             #{des},
             #{createUser.nickname},
             #{createTime},
-            #{dataStatus}
+            1
         )
     </insert>
 </mapper>

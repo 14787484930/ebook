@@ -4,6 +4,7 @@ import com.ebook.beans.about.UserAdvice;
 import com.ebook.beans.about.UserAdviceQuery;
 import com.ebook.daos.UserAdviceDao;
 import com.ebook.services.UserAdviceService;
+import com.model.utills.uuid.GeneratingId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,8 @@ public class UserAdviceServiceImpl implements UserAdviceService {
 
     @Override
     public void save(UserAdvice userAdvice) {
+
+        userAdvice.setId(GeneratingId.getId());
         useradviceDao.save(userAdvice);
     }
 

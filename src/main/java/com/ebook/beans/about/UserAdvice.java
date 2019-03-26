@@ -27,6 +27,6 @@ public class UserAdvice implements Serializable {
     private Date createTime;
 
     //数据状态不能为空
-    @NotNull(message = "数据状态不能为空")
+    //@NotNull(message = "数据状态不能为空")
     private Integer dataStatus;
 }

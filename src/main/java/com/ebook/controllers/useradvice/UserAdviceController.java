@@ -107,9 +107,9 @@ public class UserAdviceController {
 
         userAdvice.setCreateTime(new Date());
         userAdvice.setCreateUser(user);
-        userAdvice.setDataStatus(1);
+        //userAdvice.setDataStatus(1);
         userAdvice.setDes(userAdvice.getDes());
-        userAdvice.setId(GeneratingId.getId());
+        //userAdvice.setId(GeneratingId.getId());
 
         userAdviceService.save(userAdvice);
         return ResultInfo.success();
