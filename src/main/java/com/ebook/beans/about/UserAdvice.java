@@ -18,10 +18,10 @@ public class UserAdvice implements Serializable {
     @NotEmpty(message = "建议内容不能为空")
     private String des;
 
-    @NotNull(message = "创建人不能为空")
+    //@NotNull(message = "创建人不能为空")
     private User createUser;
 
-    @NotNull(message = "日期不能为空")
+    //@NotNull(message = "日期不能为空")
     @Past(message = "日期不合法")
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createTime;
