@@ -6,6 +6,7 @@ import com.ebook.services.BookTypeService;
 import com.model.utills.messages.ResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,6 +35,7 @@ public class BookTypeController {
      * 2018/12/20 13:49
      * 查看图书类型列表
      */
+    @CrossOrigin
     @RequestMapping("/booktypes")
     @ResponseBody
     public Object getBookTypes(BookTypeQuery bookTypeQuery, HttpSession session){
