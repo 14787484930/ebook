@@ -8,14 +8,17 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.model.utills.messages.ResultInfo;
 import com.model.utills.uuid.GeneratingId;
+import com.model.utills.validate.ValidateDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -101,7 +104,14 @@ public class UserAdviceController {
     @CrossOrigin
     @RequestMapping("/save")
     @ResponseBody
-    public Object Save(UserAdvice userAdvice, HttpSession session){
+    public Object Save(@Valid UserAdvice userAdvice, BindingResult result,HttpSession session){
+
+        /*服务器端校验*/
+        if(result.hasErrors()){
+            //校验失败
+            return ResultInfo.fail().add("errors", ValidateDate.checkDate(result));
+        }
+
         //从session中获取用户信息
         User user = (User)session.getAttribute("userInfo");
 
