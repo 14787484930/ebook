@@ -38,7 +38,6 @@
         where dataStatus = 1
         <if test="name != null">and name like '%' #{name} '%'</if>
         <if test="type != null">and type = #{type} </if>
-        <if test="hasInvoice != null">and hasInvoice &gt;= #{hasInvoice} </if>
         <if test="startPrice != null">and price &gt;= #{startPrice} </if>
         <if test="endPrice != null">and price &lt;= #{endPrice} </if>
         <if test="startTime != null">and startTime &gt;= #{startTime} and endDate &gt; #{startTime} </if>
