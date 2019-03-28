@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.servlet.http.HttpSession;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Date;
  * @describe
  */
 @Data
-public class BaseQuery {
+public class BaseQuery implements Serializable {
 
     public String id; //编号
     public String[] ids;

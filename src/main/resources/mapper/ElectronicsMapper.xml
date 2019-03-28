@@ -42,8 +42,8 @@
         <if test="hasInvoice != null">and hasInvoice &gt;= #{hasInvoice} </if>
         <if test="startPrice != null">and presentPrice &gt;= #{startPrice} </if>
         <if test="endPrice != null">and presentPrice &lt;= #{endPrice} </if>
-        <if test="startTime != null">and buyDate &gt;= #{startTime} </if>
-        <if test="endTime != null">and buyDate &lt;= #{endTime} </if>
+        <if test="startTime != null">and createTime &gt;= #{startTime} </if>
+        <if test="endTime != null">and createTime &lt;= #{endTime} </if>
         <if test="flag != null">and createUser = #{createUser} </if>
       order by createTime desc
     </select>
