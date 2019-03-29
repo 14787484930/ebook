@@ -12,7 +12,6 @@
         <result property="price" column="price"/>
         <result property="startTime" column="startTime"/>
         <result property="endTime" column="endTime"/>
-        <result property="endDate" column="endDate"/>
         <result property="place" column="place"/>
         <result property="weiXin" column="weiXin"/>
         <result property="phone" column="phone"/>
@@ -33,7 +32,7 @@
     </select>
 
     <select id="getTutorings" resultMap="tutoringinfo">
-        select id,name,type,price,startTime,endTime,endDate,place,weiXin,phone,des,createTime,updateTime,createUser
+        select id,name,type,price,startTime,endTime,place,weiXin,phone,des,createTime,updateTime,createUser
         from tutoringinfo
         where dataStatus = 1
         <if test="name != null">and name like '%' #{name} '%'</if>
@@ -46,7 +45,7 @@
     </select>
 
     <select id="getById" resultMap="tutoringinfo">
-        select id,name,type,price,startTime,endTime,endDate,place,weiXin,phone,des,createTime,updateTime,createUser
+        select id,name,type,price,startTime,endTime,place,weiXin,phone,des,createTime,updateTime,createUser
         from tutoringinfo
         where id = #{id}
     </select>
@@ -59,7 +58,6 @@
             <if test="#{price}!=null">price=#{price},</if>
             <if test="#{startTime}!=null">startTime=#{startTime},</if>
             <if test="#{endTime}!=null">endTime=#{endTime},</if>
-            <if test="#{endDate}!=null">endDate=#{endDate},</if>
             <if test="#{place}!=null">place=#{place},</if>
             <if test="#{weiXin}!=null">weiXin=#{weiXin},</if>
             <if test="#{phone}!=null">phone=#{phone},</if>
@@ -94,7 +92,6 @@
         price,
         startTime,
         endTime,
-        endDate,
         place,
         weiXin,
         phone,
@@ -112,7 +109,6 @@
         #{price},
         #{startTime},
         #{endTime},
-        #{endDate},
         #{place},
         #{weiXin},
         #{phone},
