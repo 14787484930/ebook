@@ -32,8 +32,8 @@ public class Tutoring extends BaseBean  {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date endTime; //结束时间
 
-    @Future(message = "日期不合法")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    /*@Future(message = "日期不合法")
+    @DateTimeFormat(pattern="yyyy-MM-dd")*/
     private Date endDate; //辅导截止日期
 
     private String place; //讲座地点
