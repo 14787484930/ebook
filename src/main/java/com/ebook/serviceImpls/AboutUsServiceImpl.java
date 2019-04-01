@@ -16,9 +16,9 @@ public class AboutUsServiceImpl implements AboutUsService {
     AboutUsDao aboutUsDao;
 
     @Override
-    public List<AboutUs> getAboutUs() {
-        List<AboutUs> list = aboutUsDao.getAboutUs();
-        return list;
+    public AboutUs getAboutUs() {
+        AboutUs aboutUs = aboutUsDao.getAboutUs();
+        return aboutUs;
     }
 
     @Override
