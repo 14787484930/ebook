@@ -112,7 +112,12 @@ public class BookController {
 
         //权限处理
         if(bookQuery.getFlag() != null){
-            session.setAttribute("flag",bookQuery.getFlag());
+               session.setAttribute("flag",bookQuery.getFlag());
+        }else{
+            Object obj = session.getAttribute("flag");
+            if(obj != null){
+                bookQuery.setFlag((Integer) obj);
+            }
         }
 
         //权限初始化
