@@ -36,24 +36,6 @@ public class SysFilter implements Filter {
         //如果session中已经存在微信号了，就不用获取了，否则要获取，获取到以后要存放sesion
         User userInfo = (User) hRequest.getSession().getAttribute("userInfo");
 
-        String flag = hRequest.getParameter("flag");
-        String name = hRequest.getParameter("bookName");
-
-
-
-        if(flag != null){  //说明是第一次进入或者是切换
-            if(Integer.valueOf(flag) == 0){ //我要购买
-                hRequest.getSession().setAttribute("userInfo",null);
-            }else{ //我要发布
-                User user = new User();
-                user.setId("ea0b33ba3b65429f976a6514ae9296e8");
-                user.setNickname("绿箭");
-                user.setWeiXin("ZXL690345407");
-                user.setPhone("14787484930");
-                user.setOpenId("123456");
-                hRequest.getSession().setAttribute("userInfo",user);
-            }
-        }
 
 
         chain.doFilter(hRequest, hResponse);
