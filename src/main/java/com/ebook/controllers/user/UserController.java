@@ -6,6 +6,7 @@ import com.ebook.beans.user.UserQuery;
 import com.ebook.services.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.model.utills.crawler.Crawler;
 import com.model.utills.messages.ResultInfo;
 import com.model.utills.validate.ValidateDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zxl
@@ -132,4 +136,80 @@ public class UserController {
         return ResultInfo.success();
     }
 
+
+
+    /**
+     * zxl
+     * @param
+     * @return
+     *2019/04/02
+     * 获取身份认证密钥
+     */
+    @RequestMapping("/getKey")
+    @ResponseBody
+    public Object getKey(){
+
+        String theKey;
+        try {
+            theKey = Crawler.LocationStr();
+        }catch (Exception e){
+            return ResultInfo.fail();
+        }
+
+        //theKey = null;
+
+        if(theKey != null){
+            return ResultInfo.success().add("location",theKey);
+        }else{
+            return ResultInfo.fail();
+        }
+
+    }
+
+
+    /**
+     * zxl
+     * @param
+     * @return
+     *2019/04/02
+     * 进行身份认证
+     */
+    @RequestMapping("/authentication")
+    @ResponseBody
+    public Object identityAuthentication(@Valid User user,BindingResult result,HttpSession session){
+
+        //参数校验
+        if(result.hasErrors()){
+            return ResultInfo.fail().add("errors", ValidateDate.checkDate(result));
+        }
+
+        Map<String,String> map = new HashMap<String,String>();
+
+        map.put("TextBox1",user.getStudNo());
+        map.put("TextBox2",user.getPassword());
+        map.put("TextBox3",user.getValidCode());
+
+        try {
+            if(Crawler.WebLogin(map)) {
+
+                //认证成功，将认证结果写入数据库
+                /*User userInfo = (User)session.getAttribute("userInfo");
+                userInfo.setCreateTime(new Date());
+                userInfo.setEmail(user.getEmail());
+                userInfo.setStudNo(user.getStudNo());
+                userService.save(userInfo);*/
+
+                //响应认证结果
+                return ResultInfo.success();
+            }else{
+                ///用户名密码或验证码输入有误
+                return ResultInfo.fail().add("errors","请输入正确的学号、密码和验证码！");
+            }
+        } catch (IOException e) {
+            //系统异常
+            return ResultInfo.fail().add("errors","系统异常，请稍后重试！");
+        }
+
+
+    }
 }

@@ -110,8 +110,11 @@ public class BookController {
     @SysLog(moduleName = "zxl查看所有信息")
     public Object getBooks(BookQuery bookQuery,HttpSession session){
 
+        //判断用户是否已经认证过
+        if(bookQuery.getFlag() == 1 && ((User)session.getAttribute("userInfo")).getId() == null){
+            ResultInfo.fail().add("pageInfo","此用户尚未认证");
+        }
 
-        System.out.println("========================="+bookQuery.getFlag());
 
         //权限处理
         if(bookQuery.getFlag() != null){
