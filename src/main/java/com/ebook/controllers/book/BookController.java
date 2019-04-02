@@ -111,9 +111,9 @@ public class BookController {
     public Object getBooks(BookQuery bookQuery,HttpSession session){
 
         //判断用户是否已经认证过
-        if(bookQuery.getFlag() == 1 && ((User)session.getAttribute("userInfo")).getId() == null){
+        /*if(bookQuery.getFlag() == 1 && ((User)session.getAttribute("userInfo")).getId() == null){
             ResultInfo.fail().add("pageInfo","此用户尚未认证");
-        }
+        }*/
 
 
         //权限处理
