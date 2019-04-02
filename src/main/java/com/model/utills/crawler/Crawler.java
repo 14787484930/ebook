@@ -126,7 +126,7 @@ public class Crawler {
      * 功能：返回用户location字符串
      * return: (2c2wu2jprazs0x45a123xq55)
      * */
-    private static String LocationStr() throws IOException {
+    public static String LocationStr() throws IOException {
         String locationCode;
         String location = GetLocation(Constant.SWFU_WEB_URL);
         if (location != null){
@@ -143,7 +143,7 @@ public class Crawler {
      * 功能：输入验证码，测试用
      *
      * */
-    private static String CheckCode(){
+/*    private static String CheckCode(){
         System.out.print("输入");
         Scanner sc = new Scanner(System.in);
         String read = sc.nextLine();
@@ -163,5 +163,5 @@ public class Crawler {
             System.out.println("是本校用户");
         else
             System.out.println("非本校用户");
-    }
+    }*/
 }
