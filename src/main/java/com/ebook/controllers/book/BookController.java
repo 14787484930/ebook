@@ -110,9 +110,26 @@ public class BookController {
     @SysLog(moduleName = "zxl查看所有信息")
     public Object getBooks(BookQuery bookQuery,HttpSession session){
 
+
+        System.out.println("========================="+bookQuery.getFlag());
+
         //权限处理
         if(bookQuery.getFlag() != null){
-               session.setAttribute("flag",bookQuery.getFlag());
+            if(bookQuery.getFlag() == 0){
+                session.setAttribute("userInfo",null);
+                session.setAttribute("flag",bookQuery.getFlag());
+                System.out.println(1);
+            }else{
+                System.out.println(2);
+                session.setAttribute("flag",bookQuery.getFlag());
+                User user = new User();
+                user.setId("ea0b33ba3b65429f976a6514ae9296e8");
+                user.setNickname("绿箭");
+                user.setWeiXin("ZXL690345407");
+                user.setPhone("14787484930");
+                user.setOpenId("123456");
+                session.setAttribute("userInfo",user);
+            }
         }else{
             Object obj = session.getAttribute("flag");
             if(obj != null){
