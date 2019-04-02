@@ -12,6 +12,7 @@ import com.model.utills.validate.ValidateDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -145,6 +146,7 @@ public class UserController {
      *2019/04/02
      * 获取身份认证密钥
      */
+    @CrossOrigin
     @RequestMapping("/getKey")
     @ResponseBody
     public Object getKey(){
@@ -174,6 +176,7 @@ public class UserController {
      *2019/04/02
      * 进行身份认证
      */
+    @CrossOrigin
     @RequestMapping("/authentication")
     @ResponseBody
     public Object identityAuthentication(@Valid User user,BindingResult result,HttpSession session){
@@ -188,6 +191,7 @@ public class UserController {
         map.put("TextBox1",user.getStudNo());
         map.put("TextBox2",user.getPassword());
         map.put("TextBox3",user.getValidCode());
+        map.put("url", user.getUrl());
 
         try {
             if(Crawler.WebLogin(map)) {

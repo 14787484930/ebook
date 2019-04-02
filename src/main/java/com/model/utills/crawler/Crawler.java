@@ -98,11 +98,7 @@ public class Crawler {
         return Boolean.FALSE;
     }
 
-    /**
-     * 功能：获取网页上的"__VIEWSTATE"和"__VIEWSTATEGENERATOR"
-     *
-     */
-    private static void GetViewState(String html){
+   /* private static void GetViewState(String html){
         Document document = Jsoup.parse(html);
         Elements eViewStateDate = document.select("input[name]");
         if (eViewStateDate.size() > 0){
@@ -120,7 +116,7 @@ public class Crawler {
                 }
             }
         }
-    }
+    }*/
 
     /**
      * 功能：返回用户location字符串
@@ -139,11 +135,10 @@ public class Crawler {
         return locationCode;
     }
 
-    /**
-     * 功能：输入验证码，测试用
-     *
-     * */
-/*    private static String CheckCode(){
+// /(mkybkaiwqcsjfmrcd2urvzzj)/default2.aspx
+
+    /*//功能：输入验证码，测试用
+    private static String CheckCode(){
         System.out.print("输入");
         Scanner sc = new Scanner(System.in);
         String read = sc.nextLine();
@@ -153,6 +148,7 @@ public class Crawler {
 
     public static void main(String[] args) throws Exception{
         String location = GetLocation(Constant.SWFU_WEB_URL);
+        System.out.println(location);
         Map<String, String> map = new HashMap<>();
         map.put("url",Constant.SWFU_WEB_URL + location);
         map.put("TextBox1","20131157060");

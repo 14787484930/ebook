@@ -32,4 +32,7 @@ public class User implements Serializable {
 
     @NotEmpty(message = "邮箱不能为空！")
     private String email; //用户邮箱
+
+    @NotEmpty(message = "sessionId不能为空")
+    private String url;  //学生所在学校的url地址
 }
