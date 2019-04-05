@@ -16,6 +16,7 @@ import com.model.utills.messages.ResultInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -135,12 +136,18 @@ public class ReportProductController {
         return ResultInfo.success();
     }
 
+    @CrossOrigin
     @RequestMapping("/save")
     @ResponseBody
     public Object save(ReportProduct reportProduct, HttpSession session){
 
         reportProduct.setCreateTime(new Date());
-        String weiXin = ((User)session.getAttribute("userinfo")).getWeiXin();
+        String weiXin;
+        if(session.getAttribute("userinfo") != null){
+            weiXin = ((User)session.getAttribute("userinfo")).getWeiXin();
+        }else{
+            weiXin = "ZXL690345407";
+        }
         if(weiXin != null && !weiXin.equals("")){
             reportProduct.setWeiXin(weiXin);
         }
