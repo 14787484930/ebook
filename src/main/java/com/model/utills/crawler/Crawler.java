@@ -1,3 +1,6 @@
+/*
+* 校园用户登陆验证
+* */
 package com.model.utills.crawler;
 
 import com.model.utills.constants.Constant;
@@ -21,9 +24,9 @@ public class Crawler {
 
     /**
      * 功能：获取response中的location
-     * 参数：ip:port
+     * 参数：ip
      * */
-    public static String GetLocation(String url) throws IOException {
+    private static String GetLocation(String url) throws IOException {
 
         //创建一个默认的HttpClient
         HttpClient httpclient = new DefaultHttpClient();
@@ -34,8 +37,8 @@ public class Crawler {
             HttpResponse responseBody = httpclient.execute(httppost);
             /*
             HttpEntity entity = responseBody.getEntity();
-            GetViewState(EntityUtils.toString(entity, "UTF-8"));*/
-
+            GetViewState(EntityUtils.toString(entity, "UTF-8"));
+            */
             //返回location
             Header[] hs = responseBody.getHeaders("Location");
             if (hs.length == 0) {
@@ -52,8 +55,7 @@ public class Crawler {
     /**
      * 功能：登陆验证
      * 参数：Map<String, String>
-     *     Map(key:Location;TextBox1;TextBox2;TextBox3;)
-     *
+     *       Map(key:Location;TextBox1;TextBox2;TextBox3;)
      * */
     public static Boolean WebLogin(Map<String,String> map) throws IOException{
 
@@ -86,7 +88,7 @@ public class Crawler {
             //判断是否登陆成功
             if (hs.length != 0) {
                 //分析字符串中是否匹配“xh=”,有表示登陆成功
-                if(hs.toString().split("xh=").length > 0)
+                if(Arrays.toString(hs).split("xh=").length > 0)
                     return Boolean.TRUE;
             }
         } finally {
@@ -96,11 +98,7 @@ public class Crawler {
         return Boolean.FALSE;
     }
 
-    /**
-     * 功能：获取网页上的"__VIEWSTATE"和"__VIEWSTATEGENERATOR"
-     *
-     */
-    private static void GetViewState(String html){
+   /* private static void GetViewState(String html){
         Document document = Jsoup.parse(html);
         Elements eViewStateDate = document.select("input[name]");
         if (eViewStateDate.size() > 0){
@@ -118,12 +116,28 @@ public class Crawler {
                 }
             }
         }
-    }
+    }*/
 
     /**
-     * 功能：输入验证码，测试用
-     *
+     * 功能：返回用户location字符串
+     * return: (2c2wu2jprazs0x45a123xq55)
      * */
+    public static String LocationStr() throws IOException {
+        String locationCode;
+        String location = GetLocation(Constant.SWFU_WEB_URL);
+        if (location != null){
+            String[] strsArray = location.split("/");
+            locationCode = strsArray[1];
+        }
+        else
+            locationCode = null;
+
+        return locationCode;
+    }
+
+// /(mkybkaiwqcsjfmrcd2urvzzj)/default2.aspx
+
+    /*//功能：输入验证码，测试用
     private static String CheckCode(){
         System.out.print("输入");
         Scanner sc = new Scanner(System.in);
@@ -131,16 +145,19 @@ public class Crawler {
         System.out.println("输入数据：" + read);
         return read;
     }
-/*    public static void main(String[] args) throws Exception{
+
+    public static void main(String[] args) throws Exception{
         String location = GetLocation(Constant.SWFU_WEB_URL);
         System.out.println(location);
-        Map map = new HashMap();
+        Map<String, String> map = new HashMap<>();
         map.put("url",Constant.SWFU_WEB_URL + location);
         map.put("TextBox1","20131157060");
         map.put("TextBox2","916420");
         map.put("TextBox3",CheckCode());
         Boolean b = WebLogin(map);
         if(b == Boolean.TRUE)
-            System.out.println("ffff");
+            System.out.println("是本校用户");
+        else
+            System.out.println("非本校用户");
     }*/
 }
