@@ -49,7 +49,7 @@
       )
       values
       (
-        #{id}
+        #{id},
         #{productId},
         #{productName},
         #{productType},
