@@ -6,7 +6,7 @@
 
     <!--查看举报table-->
     <select id="getReportTypeInfo" resultType="ReportTypeInfo" parameterType="ReportTypeInfoQuery">
-        select id, name, des from reporttypeinfo
+        select id, name, des from reporttypeinfo order by id desc
     </select>
 
     <!--查看举报详情-->
