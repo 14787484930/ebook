@@ -6,6 +6,7 @@ import com.ebook.services.ReportTypeInfoService;
 import com.model.utills.messages.ResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,6 +37,7 @@ public class ReportTypeInfoController {
      */
     @RequestMapping("/reporttypeinfo")
     @ResponseBody
+    @CrossOrigin
     public Object getReportTypes(ReportTypeInfoQuery reportTypeInfoQuery, HttpSession session){
         List<ReportTypeInfo>  reporttypeinfo = reportTypeInfoService.getReportTypeInfo(reportTypeInfoQuery);
         return ResultInfo.success().add("pageinfo",reporttypeinfo);
