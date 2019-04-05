@@ -35,7 +35,7 @@
 
     <!--插入举报信息-->
     <insert id="save" parameterType="ReportProduct">
-      insert into
+      insert into reportproductinfo
       (
         id,
         productId,
