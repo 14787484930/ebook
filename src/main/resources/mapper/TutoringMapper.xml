@@ -17,6 +17,7 @@
         <result property="phone" column="phone"/>
         <result property="des" column="des"/>
         <result property="createTime" column="createTime"/>
+        <result property="checkCode" column="checkCode"/>
         <association property="createUser" javaType="User" select="getUser" column="createUser">
             <id property="id" column="id"/>
             <result property="studNo" column="studNo"/>
@@ -46,7 +47,7 @@
     </select>
 
     <select id="getById" resultMap="tutoringinfo">
-        select id,name,type,price,startTime,endTime,place,weiXin,phone,des,createTime,updateTime,createUser
+        select id,name,type,price,startTime,endTime,place,weiXin,phone,des,createTime,updateTime,createUser,checkCode
         from tutoringinfo
         where id = #{id}
     </select>
@@ -100,7 +101,8 @@
         createTime,
         createUser,
         dataStatus,
-        viewTimes
+        viewTimes,
+        checkCode
       )
       values
       (
@@ -117,7 +119,8 @@
         #{createTime},
         #{createUser.id},
         1,
-        0
+        0,
+        #{checkCode}
       )
     </insert>
 

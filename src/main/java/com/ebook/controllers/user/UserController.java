@@ -193,6 +193,13 @@ public class UserController {
         map.put("TextBox3",user.getValidCode());
         map.put("url", user.getUrl());
 
+        //判断所填写的学号是否已经认证过了
+        UserQuery query = new UserQuery();
+        List<User> users = userService.getUsers(query);
+        if(users.size() > 0){
+            return ResultInfo.fail().add("errors", "此用户已经认证过了，请勿重复认证！");
+        }
+
         try {
             if(Crawler.WebLogin(map)) {
 

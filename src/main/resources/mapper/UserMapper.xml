@@ -4,14 +4,17 @@
 
     <cache type="com.model.utills.redis.RedisCache" />
 
-    <select id="getUserAdvice" resultType="User">
+    <select id="getUsers" resultType="User">
       select id,studNo,weiXin,sex,phone,email,score,createTime,updateTime,openId,nicname
       from userinfo
       where dataStatus = 1
+      <if test="studNo != null">
+          and studNo = #{studNo}
+      </if>
     </select>
 
     <select id="getById" resultType="User">
-      select id,studNo,weiXin,sex,phone,email,score,createTime,updateTime,openId,nicname
+      select id,studNo,weiXin,sex,phone,email,score,createTime,updateTime,openId,nickname,scoreNumber
       from userinfo
       where id = #{id}
     </select>

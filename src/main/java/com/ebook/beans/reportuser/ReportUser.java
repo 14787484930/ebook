@@ -16,18 +16,17 @@ public class ReportUser implements Serializable {
 
     private String id;
 
+    @NotNull(message = "举报人不能为空")
     private User userId;
 
+    @NotNull(message = "举报辅导不能为空")
     private String TutoringId;
 
+    @NotNull(message = "描述不能为空")
     private String des;
 
-    @NotNull(message = "创建日期不能为空")
-    @Past(message = "日期不合法")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createTime;
 
-    @NotEmpty(message = "创建人不能为空")
     private User createUser;
 
     private Integer dataStatus;

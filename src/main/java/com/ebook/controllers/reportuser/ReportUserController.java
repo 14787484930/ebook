@@ -83,6 +83,14 @@ public class ReportUserController {
         return ResultInfo.success();
     }
 
+    @RequestMapping("/save")
+    @ResponseBody
+    public Object save(){
+
+
+        return ResultInfo.success();
+    }
+
 
 
 

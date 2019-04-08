@@ -11,6 +11,7 @@ import com.ebook.sys.log.SysLog;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.model.utills.messages.ResultInfo;
+import com.model.utills.randomnum.RandomNum;
 import com.model.utills.uuid.GeneratingId;
 import com.model.utills.validate.ValidateDate;
 import org.apache.commons.lang3.StringUtils;
@@ -172,7 +173,7 @@ public class TutoringController {
         //判断当前用户是否认证过
         if(StringUtils.isEmpty(((User)session.getAttribute("userinfo")).getId())){
 
-            return ResultInfo.success().add("msg","进行学生身份认证后才能接单！");
+            return ResultInfo.fail().add("msg","进行学生身份认证后才能接单！");
         }
 
         //需要得到校验码并判断是否正确
@@ -180,7 +181,7 @@ public class TutoringController {
         String checkCode2 = tutoringService.getById(tutoringQuery.getId()).getCheckCode(); //数据库中获取的校验码
 
         if(!checkCode1.equals(checkCode2)){
-            return ResultInfo.success().add("msg","您输入的接单码有误！");
+            return ResultInfo.fail().add("msg","您输入的接单码有误！");
         }
 
         //需要得到接单用户id（从session中取）
@@ -203,7 +204,7 @@ public class TutoringController {
     public Object deleteOrderUser(TutoringQuery tutoringQuery){
 
         //生成校验码覆盖原来的
-        tutoringQuery.setCheckCode(GeneratingId.getRandomNumber()+"");
+        tutoringQuery.setCheckCode(RandomNum.getRandomNumer());
 
         //接单人覆盖为null
         tutoringQuery.setOrderUser(null);

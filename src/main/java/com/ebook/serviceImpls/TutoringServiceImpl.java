@@ -10,11 +10,13 @@ import com.ebook.daos.UserDao;
 import com.ebook.services.ReportUserService;
 import com.ebook.services.TutoringService;
 import com.ebook.services.UserService;
+import com.model.utills.randomnum.RandomNum;
 import com.model.utills.uuid.GeneratingId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class TutoringServiceImpl implements TutoringService {
@@ -50,6 +52,8 @@ public class TutoringServiceImpl implements TutoringService {
     public void save(Tutoring tutoring) {
 
         tutoring.setId(GeneratingId.getId());
+        //生成一个接单码
+        tutoring.setCheckCode(RandomNum.getRandomNumer());
         tutoringDao.save(tutoring);
     }
 
