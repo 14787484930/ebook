@@ -16,6 +16,8 @@
         <result property="weiXin" column="weiXin"/>
         <result property="phone" column="phone"/>
         <result property="des" column="des"/>
+        <result property="isScore" column="isScore"/>
+        <result property="orderUser" column="orderUser"/>
         <result property="createTime" column="createTime"/>
         <result property="checkCode" column="checkCode"/>
         <association property="createUser" javaType="User" select="getUser" column="createUser">
@@ -33,7 +35,7 @@
     </select>
 
     <select id="getTutorings" resultMap="tutoringinfo">
-        select id,name,type,price,startTime,endTime,place,weiXin,phone,des,createTime,updateTime,createUser
+        select id,name,type,price,startTime,endTime,place,weiXin,phone,des,createTime,updateTime,createUser,isScore,orderUser
         from tutoringinfo
         where dataStatus = 1
         <if test="name != null">and name like '%' #{name} '%'</if>
@@ -47,7 +49,7 @@
     </select>
 
     <select id="getById" resultMap="tutoringinfo">
-        select id,name,type,price,startTime,endTime,place,weiXin,phone,des,createTime,updateTime,createUser,checkCode
+        select id,name,type,price,startTime,endTime,place,weiXin,phone,des,createTime,updateTime,createUser,checkCode,isScore,orderUser
         from tutoringinfo
         where id = #{id}
     </select>
