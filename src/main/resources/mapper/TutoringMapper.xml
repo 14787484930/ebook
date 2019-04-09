@@ -136,7 +136,7 @@
     <!--拒绝接单-->
     <update id="deleteOrderUser" parameterType="TutoringQuery">
         update tutoringinfo
-        set orderUser = null,checkCode = #{checkCode}
+        set orderUser = null,checkCode = #{checkCode},createTime = now()
         where id = #{id}
     </update>
 

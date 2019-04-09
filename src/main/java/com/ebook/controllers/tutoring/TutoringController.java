@@ -166,6 +166,7 @@ public class TutoringController {
      * 2018/12/27
      * 用户接单
      */
+    @CrossOrigin
     @RequestMapping("/getOrder")
     @ResponseBody
     public Object getOrder(TutoringQuery tutoringQuery,HttpSession session){
@@ -173,7 +174,7 @@ public class TutoringController {
         //判断当前用户是否认证过
         if(StringUtils.isEmpty(((User)session.getAttribute("userinfo")).getId())){
 
-            return ResultInfo.fail().add("msg","进行学生身份认证后才能接单！");
+            return ResultInfo.fail().add("msg","进行学生身份认证后才能接单！").add("code",101);
         }
 
         //需要得到校验码并判断是否正确
@@ -199,6 +200,7 @@ public class TutoringController {
      * 2018/12/27
      * 撤销接单
      */
+    @CrossOrigin
     @RequestMapping("/delOrder")
     @ResponseBody
     public Object deleteOrderUser(TutoringQuery tutoringQuery){
@@ -221,6 +223,7 @@ public class TutoringController {
      * 2018/12/27
      * 评价用户
      */
+    @CrossOrigin
     @RequestMapping("/updateScore")
     @ResponseBody
     public Object updateUserScore(TutoringQuery tutoringQuery,HttpSession session){
