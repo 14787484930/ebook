@@ -122,6 +122,13 @@ public class BookController {
                 session.setAttribute("userInfo",null);
                 session.setAttribute("flag",bookQuery.getFlag());
                 System.out.println(1);
+                User user = new User();
+                user.setId("ea0b33ba3b65429f976a6514ae9296e8");
+                user.setNickname("绿箭");
+                user.setWeiXin("ZXL690345407");
+                user.setPhone("14787484930");
+                user.setOpenId("123456");
+                session.setAttribute("userInfo",user);
             }else{
                 System.out.println(2);
                 session.setAttribute("flag",bookQuery.getFlag());
