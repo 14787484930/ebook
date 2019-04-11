@@ -172,7 +172,11 @@ public class TutoringController {
     public Object getOrder(TutoringQuery tutoringQuery,HttpSession session){
 
         //判断当前用户是否认证过
-        if(StringUtils.isEmpty(((User)session.getAttribute("userinfo")).getId())){
+        /*if(StringUtils.isEmpty(((User)session.getAttribute("userinfo")).getId())){
+
+            return ResultInfo.fail().add("msg","进行学生身份认证后才能接单！").add("code",101);
+        }*/
+        if(session.getAttribute("userinfo") == null){
 
             return ResultInfo.fail().add("msg","进行学生身份认证后才能接单！").add("code",101);
         }
