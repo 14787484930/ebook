@@ -176,7 +176,7 @@ public class TutoringController {
 
             return ResultInfo.fail().add("msg","进行学生身份认证后才能接单！").add("code",101);
         }*/
-        if(session.getAttribute("userinfo") == null){
+        if(session.getAttribute("userInfo") == null){
 
             return ResultInfo.fail().add("msg","进行学生身份认证后才能接单！").add("code",101);
         }
