@@ -118,19 +118,6 @@ public class BookController {
 
         //权限处理
         if(bookQuery.getFlag() != null){
-            if(bookQuery.getFlag() == 0){
-                session.setAttribute("userInfo",null);
-                session.setAttribute("flag",bookQuery.getFlag());
-                System.out.println(1);
-                User user = new User();
-                //user.setId("ea0b33ba3b65429f976a6514ae9296e8");
-                user.setNickname("绿箭");
-                user.setWeiXin("ZXL690345407");
-                user.setPhone("14787484930");
-                user.setOpenId("123456");
-                session.setAttribute("userInfo",user);
-            }else{
-                System.out.println(2);
                 session.setAttribute("flag",bookQuery.getFlag());
                 User user = new User();
                 user.setId("ea0b33ba3b65429f976a6514ae9296e8");
@@ -138,8 +125,8 @@ public class BookController {
                 user.setWeiXin("ZXL690345407");
                 user.setPhone("14787484930");
                 user.setOpenId("123456");
+                user.setFlag(bookQuery.getFlag());
                 session.setAttribute("userInfo",user);
-            }
         }else{
             Object obj = session.getAttribute("flag");
             if(obj != null){

@@ -45,6 +45,7 @@ public class UserController {
      * 2018/12/21
      * 查询用户列表
      */
+    @CrossOrigin
     @RequestMapping("/users")
     @ResponseBody
     public Object getUsers(UserQuery userQuery, HttpSession session){
@@ -68,6 +69,7 @@ public class UserController {
      * 2018/12/21
      * 查询用户详情
      */
+    @CrossOrigin
     @RequestMapping("/getById/{id}")
     @ResponseBody
     public Object getById(@PathVariable("id") String id){
@@ -83,6 +85,7 @@ public class UserController {
      * 2018/12/21
      * 编辑用户信息
      */
+    @CrossOrigin
     @RequestMapping("/update")
     @ResponseBody
     public Object update(@Valid User user,BindingResult result){
@@ -105,6 +108,7 @@ public class UserController {
      * 2018/12/21
      * 删除用户信息
      */
+    @CrossOrigin
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(UserQuery userQuery){
@@ -120,6 +124,7 @@ public class UserController {
      *2018/12/21
      * 添加用户信息
      */
+    @CrossOrigin
     @RequestMapping("/save")
     @ResponseBody
     public Object save(@Valid User user,BindingResult result){
