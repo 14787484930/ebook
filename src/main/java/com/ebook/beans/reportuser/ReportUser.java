@@ -20,7 +20,7 @@ public class ReportUser implements Serializable {
     private User userId;
 
     @NotNull(message = "举报辅导不能为空")
-    private String TutoringId;
+    private String tutoringId;
 
     @NotNull(message = "描述不能为空")
     private String des;

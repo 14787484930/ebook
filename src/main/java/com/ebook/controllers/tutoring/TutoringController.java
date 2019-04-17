@@ -254,11 +254,11 @@ public class TutoringController {
         user.setScoreNumber(scoreNumber);
 
         ReportUser reportUser = new ReportUser();
+        reportUser.setTutoringId(tutoringQuery.getId());
         //判断是否进行了举报
         if(tutoringQuery.getFlag() == 1){
             reportUser.setCreateTime(new Date());
             reportUser.setCreateUser((User)session.getAttribute("userInfo"));
-            reportUser.setTutoringId(tutoringQuery.getId());
             reportUser.setId(GeneratingId.getId());
         }
 

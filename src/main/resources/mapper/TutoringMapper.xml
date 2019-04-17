@@ -160,7 +160,7 @@
 
     <!--标记为已评论-->
     <update id="updateTutoring">
-      update tutoringinfo set isScore = 1 ;
+      update tutoringinfo set isScore = 1 where id = #{tutoringId}
     </update>
 
     <update id="updateViews" parameterType="BookQuery">

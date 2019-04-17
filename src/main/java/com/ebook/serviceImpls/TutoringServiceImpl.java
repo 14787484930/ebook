@@ -129,12 +129,12 @@ public class TutoringServiceImpl implements TutoringService {
         userDao.updateScore(user);
 
         //判断是否进行举报，是的话进行举报操作
-        if(reportUser != null){
+        if(reportUser.getId() != null){
             reportUserDao.save(reportUser);
         }
 
         //将辅导编辑为已经举报过的
-        tutoringDao.updateTutoring();
+        tutoringDao.updateTutoring(reportUser);
     }
 
     /**
