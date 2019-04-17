@@ -190,7 +190,7 @@ public class TutoringController {
         }
 
         //需要得到接单用户id（从session中取）
-        tutoringQuery.setOrderUser(((User)session.getAttribute("userinfo")).getId());
+        tutoringQuery.setOrderUser(((User)session.getAttribute("userInfo")).getId());
 
         //调用service接单操作
         tutoringService.updateOrderUser(tutoringQuery);
