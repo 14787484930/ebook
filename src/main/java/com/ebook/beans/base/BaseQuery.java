@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -49,6 +50,13 @@ public class BaseQuery implements Serializable {
         this.user = (User)session.getAttribute("userInfo");
         if(user != null){
             this.createUser = user.getId();
+        }
+
+        if(this.endTime != null){
+            Calendar c = Calendar.getInstance();
+            c.setTime(this.endTime);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            this.endTime = c.getTime();
         }
     }
 }
