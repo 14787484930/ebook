@@ -69,11 +69,11 @@ public class WeixinAuthFilter implements Filter {
                     		.replace("APPID", Constant.APPID)
                     		.replace("SECRET", Constant.APPSECRET)
                     		.replace("CODE", code);
-                    String json = SendHttp.sengGet(url);
+                    String json = SendHttp.sendGet(url);
                     String openid = JSONObject.fromObject(json).getString("openid");
                     String access_token = JSONObject.fromObject(json).getString("access_token");
                     String a = Constant.GET_USER_URL.replace("ACCESS_TOKEN",access_token).replace("OPENID",openid);
-                    String jsonStr = SendHttp.sengGet(a);
+                    String jsonStr = SendHttp.sendGet(a);
                     System.out.println("打印数据："+jsonStr);
                     hRequest.getSession().setAttribute("fromUserName", openid);
                     System.out.println(openid+"jjjjjjjjjjjjjjj");

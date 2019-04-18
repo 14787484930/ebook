@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class SendHttp {
 
-    public static String sengGet(String url) {
+    public static String sendGet(String url) {
 
         /*使用HttpClient发送请求,3步*/
         //获取执行对象

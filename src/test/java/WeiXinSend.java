@@ -188,7 +188,7 @@ public class WeiXinSend {
 
         String url = Constant.GET_MENU_URL.replace("ACCESS_TOKEN",Constant.ACCESSTOKEN);
 
-        String menuStr = SendHttp.sengGet(url);
+        String menuStr = SendHttp.sendGet(url);
 
         System.out.println(menuStr);
 
@@ -202,7 +202,7 @@ public class WeiXinSend {
     public void delMenu(){
 
         String url = Constant.DEL_MENU_URL.replace("ACCESS_TOKEN",Constant.ACCESSTOKEN);
-        String str = SendHttp.sengGet(url);
+        String str = SendHttp.sendGet(url);
         System.out.println(str);
     }
 
@@ -214,7 +214,7 @@ public class WeiXinSend {
         url = url.replace("ACCESS_TOKEN",str);
         url = url.replace("OPENID","og4jG1LVi3tcqeWIU_Dw4c1SdfGk");
 
-        String s = SendHttp.sengGet(url);
+        String s = SendHttp.sendGet(url);
         System.out.println(s);
 
     }

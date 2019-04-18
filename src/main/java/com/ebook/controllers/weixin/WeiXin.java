@@ -28,10 +28,13 @@ public class WeiXin {
     @RequestMapping(value="test",method = RequestMethod.GET)
     public void test(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+        //方式一：明文认证方式
         //response.getWriter().println("weixin");
         System.out.println("===================="+123);
 
-        /*采用加密认证方式*/
+
+
+        //方式二：采用加密认证方式
         //一、获取密文认证的四个参数
 
         //signature 微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数。
@@ -46,10 +49,10 @@ public class WeiXin {
         //echostr 随机字符串
         String echostr = request.getParameter("echostr");
 
-        System.out.println("signature==="+signature);
+        /*System.out.println("signature==="+signature);
         System.out.println("timestamp==="+timestamp);
         System.out.println("nonce==="+nonce);
-        System.out.println("echostr==="+echostr);
+        System.out.println("echostr==="+echostr);*/
 
         //二、对四个参数做密文认证的处理
         //将token、timestamp、nonce三个参数进行字典(数组)序排序
