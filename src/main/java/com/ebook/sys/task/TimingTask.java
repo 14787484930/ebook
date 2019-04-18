@@ -12,6 +12,9 @@ import com.ebook.beans.tutoring.Tutoring;
 import com.ebook.beans.tutoring.TutoringQuery;
 import com.ebook.daos.BookDao;
 import com.ebook.services.*;
+import com.model.utills.mail.MailUtils;
+import com.model.utills.mail.SendEmail;
+import com.model.utills.weixin.AccessTokenUtill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -250,4 +253,22 @@ public class TimingTask {
 
     }
 
+    /**
+     * zxl
+     * 2019/4/18
+     * 动态刷新接口
+     */
+    //@Scheduled(cron = "0 50 0 * * *")
+    public void reFreshAccessToken(){
+
+        if(!AccessTokenUtill.getAccessToken()){
+
+            try {
+                SendEmail.sendemail("690345407@qq.com","动态获取AccessToken失败！");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 }
