@@ -115,13 +115,13 @@ public class MenuUtill {
         JSONObject toBuy = new JSONObject();
         toBuy.put("type","view");
         toBuy.put("name","我要购买");
-        toBuy.put("url","http://47.106.222.50:8080/book?flag=0");
+        toBuy.put("url","http://ebook.zhangxinhua.xin/book?flag=0");
 
         //我要发布
         JSONObject toRealse = new JSONObject();
         toRealse.put("type","view");
         toRealse.put("name","我要发布");
-        toRealse.put("url","http://47.106.222.50:8080/book?flag=1");
+        toRealse.put("url","http://ebook.zhangxinhua.xin/book?flag=1");
 
         //加入集合
         twoLevelMenus1.add(toBuy);
@@ -137,13 +137,13 @@ public class MenuUtill {
         JSONObject introduceOur = new JSONObject();
         introduceOur.put("type","view");
         introduceOur.put("name","我的建议");
-        introduceOur.put("url","http://47.106.222.50:8080/advice");
+        introduceOur.put("url","http://ebook.zhangxinhua.xin/advice");
 
         //我要发布
         JSONObject myAdvice = new JSONObject();
         myAdvice.put("type","view");
         myAdvice.put("name","关于我们");
-        myAdvice.put("url","http://47.106.222.50:8080/version");
+        myAdvice.put("url","http://ebook.zhangxinhua.xin/version");
 
         //加入集合
         twoLevelMenus2.add(introduceOur);
