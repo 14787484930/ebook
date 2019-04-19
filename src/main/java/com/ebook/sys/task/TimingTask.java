@@ -258,7 +258,7 @@ public class TimingTask {
      * 2019/4/18
      * 动态刷新接口
      */
-    //@Scheduled(cron = "0 50 0 * * *")
+    //@Scheduled(cron = "0 0/110 * * * *")
     public void reFreshAccessToken(){
 
         if(!AccessTokenUtill.getAccessToken()){
