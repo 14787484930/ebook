@@ -1,5 +1,7 @@
 import com.model.utills.constants.Constant;
 import com.model.utills.http.SendHttp;
+import com.model.utills.weixin.AccessTokenUtill;
+import com.model.utills.weixin.MenuUtill;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.http.HttpEntity;
@@ -217,6 +219,15 @@ public class WeiXinSend {
         String s = SendHttp.sendGet(url);
         System.out.println(s);
 
+    }
+
+    @Test
+    public void abc(){
+
+        AccessTokenUtill.getAccessToken();
+
+        //MenuUtill.delMenu();
+        MenuUtill.addMenu();
     }
 
 }
