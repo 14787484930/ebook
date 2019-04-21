@@ -35,7 +35,7 @@
       from otherInfo
       where dataStatus = 1
         <if test="otherName != null">and otherName like '%' #{otherName} '%'</if>
-        <if test="hasInvoice != null">and hasInvoice &gt;= #{hasInvoice} </if>
+        <if test="hasInvoice != null">and hasInvoice = #{hasInvoice} </if>
         <if test="startPrice != null">and presentPrice &gt;= #{startPrice} </if>
         <if test="endPrice != null">and presentPrice &lt;= #{endPrice} </if>
         <if test="startTime != null">and buyDate &gt;= #{startTime} </if>
