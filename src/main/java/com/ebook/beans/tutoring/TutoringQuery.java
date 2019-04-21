@@ -19,11 +19,11 @@ public class TutoringQuery extends BaseQuery {
     private String orderUser; //接单人
     private double score;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH-mm-ss")
+  /*  @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date endTime; //结束时间
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH-mm-ss")
-    private Date startTime; //开始时间
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date startTime; //开始时间*/
 
     //举报
     private ReportUser reportUser;
