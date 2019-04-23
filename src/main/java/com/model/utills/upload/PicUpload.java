@@ -27,7 +27,7 @@ public class PicUpload {
 
             File file = new File(path, GeneratingId.getId() + "." + endStr);
 
-            Thumbnails.of(pic.getInputStream()).scale(1f).outputQuality(0.25f).toFile(file);
+            Thumbnails.of(pic.getInputStream()).scale(1f).outputQuality(0.2f).toFile(file);
 
             sb.append("/pictures/" + type + "/").append(file.getName()).append(",");
 
