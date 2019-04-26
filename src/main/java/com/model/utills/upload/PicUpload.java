@@ -19,7 +19,8 @@ public class PicUpload {
         StringBuffer sb = new StringBuffer();
 
         //获取文件上传路径
-        String path = session.getServletContext().getRealPath("/pictures/" + type);
+        //String path = session.getServletContext().getRealPath("/pictures/" + type); //放在类路径下
+        String path = "F:/pictures/" + type; //放在nginx服务器上
 
         for(MultipartFile pic : pics) {
 
@@ -29,7 +30,7 @@ public class PicUpload {
 
             Thumbnails.of(pic.getInputStream()).scale(1f).outputQuality(0.2f).toFile(file);
 
-            sb.append("/pictures/" + type + "/").append(file.getName()).append(",");
+            sb.append("/" + type + "/").append(file.getName()).append(",");
 
         };
         return sb.deleteCharAt(sb.length()-1).toString();
