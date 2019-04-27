@@ -2,9 +2,11 @@ package com.model.utills.upload;
 
 import com.model.utills.uuid.GeneratingId;
 import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 
@@ -21,6 +23,7 @@ public class PicUpload {
         //获取文件上传路径
         //String path = session.getServletContext().getRealPath("/pictures/" + type); //放在类路径下
         String path = "F:/pictures/" + type; //放在nginx服务器上
+        File sy = new File("F:/pictures/sy/sy.png");
 
         for(MultipartFile pic : pics) {
 
@@ -28,7 +31,7 @@ public class PicUpload {
 
             File file = new File(path, GeneratingId.getId() + "." + endStr);
 
-            Thumbnails.of(pic.getInputStream()).scale(1f).outputQuality(0.2f).toFile(file);
+            Thumbnails.of(pic.getInputStream()).scale(1f).outputQuality(0.2f).watermark(Positions.BOTTOM_RIGHT, ImageIO.read(sy), 0.5f).toFile(file);
 
             sb.append("/" + type + "/").append(file.getName()).append(",");
 
