@@ -1,5 +1,6 @@
 package com.model.utills.upload;
 
+import com.model.utills.constants.Constant;
 import com.model.utills.uuid.GeneratingId;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -22,8 +23,8 @@ public class PicUpload {
 
         //获取文件上传路径
         //String path = session.getServletContext().getRealPath("/pictures/" + type); //放在类路径下
-        String path = "F:/pictures/" + type; //放在nginx服务器上
-        File sy = new File("F:/pictures/sy/sy.png");
+        String path = Constant.PICPATH + type; //放在nginx服务器上
+        File sy = new File(Constant.SYPATH);
 
         for(MultipartFile pic : pics) {
 

@@ -37,4 +37,8 @@ public class User implements Serializable {
 
     @NotEmpty(message = "sessionId不能为空")
     private String url;  //学生所在学校的url地址
+
+    /*小卖铺楼栋*/
+    private int buildingNumber; //宿舍楼编号
+    private String superMarketName; //超市名称
 }
