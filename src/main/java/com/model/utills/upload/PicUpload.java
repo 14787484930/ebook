@@ -32,7 +32,7 @@ public class PicUpload {
 
             File file = new File(path, GeneratingId.getId() + "." + endStr);
 
-            Thumbnails.of(pic.getInputStream()).scale(1f).outputQuality(0.2f).watermark(Positions.BOTTOM_RIGHT, ImageIO.read(sy), 0.5f).toFile(file);
+            Thumbnails.of(pic.getInputStream()).scale(0.2f).watermark(Positions.BOTTOM_RIGHT, ImageIO.read(sy), 0.5f).toFile(file);
 
             sb.append("/" + type + "/").append(file.getName()).append(",");
 
