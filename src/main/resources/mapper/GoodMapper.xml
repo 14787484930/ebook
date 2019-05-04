@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ebook.daos.GoodDao">
+
+    <cache type="com.model.utills.redis.RedisCache" />
+
+
+    <resultMap id="goodinfo" type="Good">
+        <id property="id" column="id"/>
+        <result property="goodName" column="goodName"/>
+        <result property="goodPrice" column="goodPrice"/>
+        <result property="goodPic" column="goodPic"/>
+        <result property="des" column="des"/>
+        <result property="createTime" column="createTime"/>
+        <association property="createUser" javaType="User" select="getUser" column="createUser">
+            <id property="id" column="id"/>
+            <result property="studNo" column="studNo"/>
+            <result property="weiXin" column="weiXin"/>
+            <result property="nickname" column="nickname"/>
+            <result property="openId" column="openId"/>
+        </association>
+    </resultMap>
+
+    <!--查询用户信息-->
+    <select id="getUser"  resultType="User">
+        select id,weiXin,studNo,nickname,openId from userInfo where id = #{createUser}
+    </select>
+
+    <!--查看图书table-->
+    <select id="getGoods" resultMap="goodinfo" parameterType="GoodQuery">
+        select id,goodName,goodPic,des,createUser,createTime,updateUser,updateTime,dataStatus from goodinfo
+        where dataStatus = 1
+        and createUser = #{createUser}
+       <if test="goodName != null">and goodName like '%' #{goodName} '%'</if>
+        order by createTime desc
+    </select>
+
+    <!--查看图书详情-->
+    <select id="getById" resultMap="goodinfo">
+      select id,goodName,goodPic,des,createUser,createTime,updateUser,updateTime,dataStatus from goodinfo
+      where id = #{id}
+    </select>
+
+    <!--编辑图书-->
+    <update id="update" parameterType="Good">
+        update goodInfo
+        <set>
+            goodName = #{goodName},
+            goodPic = #{gookPic},
+            des = #{des},
+            updateUser = #{updateUser},
+            updateTime = #{updateTime},
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--删除图书（软删）-->
+    <delete id="delete" parameterType="GoodQuery">
+        update goodInfo
+        set dataStatus = 100
+        where
+        <choose>
+            <when test="id != null">id = #{id}</when>
+            <when test="ids != null">
+                id in
+                <foreach collection="ids" item="id" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </when>
+        </choose>
+    </delete>
+
+    <!--新增订单-->
+    <insert id="save" parameterType="Good">
+        insert into goodInfo
+        (
+            id,
+            goodName,
+            goodPic,
+            des,
+            createUser,
+            createTime,
+            updateUser,
+            updateTime,
+            dataStatus
+        )
+        values
+        (
+            #{id},
+            #{goodName},
+            #{goodPic},
+            #{des},
+            #{createUser},
+            #{createTime},
+            #{updateUser},
+            #{updateTime},
+            1
+        )
+    </insert>
+
+
+</mapper>

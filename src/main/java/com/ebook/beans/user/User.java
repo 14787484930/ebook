@@ -39,7 +39,7 @@ public class User implements Serializable {
     private String url;  //学生所在学校的url地址
 
     /*小卖铺楼栋*/
-    private int buildingNumber; //宿舍楼编号---针对小卖铺
+    private Integer buildingNumber; //宿舍楼编号---针对小卖铺
     private String superMarketName; //超市名称
-    private String buildingNun; //宿舍楼编号---针对普通用户
+    private Integer buildingNum; //宿舍楼编号---针对普通用户
 }
