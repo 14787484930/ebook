@@ -30,7 +30,7 @@
     <select id="getGoods" resultMap="good_info" parameterType="GoodQuery">
         select id,goodName,goodPic,des,createUser,createTime,updateUser,updateTime,dataStatus from goodinfo
         where dataStatus = 1
-        and createUser = #{createUser.id}
+        and createUser = #{supperId}
        <if test="goodName != null">and goodName like '%' #{goodName} '%'</if>
         order by createTime desc
     </select>

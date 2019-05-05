@@ -5,7 +5,7 @@
     <cache type="com.model.utills.redis.RedisCache" />
 
 
-    <resultMap id="orderDetailedInfo" type="Order">
+   <!-- <resultMap id="orderDetailedInfo" type="Order">
         <id property="id" column="orderId"/>
         <result property="totalCost" column="totalCost"/>
         <result property="totalNum" column="totalNum"/>
@@ -35,23 +35,23 @@
         where d.orderId = #{id}
     </select>
 
-    <!--查询用户信息-->
+    &lt;!&ndash;查询用户信息&ndash;&gt;
     <select id="getUser"  resultType="User">
         select id,weiXin,studNo,nickname,openId from userInfo where id = #{createUser}
     </select>
 
-    <!--查看图书table-->
+    &lt;!&ndash;查看图书table&ndash;&gt;
     <select id="getOrders" resultMap="Order" parameterType="GoodQuery">
         select id,totalCost,createTime,address from orderinfo
         order by createTime desc
     </select>
 
-    <!--查看图书详情-->
+    &lt;!&ndash;查看图书详情&ndash;&gt;
     <select id="getById" resultMap="orderDetailedInfo" parameterType="OrderQuery">
        select id,totalCost,totalNum,address,phone,createUser,createTime from orderinfo where id = #{id}
     </select>
 
-    <!--新增订单-->
+    &lt;!&ndash;新增订单&ndash;&gt;
     <insert id="saveOrder" parameterType="Order">
         insert into orderInfo
         (
@@ -90,7 +90,7 @@
             #{id},
             #{buyNumber}
         )
-    </insert>
+    </insert>-->
 
 
 </mapper>

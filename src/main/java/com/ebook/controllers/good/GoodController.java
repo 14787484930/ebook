@@ -59,6 +59,8 @@ public class GoodController {
         user.setOpenId("123456");
         session.setAttribute("userInfo",user);
 
+        goodQuery.setSupperId("ea0b33ba3b65429f976a6514ae9296e8");
+
         //权限初始化
         goodQuery.intiQuery(session);
         //分页参数
