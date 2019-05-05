@@ -7,16 +7,18 @@ import com.ebook.daos.OrderDao;
 import com.ebook.services.OrderService;
 import com.model.utills.uuid.GeneratingId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
     OrderDao orderDao;
 
     @Override
-    public List<Order> getOrders() {
+    public List<Order> getOrders(OrderQuery query) {
 
         List<Order> orders = orderDao.getOrders();
         return orders;

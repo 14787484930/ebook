@@ -5,7 +5,7 @@
     <cache type="com.model.utills.redis.RedisCache" />
 
 
-    <resultMap id="goodinfo" type="Good">
+    <resultMap id="good_info" type="Good">
         <id property="id" column="id"/>
         <result property="goodName" column="goodName"/>
         <result property="goodPrice" column="goodPrice"/>
@@ -26,17 +26,17 @@
         select id,weiXin,studNo,nickname,openId from userInfo where id = #{createUser}
     </select>
 
-    <!--查看图书table-->
-    <select id="getGoods" resultMap="goodinfo" parameterType="GoodQuery">
+    <!--查看商品-->
+    <select id="getGoods" resultMap="good_info" parameterType="GoodQuery">
         select id,goodName,goodPic,des,createUser,createTime,updateUser,updateTime,dataStatus from goodinfo
         where dataStatus = 1
-        and createUser = #{createUser}
+        and createUser = #{createUser.id}
        <if test="goodName != null">and goodName like '%' #{goodName} '%'</if>
         order by createTime desc
     </select>
 
     <!--查看图书详情-->
-    <select id="getById" resultMap="goodinfo">
+    <select id="getById" resultMap="good_info">
       select id,goodName,goodPic,des,createUser,createTime,updateUser,updateTime,dataStatus from goodinfo
       where id = #{id}
     </select>
@@ -48,7 +48,7 @@
             goodName = #{goodName},
             goodPic = #{gookPic},
             des = #{des},
-            updateUser = #{updateUser},
+            updateUser = #{updateUser.id},
             updateTime = #{updateTime},
         </set>
         where id = #{id}
@@ -80,8 +80,6 @@
             des,
             createUser,
             createTime,
-            updateUser,
-            updateTime,
             dataStatus
         )
         values
@@ -90,10 +88,8 @@
             #{goodName},
             #{goodPic},
             #{des},
-            #{createUser},
+            #{createUser.id},
             #{createTime},
-            #{updateUser},
-            #{updateTime},
             1
         )
     </insert>

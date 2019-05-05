@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ebook.daos.OrderDao">
+
+    <cache type="com.model.utills.redis.RedisCache" />
+
+
+    <resultMap id="orderDetailedInfo" type="Order">
+        <id property="id" column="orderId"/>
+        <result property="totalCost" column="totalCost"/>
+        <result property="totalNum" column="totalNum"/>
+        <result property="address" column="address"/>
+        <result property="createTime" column="createTime"/>
+        <association property="createUser" javaType="User" select="getUser" column="createUser">
+            <id property="id" column="id"/>
+            <result property="studNo" column="studNo"/>
+            <result property="weiXin" column="weiXin"/>
+            <result property="nickname" column="nickname"/>
+            <result property="openId" column="openId"/>
+        </association>
+        <collection property="goods" ofType="Good" select="getGoods" column="id">
+            <id property="id" column="goodId"/>
+            <result property="goodName" column="goodName"/>
+            <result property="goodPrice" column="goodPrice"/>
+            <result property="goodPic" column="goodPic"/>
+            <result property="buyNumber" column="buyNumber"/>
+            <result property="createTime" column="createTime"/>
+        </collection>
+    </resultMap>
+
+    <select id="getGoods" resultType="Good">
+        select d.orderId, d.goodId, d.buyNumber, g.goodName, g.goodPic, g.goodPrice
+        from orderdetailedinfo d
+        join goodinfo g on d.goodId = g.id
+        where d.orderId = #{id}
+    </select>
+
+    <!--查询用户信息-->
+    <select id="getUser"  resultType="User">
+        select id,weiXin,studNo,nickname,openId from userInfo where id = #{createUser}
+    </select>
+
+    <!--查看图书table-->
+    <select id="getOrders" resultMap="Order" parameterType="GoodQuery">
+        select id,totalCost,createTime,address from orderinfo
+        order by createTime desc
+    </select>
+
+    <!--查看图书详情-->
+    <select id="getById" resultMap="orderDetailedInfo" parameterType="OrderQuery">
+       select id,totalCost,totalNum,address,phone,createUser,createTime from orderinfo where id = #{id}
+    </select>
+
+    <!--新增订单-->
+    <insert id="saveOrder" parameterType="Order">
+        insert into orderInfo
+        (
+            id,
+            totalCost,
+            totalNum,
+            address,
+            phone,
+            createUser,
+            createTime,
+            dataStatus
+        )
+        values
+        (
+            #{id},
+            #{totalCost},
+            #{totalNum},
+            #{address},
+            #{phone}
+            #{createUser.id},
+            #{createTime},
+            1
+        )
+    </insert>
+
+    <insert id="saveDetail" parameterType="Good">
+        insert into goodInfo
+        (
+            orderId,
+            goodId,
+            buyNumber
+        )
+        values
+        (
+            #{orderId},
+            #{id},
+            #{buyNumber}
+        )
+    </insert>
+
+
+</mapper>

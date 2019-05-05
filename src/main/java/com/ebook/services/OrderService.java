@@ -9,7 +9,7 @@ import java.util.List;
 public interface OrderService {
 
     //查看订单信息
-    public List<Order> getOrders();
+    public List<Order> getOrders(OrderQuery query);
 
     //查看订单详细信息
     public List<Good> getDetailed(OrderQuery query);
