@@ -5,7 +5,7 @@
     <cache type="com.model.utills.redis.RedisCache" />
 
 
-   <!-- <resultMap id="orderDetailedInfo" type="Order">
+    <resultMap id="orderDetailedInfo" type="Order">
         <id property="id" column="orderId"/>
         <result property="totalCost" column="totalCost"/>
         <result property="totalNum" column="totalNum"/>
@@ -19,39 +19,38 @@
             <result property="openId" column="openId"/>
         </association>
         <collection property="goods" ofType="Good" select="getGoods" column="id">
-            <id property="id" column="goodId"/>
+            <id property="id" column="id"/>
             <result property="goodName" column="goodName"/>
             <result property="goodPrice" column="goodPrice"/>
             <result property="goodPic" column="goodPic"/>
             <result property="buyNumber" column="buyNumber"/>
-            <result property="createTime" column="createTime"/>
         </collection>
     </resultMap>
 
     <select id="getGoods" resultType="Good">
-        select d.orderId, d.goodId, d.buyNumber, g.goodName, g.goodPic, g.goodPrice
+        select d.orderId, d.goodId id, d.buyNumber, g.goodName, g.goodPic, g.goodPrice
         from orderdetailedinfo d
         join goodinfo g on d.goodId = g.id
         where d.orderId = #{id}
     </select>
 
-    &lt;!&ndash;查询用户信息&ndash;&gt;
+    <!--查询用户信息-->
     <select id="getUser"  resultType="User">
         select id,weiXin,studNo,nickname,openId from userInfo where id = #{createUser}
     </select>
 
-    &lt;!&ndash;查看图书table&ndash;&gt;
-    <select id="getOrders" resultMap="Order" parameterType="GoodQuery">
+    <!--查看图书table-->
+    <select id="getOrders" resultType="Order" parameterType="GoodQuery">
         select id,totalCost,createTime,address from orderinfo
         order by createTime desc
     </select>
 
-    &lt;!&ndash;查看图书详情&ndash;&gt;
-    <select id="getById" resultMap="orderDetailedInfo" parameterType="OrderQuery">
+    <!--查看图书详情-->
+    <select id="getDetailed" resultMap="orderDetailedInfo" parameterType="OrderQuery">
        select id,totalCost,totalNum,address,phone,createUser,createTime from orderinfo where id = #{id}
     </select>
 
-    &lt;!&ndash;新增订单&ndash;&gt;
+    <!--新增订单-->
     <insert id="saveOrder" parameterType="Order">
         insert into orderInfo
         (
@@ -70,7 +69,7 @@
             #{totalCost},
             #{totalNum},
             #{address},
-            #{phone}
+            #{phone},
             #{createUser.id},
             #{createTime},
             1
@@ -78,7 +77,7 @@
     </insert>
 
     <insert id="saveDetail" parameterType="Good">
-        insert into goodInfo
+        insert into orderdetailedinfo
         (
             orderId,
             goodId,
@@ -90,7 +89,7 @@
             #{id},
             #{buyNumber}
         )
-    </insert>-->
+    </insert>
 
 
 </mapper>

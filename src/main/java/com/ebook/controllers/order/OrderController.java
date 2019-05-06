@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.management.Query;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -51,6 +52,14 @@ public class OrderController {
     @RequestMapping("/orders")
     @ResponseBody
     public Object getGoods(OrderQuery orderQuery, HttpSession session){
+
+        User user = new User();
+        user.setId("ea0b33ba3b65429f976a6514ae9296e8");
+        user.setNickname("绿箭");
+        user.setWeiXin("ZXL690345407");
+        user.setPhone("14787484930");
+        user.setOpenId("123456");
+        session.setAttribute("userInfo",user);
 
         //权限初始化
         orderQuery.intiQuery(session);
@@ -88,7 +97,7 @@ public class OrderController {
      * @return
      * @throws Exception
      * 2019/05/05
-     * 保存其他产品
+     * 保存订单信息
      */
     @CrossOrigin
     @RequestMapping("/save")
@@ -104,6 +113,25 @@ public class OrderController {
 
         order.setCreateUser((User)session.getAttribute("userInfo"));
         order.setCreateTime(new Date());
+
+        order.setPhone("14787484930");
+        order.setAddress("725");
+        order.setTotalCost(20.00);
+        order.setTotalNum(3);
+
+        ArrayList<Good> goods = new ArrayList<Good>();
+        Good good1 = new Good();
+        good1.setId("1");
+        good1.setBuyNumber(1);
+
+        Good good2 = new Good();
+        good2.setId("2");
+        good2.setBuyNumber(2);
+
+        goods.add(good1);
+        goods.add(good2);
+        order.setGoods(goods);
+
 
         //保存商品
         orderService.saveOrder(order);

@@ -15,4 +15,7 @@ public interface UserDao {
     public void updateScore(User user);
 
     public List<User> getsuperMarkets(UserQuery query); //加载本栋楼的超市
+    public void updateBuildingNum(UserQuery userQuery); //用户首次进入小卖铺选择楼栋
+
+    public void updatebuildingNumber(UserQuery userQuery); //为用户开通小卖铺
 }

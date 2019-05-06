@@ -74,9 +74,20 @@
         where id = #{id}
     </update>
 
+    <!--查看指定楼栋小卖铺-->
     <select id="getsuperMarkets" parameterType="UserQuery" resultType="User">
         select id,buildingNumber,superMarketName,buildingNum from userinfo
         where buildingNumber = #{buildingNum}
     </select>
+
+    <!--选择所在楼栋-->
+    <update id="updateBuildingNum" parameterType="UserQuery">
+        update userinfo set buildingNum = #{buildingNum} where id = #{id}
+    </update>
+
+    <!--选择所在楼栋-->
+    <update id="updatebuildingNumber" parameterType="UserQuery">
+        update userinfo set buildingNumber = #{buildingNumber}, superMarketName = #{superMarketName} where id = #{id}
+    </update>
 
 </mapper>

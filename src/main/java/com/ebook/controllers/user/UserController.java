@@ -4,6 +4,7 @@ import com.ebook.beans.user.User;
 import com.ebook.beans.user.UserQuery;
 
 import com.ebook.services.UserService;
+import com.ebook.sys.log.SysLog;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.model.utills.crawler.Crawler;
@@ -20,10 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author zxl
@@ -229,6 +227,13 @@ public class UserController {
 
     }
 
+    /**
+     * zxl
+     * @param
+     * @return
+     *2019/05/06
+     * 查看本栋楼小卖铺列表
+     */
     @CrossOrigin
     @RequestMapping("/getsuperMarkets")
     @ResponseBody
@@ -243,5 +248,39 @@ public class UserController {
         PageInfo<User> pageInfo = new PageInfo<User>(list,10);
 
         return ResultInfo.success().add("pageinfo",pageInfo).add("userinfo",userQuery.getUser());
+    }
+
+    /**
+     * zxl
+     * @param buildingNum
+     * @return
+     * 2019/05/06
+     * 首次进入小卖铺选择楼栋
+     */
+    @CrossOrigin
+    @RequestMapping("/updateBuildingNum")
+    @ResponseBody
+    @SysLog(moduleName = "选择楼栋信息")
+    public Object updateBuildingNum(UserQuery userQuery){
+
+        userService.updateBuildingNum(userQuery);
+        return ResultInfo.success();
+    }
+
+    /**
+     * zxl
+     * @param userQuery
+     * @return
+     * 2019/05/06
+     * 首次进入小卖铺选择楼栋
+     */
+    @CrossOrigin
+    @RequestMapping("/updatebuildingNumber")
+    @ResponseBody
+    @SysLog(moduleName = "开通小卖铺")
+    public Object updatebuildingNumber(UserQuery userQuery){
+
+        userService.updatebuildingNumber(userQuery);
+        return ResultInfo.success();
     }
 }

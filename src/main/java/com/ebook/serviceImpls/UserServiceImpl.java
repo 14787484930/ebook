@@ -92,4 +92,15 @@ public class UserServiceImpl implements UserService {
         List<User> superMarkets = userDao.getsuperMarkets(query);
         return superMarkets;
     }
+
+    @Override
+    public void updateBuildingNum(UserQuery userQuery) {
+
+        userDao.updateBuildingNum(userQuery);
+    }
+
+    @Override
+    public void updatebuildingNumber(UserQuery userQuery) {
+        userDao.updatebuildingNumber(userQuery);
+    }
 }
