@@ -86,14 +86,8 @@ public class UserController {
     @CrossOrigin
     @RequestMapping("/update")
     @ResponseBody
-    public Object update(@Valid User user,BindingResult result){
-
-        /*服务器端校验*/
-        if(result.hasErrors()){
-            //校验失败
-            return ResultInfo.fail().add("errors", ValidateDate.checkDate(result));
-        }
-
+    public Object update(User user){
+        
         user.setUpdateTime(new Date());
         userService.update(user);
         return ResultInfo.success();
