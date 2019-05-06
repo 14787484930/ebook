@@ -78,7 +78,7 @@ public class UserController {
     /**
      * zxl
      * @param user
-     * @param result
+     * @param
      * @return
      * 2018/12/21
      * 编辑用户信息
@@ -87,7 +87,7 @@ public class UserController {
     @RequestMapping("/update")
     @ResponseBody
     public Object update(User user){
-        
+
         user.setUpdateTime(new Date());
         userService.update(user);
         return ResultInfo.success();
@@ -246,7 +246,7 @@ public class UserController {
 
     /**
      * zxl
-     * @param buildingNum
+     * @param
      * @return
      * 2019/05/06
      * 首次进入小卖铺选择楼栋
