@@ -24,6 +24,9 @@
         <set>
             <if test="#{phone}!=null">phone=#{phone},</if>
             <if test="#{email}!=null">email=#{email}</if>
+            <if test="#{buildingNumber}!=null">buildingNumber=#{buildingNumber}</if>
+            <if test="#{superMarketName}!=null">superMarketName=#{superMarketName}</if>
+            <if test="#{buildingNum}!=null">buildingNum=#{buildingNum}</if>
         </set>
         where id = #{id}
     </update>
