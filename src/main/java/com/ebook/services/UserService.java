@@ -13,4 +13,6 @@ public interface UserService {
     public User getById(String id);
     public void update(User user);
     public void delete(UserQuery query);
+
+    public List<User> getsuperMarkets(UserQuery query); //加载本栋楼的超市
 }

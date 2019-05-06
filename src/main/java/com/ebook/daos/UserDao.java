@@ -13,4 +13,6 @@ public interface UserDao {
     public void update(User user);
     public void delete(UserQuery query);
     public void updateScore(User user);
+
+    public List<User> getsuperMarkets(UserQuery query); //加载本栋楼的超市
 }

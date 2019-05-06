@@ -228,4 +228,20 @@ public class UserController {
 
 
     }
+
+    @CrossOrigin
+    @RequestMapping("/getsuperMarkets")
+    @ResponseBody
+    public Object getsuperMarkets(UserQuery userQuery, HttpSession session){
+
+        userQuery.intiQuery(session);
+
+        PageHelper.startPage(userQuery.getPageNumber(),userQuery.pageSize);
+
+        List<User> list = userService.getsuperMarkets(userQuery);
+
+        PageInfo<User> pageInfo = new PageInfo<User>(list,10);
+
+        return ResultInfo.success().add("pageinfo",pageInfo).add("userinfo",userQuery.getUser());
+    }
 }

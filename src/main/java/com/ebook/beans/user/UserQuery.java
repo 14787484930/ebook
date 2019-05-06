@@ -25,6 +25,11 @@ public class UserQuery {
     public Integer pageNumber; //当前页码
     public Integer pageSize; //页面容量
 
+    /*小卖铺楼栋*/
+    private Integer buildingNumber; //宿舍楼编号---针对小卖铺
+    private String superMarketName; //超市名称
+    private Integer buildingNum; //宿舍楼编号---针对普通用户
+
     /**
      * zxl
      * @param session

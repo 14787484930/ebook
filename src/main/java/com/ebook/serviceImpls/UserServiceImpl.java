@@ -85,4 +85,11 @@ public class UserServiceImpl implements UserService {
 
         userDao.delete(query);
     }
+
+    @Override
+    public List<User> getsuperMarkets(UserQuery query) {
+
+        List<User> superMarkets = userDao.getsuperMarkets(query);
+        return superMarkets;
+    }
 }

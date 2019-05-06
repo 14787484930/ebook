@@ -74,4 +74,9 @@
         where id = #{id}
     </update>
 
+    <select id="getsuperMarkets" parameterType="UserQuery" resultType="User">
+        select id,buildingNumber,superMarketName,buildingNum from userinfo
+        where buildingNumber = #{buildingNum}
+    </select>
+
 </mapper>
