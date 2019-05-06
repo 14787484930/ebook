@@ -13,19 +13,19 @@ import java.util.List;
 @Data
 public class Order extends BaseBean {
 
-    //@NotNull(message = "手机不能为空")
-    ///@Pattern(regexp = Constant.PHONE_NUMBER, message = "输入的手机号不合法")
+    @NotNull(message = "手机不能为空")
+    @Pattern(regexp = Constant.PHONE_NUMBER, message = "输入的手机号不合法")
     private String phone; //订单联系人电话
 
-    //@NotNull(message = "宿舍号不能为空！")
+    @NotNull(message = "宿舍号不能为空！")
     private String address; //订单地址
 
-    //@NotNull(message = "商品数量不能为空！")
-    //@Min(value = 1, message = "最小值为1")
+    @NotNull(message = "商品数量不能为空！")
+    @Min(value = 1, message = "最小值为1")
     private Integer totalNum; //订单商品总数量
 
-    //@NotNull(message = "总金额不能为空！")
-    //@Min(value = 0, message = "最小值为0")
+    @NotNull(message = "总金额不能为空！")
+    @Min(value = 0, message = "最小值为0")
     private Double totalCost; //订单总金额
 
     private List<Good> goods; //订单详细信息
