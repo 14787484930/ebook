@@ -44,15 +44,14 @@ public class PicUpload {
     public static boolean delPic(String picsPath,HttpSession session){
 
         //获取文件上传路径
-        String path = session.getServletContext().getRealPath("/");
+        //String path = session.getServletContext().getRealPath("/");
+
+        String path = StringUtils.substringBeforeLast(Constant.PICPATH,"/"); //放在nginx服务器上
 
         //解析出单个图片的路径
         String[] pics = StringUtils.split(picsPath,",");
 
         for(String pic:pics){
-
-            path = StringUtils.replace(path,"\\","/");
-            pic = StringUtils.substringAfter(pic,"/");
             File file = new File(path+pic);
             file.delete();
         }
