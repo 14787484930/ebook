@@ -74,6 +74,30 @@ public class TutoringController {
         return ResultInfo.success().add("pageInfo",pageInfo).add("userInfo",tutoringQuery.getUser());
     }
 
+    /**
+     *zxl
+     * @param tutoringQuery
+     * @param session
+     * @return
+     * 2018/12/21
+     * 查询辅导列表
+     */
+    @CrossOrigin
+    @RequestMapping("/tutoringsByUser")
+    @ResponseBody
+    public Object getUsersByUser(TutoringQuery tutoringQuery, HttpSession session){
+
+        tutoringQuery.intiQuery(session);
+
+        PageHelper.startPage(tutoringQuery.getPageNumber(),tutoringQuery.pageSize);
+
+        List<Tutoring> list = tutoringService.getTutoringsByUser(tutoringQuery);
+
+        PageInfo<Tutoring> pageInfo = new PageInfo<Tutoring>(list,10);
+
+        return ResultInfo.success().add("pageInfo",pageInfo).add("userInfo",tutoringQuery.getUser());
+    }
+
 
     /**
      * zxl

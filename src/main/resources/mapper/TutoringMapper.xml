@@ -48,6 +48,20 @@
         order by createTime desc
     </select>
 
+    <select id="getTutoringsByUser" resultType="Tutoring">
+        select id,name,type,price,startTime,endTime,place,weiXin,phone,des,createTime,updateTime,createUser,isScore,orderUser
+        from tutoringinfo
+        where dataStatus = 1
+        and orderUser = #{orderUser}
+        <if test="name != null">and name like '%' #{name} '%'</if>
+        <if test="type != null">and type = #{type} </if>
+        <if test="startPrice != null">and price &gt;= #{startPrice} </if>
+        <if test="endPrice != null">and price &lt;= #{endPrice} </if>
+        <if test="startTime != null">and startTime &gt;= #{startTime} </if>
+        <if test="endTime != null">and startTime &lt; #{endTime}</if>
+        order by createTime desc
+    </select>
+
     <select id="getById" resultMap="tutoringinfo">
         select id,name,type,price,startTime,endTime,place,weiXin,phone,des,createTime,updateTime,createUser,checkCode,isScore,orderUser
         from tutoringinfo
