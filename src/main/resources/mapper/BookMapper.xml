@@ -51,7 +51,7 @@
     <!--查看图书详情-->
     <select id="getById" resultMap="bookinfo">
       select
-       id, bookName, author, bookPrice, pubDate, bookPub, bookPic, weiXin, phone, des, createUser, createTime
+       id, bookName, author,bookType, bookPrice, pubDate, bookPub, bookPic, weiXin, phone, des, createUser, createTime
       from bookInfo where id = #{id}
     </select>
 
