@@ -42,6 +42,12 @@ public class TutoringServiceImpl implements TutoringService {
         return tutoringDao.getTutorings(query);
     }
 
+    @Override
+    public List<Tutoring> getTutoringsByUser(TutoringQuery query) {
+
+        return tutoringDao.getTutoringsByUser(query);
+    }
+
     /**
      * zxl
      * @param tutoring
