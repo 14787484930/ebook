@@ -58,7 +58,7 @@
     </select>
 
     <select id="getTutorings" resultMap="tutoringinfos">
-        select id,name,type,price,startTime,endTime,place,weiXin,phone,des,createTime,updateTime,createUser,isScore,orderUser
+        select id,name,type,price,startTime,endTime,place,weiXin,phone,createTime,updateTime,createUser,isScore,orderUser
         from tutoringinfo
         where dataStatus = 1
         <if test="name != null">and name like '%' #{name} '%'</if>
