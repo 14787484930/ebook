@@ -29,12 +29,35 @@
         </association>
     </resultMap>
 
+    <resultMap id="tutoringinfos" type="Tutoring">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="price" column="price"/>
+        <result property="startTime" column="startTime"/>
+        <result property="endTime" column="endTime"/>
+        <result property="place" column="place"/>
+        <result property="weiXin" column="weiXin"/>
+        <result property="phone" column="phone"/>
+        <result property="isScore" column="isScore"/>
+        <result property="orderUser" column="orderUser"/>
+        <result property="createTime" column="createTime"/>
+        <result property="checkCode" column="checkCode"/>
+        <association property="createUser" javaType="User" select="getUser" column="createUser">
+            <id property="id" column="id"/>
+            <result property="studNo" column="studNo"/>
+            <result property="weiXin" column="weiXin"/>
+            <result property="nickname" column="nickname"/>
+            <result property="openId" column="openId"/>
+        </association>
+    </resultMap>
+
     <!--查询用户信息-->
     <select id="getUser"  resultType="User">
         select id,weiXin,studNo,nickname,openId from userInfo where id = #{createUser}
     </select>
 
-    <select id="getTutorings" resultMap="tutoringinfo">
+    <select id="getTutorings" resultMap="tutoringinfos">
         select id,name,type,price,startTime,endTime,place,weiXin,phone,des,createTime,updateTime,createUser,isScore,orderUser
         from tutoringinfo
         where dataStatus = 1
