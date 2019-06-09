@@ -56,7 +56,7 @@ public class UserController {
 
         PageInfo<User> pageInfo = new PageInfo<User>(list,10);
 
-        return ResultInfo.success().add("pageinfo",pageInfo).add("userinfo",userQuery.getUser());
+        return ResultInfo.success().add("pageInfo",pageInfo).add("userInfo",userQuery.getUser());
     }
 
 
@@ -241,7 +241,7 @@ public class UserController {
 
         PageInfo<User> pageInfo = new PageInfo<User>(list,10);
 
-        return ResultInfo.success().add("pageinfo",pageInfo).add("userinfo",userQuery.getUser());
+        return ResultInfo.success().add("pageInfo",pageInfo).add("userInfo",userQuery.getUser());
     }
 
     /**
