@@ -1,15 +1,15 @@
 package com.ebook.controllers.reportuser;
 
-import com.ebook.beans.book.Book;
 import com.ebook.beans.book.BookQuery;
-import com.ebook.beans.electronics.Electronics;
 import com.ebook.beans.electronics.ElectronicsQuery;
-import com.ebook.beans.other.Other;
 import com.ebook.beans.other.OtherQuery;
 import com.ebook.beans.reportuser.ReportProduct;
 import com.ebook.beans.reportuser.ReportProductQuery;
 import com.ebook.beans.user.User;
-import com.ebook.services.*;
+import com.ebook.services.BookService;
+import com.ebook.services.ElectronicsService;
+import com.ebook.services.OtherService;
+import com.ebook.services.ReportProductService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.model.utills.messages.ResultInfo;
@@ -55,6 +55,7 @@ public class ReportProductController {
      * 2018/12/26
      * 获取举报列表
      */
+    @CrossOrigin
     @RequestMapping("/reportproducts")
     @ResponseBody
     public Object reportProducts(ReportProductQuery reportProductQuery){
@@ -75,6 +76,7 @@ public class ReportProductController {
      * 2018/12/26
      * 查看举报详情
      */
+    @CrossOrigin
     @RequestMapping("/getById/{id}")
     @ResponseBody
     public Object getById(@PathVariable("id") String id){
@@ -91,6 +93,7 @@ public class ReportProductController {
      * 2018/12/26
      * 处理举报
      */
+    @CrossOrigin
     @RequestMapping("/update")
     @ResponseBody
     public Object update(ReportProductQuery reportProductQuery, HttpSession session){
@@ -128,6 +131,7 @@ public class ReportProductController {
      * 2018/12/26
      * 删除举报
      */
+    @CrossOrigin
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(ReportProductQuery reportProductQuery){
@@ -163,6 +167,7 @@ public class ReportProductController {
      * 2018/12/26
      * 查看被举报的产品
      */
+    @CrossOrigin
     @RequestMapping("/getProduct")
     @ResponseBody
     public Object getProduct(ReportProductQuery reportProductQuery){
