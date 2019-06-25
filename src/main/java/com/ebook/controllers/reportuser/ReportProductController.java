@@ -58,7 +58,9 @@ public class ReportProductController {
     @CrossOrigin
     @RequestMapping("/reportproducts")
     @ResponseBody
-    public Object reportProducts(ReportProductQuery reportProductQuery){
+    public Object reportProducts(ReportProductQuery reportProductQuery,HttpSession session){
+
+        reportProductQuery.intiQuery(session);
 
         PageHelper.startPage(reportProductQuery.getPageNumber(),reportProductQuery.getPageSize());
 
