@@ -46,7 +46,7 @@
         update goodInfo
         <set>
             goodName = #{goodName},
-            goodPic = #{gookPic},
+            goodPic = #{goodPic},
             des = #{des},
             updateUser = #{updateUser.id},
             updateTime = #{updateTime},
