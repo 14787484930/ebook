@@ -3,11 +3,6 @@ package com.ebook.beans.good;
 import com.ebook.beans.base.BaseBean;
 import lombok.Data;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
 
 /**
  * @author zxl
@@ -17,11 +12,11 @@ import javax.validation.constraints.NotNull;
 @Data
 public class Good extends BaseBean {
 
-    @NotNull(message = "商品名称不能为空！")
+    //@NotNull(message = "商品名称不能为空！")
     private String goodName; //商品名称
 
-    @NotNull(message = "价格不能为空！")
-    @Min(value = 0, message = "最小值为0")
+    //@NotNull(message = "价格不能为空！")
+    //@Min(value = 0, message = "最小值为0")
     private double goodPrice; //商品价格
 
     private String goodPic; //商品图片

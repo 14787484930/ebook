@@ -1,25 +1,23 @@
 package com.ebook.controllers.order;
 
 import com.ebook.beans.good.Good;
-import com.ebook.beans.good.GoodQuery;
 import com.ebook.beans.order.Order;
 import com.ebook.beans.order.OrderQuery;
 import com.ebook.beans.user.User;
-import com.ebook.services.GoodService;
 import com.ebook.services.OrderService;
 import com.ebook.sys.log.SysLog;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.model.utills.messages.ResultInfo;
-import com.model.utills.upload.PicUpload;
 import com.model.utills.validate.ValidateDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.management.Query;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -102,7 +100,7 @@ public class OrderController {
     @CrossOrigin
     @RequestMapping("/save")
     @ResponseBody
-    public Object save(@Valid Order order, BindingResult result,
+    public Object save(@RequestBody @Valid Order order, BindingResult result,
                        HttpSession session) throws Exception {
 
         /*服务器端校验*/
@@ -134,7 +132,7 @@ public class OrderController {
 
 
         //保存商品
-        orderService.saveOrder(order);
+        //orderService.saveOrder(order);
 
         return ResultInfo.success();
     }

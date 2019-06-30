@@ -28,7 +28,7 @@
 
     <!--查看商品-->
     <select id="getGoods" resultMap="good_info" parameterType="GoodQuery">
-        select id,goodName,goodPic,des,createUser,createTime,updateUser,updateTime,dataStatus from goodinfo
+        select id,goodName,goodPic,goodPrice,des,createUser,createTime,updateUser,updateTime,dataStatus from goodinfo
         where dataStatus = 1
         and createUser = #{supperId}
        <if test="goodName != null">and goodName like '%' #{goodName} '%'</if>
@@ -37,7 +37,7 @@
 
     <!--查看图书详情-->
     <select id="getById" resultMap="good_info">
-      select id,goodName,goodPic,des,createUser,createTime,updateUser,updateTime,dataStatus from goodinfo
+      select id,goodName,goodPic,goodPrice,des,createUser,createTime,updateUser,updateTime,dataStatus from goodinfo
       where id = #{id}
     </select>
 
