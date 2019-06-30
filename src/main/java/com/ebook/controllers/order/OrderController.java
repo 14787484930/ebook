@@ -1,6 +1,5 @@
 package com.ebook.controllers.order;
 
-import com.ebook.beans.good.Good;
 import com.ebook.beans.order.Order;
 import com.ebook.beans.order.OrderQuery;
 import com.ebook.beans.user.User;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -112,7 +110,7 @@ public class OrderController {
         order.setCreateUser((User)session.getAttribute("userInfo"));
         order.setCreateTime(new Date());
 
-        order.setPhone("14787484930");
+       /* order.setPhone("14787484930");
         order.setAddress("725");
         order.setTotalCost(20.00);
         order.setTotalNum(3);
@@ -128,11 +126,11 @@ public class OrderController {
 
         goods.add(good1);
         goods.add(good2);
-        order.setGoods(goods);
+        order.setGoods(goods);*/
 
 
         //保存商品
-        //orderService.saveOrder(order);
+        orderService.saveOrder(order);
 
         return ResultInfo.success();
     }
