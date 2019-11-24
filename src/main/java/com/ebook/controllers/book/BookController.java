@@ -3,20 +3,16 @@ package com.ebook.controllers.book;
 import com.ebook.beans.book.Book;
 import com.ebook.beans.book.BookQuery;
 import com.ebook.beans.user.User;
-import com.ebook.sys.log.SysLog;
 import com.ebook.services.BookService;
+import com.ebook.sys.log.SysLog;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.model.utills.messages.ResultInfo;
 import com.model.utills.upload.PicUpload;
 import com.model.utills.validate.ValidateDate;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.connection.DefaultStringRedisConnection;
-import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -233,6 +229,11 @@ public class BookController {
         if(result.hasErrors()){
             //校验失败
             return ResultInfo.fail().add("errors", ValidateDate.checkDate(result));
+        }
+
+        //图片校验
+        if(files == null){
+            return ResultInfo.fail().add("errors", "图片不能为空！");
         }
 
         //图片的处理

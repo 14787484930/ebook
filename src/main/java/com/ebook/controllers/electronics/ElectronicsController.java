@@ -143,6 +143,11 @@ public class ElectronicsController {
             ResultInfo.fail().add("error", ValidateDate.checkDate(result));
         }
 
+        //图片校验
+        if(files == null){
+            return ResultInfo.fail().add("errors", "图片不能为空！");
+        }
+
         //图片处理
         electronics.setElectronicsPic(PicUpload.uploadPic(files,session,"electronics"));
         electronics.setCreateUser((User)session.getAttribute("userInfo"));

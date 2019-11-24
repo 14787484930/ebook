@@ -154,6 +154,11 @@ public class OtherController {
             return ResultInfo.fail().add("errors", ValidateDate.checkDate(result));
         }
 
+        //图片校验
+        if(files == null){
+            return ResultInfo.fail().add("errors", "图片不能为空！");
+        }
+
         //图片的处理
         other.setOtherPic(PicUpload.uploadPic(files,session,"other"));
         other.setCreateUser((User)session.getAttribute("userInfo"));
