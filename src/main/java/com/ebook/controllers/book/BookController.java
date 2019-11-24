@@ -232,7 +232,7 @@ public class BookController {
         }
 
         //图片校验
-        if(files == null){
+        if(files == null || files.length == 0){
             return ResultInfo.fail().add("errors", "图片不能为空！");
         }
 
