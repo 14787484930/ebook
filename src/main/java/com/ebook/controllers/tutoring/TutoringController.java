@@ -4,7 +4,6 @@ import com.ebook.beans.reportuser.ReportUser;
 import com.ebook.beans.tutoring.Tutoring;
 import com.ebook.beans.tutoring.TutoringQuery;
 import com.ebook.beans.user.User;
-import com.ebook.beans.user.UserQuery;
 import com.ebook.services.TutoringService;
 import com.ebook.services.UserService;
 import com.ebook.sys.log.SysLog;
@@ -14,7 +13,6 @@ import com.model.utills.messages.ResultInfo;
 import com.model.utills.randomnum.RandomNum;
 import com.model.utills.uuid.GeneratingId;
 import com.model.utills.validate.ValidateDate;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -50,7 +48,7 @@ public class TutoringController {
      * @param session
      * @return
      * 2018/12/21
-     * 查询辅导列表
+     * 接单人查看自己结果的订单
      */
     @CrossOrigin
     @RequestMapping("/tutorings")
