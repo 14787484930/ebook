@@ -5,11 +5,10 @@ import com.ebook.beans.electronics.ElectronicsQuery;
 import com.ebook.beans.other.OtherQuery;
 import com.ebook.beans.reportuser.ReportProduct;
 import com.ebook.beans.reportuser.ReportProductQuery;
+import com.ebook.beans.tutoring.Tutoring;
+import com.ebook.beans.tutoring.TutoringQuery;
 import com.ebook.beans.user.User;
-import com.ebook.services.BookService;
-import com.ebook.services.ElectronicsService;
-import com.ebook.services.OtherService;
-import com.ebook.services.ReportProductService;
+import com.ebook.services.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.model.utills.messages.ResultInfo;
@@ -47,6 +46,9 @@ public class ReportProductController {
 
     @Autowired
     OtherService otherService;
+
+    @Autowired
+    TutoringService tutoringService;
 
     /**
      * zxl
@@ -122,6 +124,11 @@ public class ReportProductController {
                 otherQuery.setId(productId);
                 otherService.delete(otherQuery);
                 break;
+            case 4:
+                TutoringQuery tutoringQuery = new TutoringQuery();
+                tutoringQuery.setId(productId);
+                tutoringService.delete(tutoringQuery);
+                break;
         }
         return ResultInfo.success();
     }
@@ -191,6 +198,9 @@ public class ReportProductController {
                 break;
             case 3:
                 ref.add("info",otherService.getById(productId));
+                break;
+            case 4:
+                ref.add("info",tutoringService.getById(productId));
                 break;
         }
         return ref;

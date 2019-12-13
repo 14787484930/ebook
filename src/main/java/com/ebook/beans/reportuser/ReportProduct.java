@@ -20,7 +20,7 @@ public class ReportProduct extends BaseBean {
     private String productName; //产品名称
 
     @NotEmpty(message = "产品类型不能为空")
-    private Integer productType; //产品类型 {1：图书，2：电子，3：其他}
+    private Integer productType; //产品类型 {1：图书，2：电子，3：其他，4：辅导}
 
     @NotEmpty(message = "举报类型不能为空")
     private String reportType; //举报类型
