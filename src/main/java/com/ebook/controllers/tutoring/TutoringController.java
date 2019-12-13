@@ -61,6 +61,12 @@ public class TutoringController {
             tutoringQuery.setFlag(Integer.valueOf(session.getAttribute("flag")+""));
         }
 
+        //判断用户查询的是已完成还是未完成(flag:0 我要购买，flag:1 我要发布)       isScore; 是否评价了{0：没有评分过，1：已经评分过了}
+        if(tutoringQuery.getFlag() == 1 && tutoringQuery.getIsScore() == null){
+            //当没有传isScore的值时设置默认值，查询未完成订单
+            tutoringQuery.setIsScore(0);
+        }
+
         tutoringQuery.intiQuery(session);
 
         PageHelper.startPage(tutoringQuery.getPageNumber(),tutoringQuery.pageSize);
@@ -278,7 +284,7 @@ public class TutoringController {
         ReportUser reportUser = new ReportUser();
         reportUser.setTutoringId(tutoringQuery.getId());
         //判断是否进行了举报
-        if(tutoringQuery.getFlag() == 1){
+        if(tutoringQuery.getIsReport() == 1){
             reportUser.setCreateTime(new Date());
             reportUser.setCreateUser((User)session.getAttribute("userInfo"));
             reportUser.setId(GeneratingId.getId());

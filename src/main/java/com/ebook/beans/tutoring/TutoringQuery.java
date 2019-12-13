@@ -27,6 +27,7 @@ public class TutoringQuery extends BaseQuery {
 
     //举报
     private ReportUser reportUser;
-    private Integer flag; //是否举报{0：不举报，1：举报}
+    private Integer isReport; //是否举报{0：不举报，1：举报}
+    private Integer isScore; //是否评价了{0：没有评分过，1：已经评分过了}
 
 }
