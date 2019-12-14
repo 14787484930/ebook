@@ -68,7 +68,7 @@
         <if test="startTime != null">and startTime &gt;= #{startTime} </if>
         <if test="endTime != null">and startTime &lt; #{endTime}</if>
         <if test="flag == 1">and createUser = #{createUser} and isScore = #{isScore}</if>
-        <if test="flag == 0">and orderUser is null and startTime > CURRENT_DATE()</if>
+        <if test="flag == 0">and orderUser is null and startTime > now()</if>
         order by createTime desc
     </select>
 
