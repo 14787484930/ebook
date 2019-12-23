@@ -103,10 +103,13 @@ public class UserController {
     @CrossOrigin
     @RequestMapping("/update")
     @ResponseBody
-    public Object update(User user){
+    public Object update(User user, HttpSession session){
 
         user.setUpdateTime(new Date());
         userService.update(user);
+        UserQuery query = new UserQuery();
+        query.setWeiXin(((User)session.getAttribute("userInfo")).getWeiXin());
+        session.setAttribute("userInfo",userService.getByWeiXin(query));
         return ResultInfo.success();
     }
 
@@ -272,9 +275,12 @@ public class UserController {
     @RequestMapping("/updateBuildingNum")
     @ResponseBody
     @SysLog(moduleName = "选择楼栋信息")
-    public Object updateBuildingNum(UserQuery userQuery){
+    public Object updateBuildingNum(UserQuery userQuery, HttpSession session){
 
         userService.updateBuildingNum(userQuery);
+        UserQuery query = new UserQuery();
+        query.setWeiXin(((User)session.getAttribute("userInfo")).getWeiXin());
+        session.setAttribute("userInfo",userService.getByWeiXin(query));
         return ResultInfo.success();
     }
 
@@ -289,9 +295,13 @@ public class UserController {
     @RequestMapping("/updatebuildingNumber")
     @ResponseBody
     @SysLog(moduleName = "开通小卖铺")
-    public Object updatebuildingNumber(UserQuery userQuery){
+    public Object updatebuildingNumber(UserQuery userQuery, HttpSession session){
 
         userService.updatebuildingNumber(userQuery);
+        UserQuery query = new UserQuery();
+        query.setWeiXin(((User)session.getAttribute("userInfo")).getWeiXin());
+        session.setAttribute("userInfo",userService.getByWeiXin(query));
+
         return ResultInfo.success();
     }
 }
