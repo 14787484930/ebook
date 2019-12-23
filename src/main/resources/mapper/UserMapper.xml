@@ -14,18 +14,24 @@
     </select>
 
     <select id="getById" resultType="User">
-      select id,studNo,weiXin,sex,phone,email,score,createTime,updateTime,openId,nickname,scoreNumber
+      select id,studNo,weiXin,sex,phone,email,score,createTime,updateTime,openId,nickname,scoreNumber,buildingNumber,superMarketName,buildingNum
       from userinfo
       where id = #{id}
+    </select>
+
+    <select id="getByWeiXin" resultType="User">
+      select id,studNo,weiXin,sex,phone,email,score,createTime,updateTime,openId,nickname,scoreNumber,buildingNumber,superMarketName,buildingNum
+      from userinfo
+      where weiXin = #{weiXin}
     </select>
 
     <update id="update" parameterType="User">
       update userinfo
         <set>
             <if test="#{phone}!=null">phone=#{phone},</if>
-            <if test="#{email}!=null">email=#{email}</if>
-            <if test="#{buildingNumber}!=null">buildingNumber=#{buildingNumber}</if>
-            <if test="#{superMarketName}!=null">superMarketName=#{superMarketName}</if>
+            <if test="#{email}!=null">email=#{email},</if>
+            <if test="#{buildingNumber}!=null">buildingNumber=#{buildingNumber},</if>
+            <if test="#{superMarketName}!=null">superMarketName=#{superMarketName},</if>
             <if test="#{buildingNum}!=null">buildingNum=#{buildingNum}</if>
         </set>
         where id = #{id}

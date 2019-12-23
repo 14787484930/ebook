@@ -77,6 +77,23 @@ public class UserController {
 
     /**
      * zxl
+     * @param
+     * @return
+     * 2019/12/18
+     * 查询用户详情
+     */
+    @CrossOrigin
+    @RequestMapping("/getUser")
+    @ResponseBody
+    public Object getUser(HttpSession session){
+
+        User user = (User)session.getAttribute("userInfo");
+        return ResultInfo.success().add("userInfo",user);
+    }
+
+
+    /**
+     * zxl
      * @param user
      * @param
      * @return

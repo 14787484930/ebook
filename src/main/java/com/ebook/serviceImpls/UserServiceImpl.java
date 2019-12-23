@@ -1,6 +1,5 @@
 package com.ebook.serviceImpls;
 
-import com.ebook.beans.book.Book;
 import com.ebook.beans.user.User;
 import com.ebook.beans.user.UserQuery;
 import com.ebook.daos.UserDao;
@@ -34,6 +33,20 @@ public class UserServiceImpl implements UserService {
 
         List<User> list = userDao.getUsers(query);
         return list;
+    }
+
+    /**
+     * zxl
+     * @param query
+     * @return
+     * 2019-12-23
+     * 通过微信查询用户
+     */
+    @Override
+    public User getByWeiXin(UserQuery query) {
+
+        User user = userDao.getByWeiXin(query);
+        return user;
     }
 
     /**

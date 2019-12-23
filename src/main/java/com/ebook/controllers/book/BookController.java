@@ -3,7 +3,9 @@ package com.ebook.controllers.book;
 import com.ebook.beans.book.Book;
 import com.ebook.beans.book.BookQuery;
 import com.ebook.beans.user.User;
+import com.ebook.beans.user.UserQuery;
 import com.ebook.services.BookService;
+import com.ebook.services.UserService;
 import com.ebook.sys.log.SysLog;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -30,6 +32,9 @@ public class BookController {
 
     @Autowired
     BookService bookService;
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     private RedisTemplate<String,String> template;
@@ -115,12 +120,18 @@ public class BookController {
         //权限处理
         if(bookQuery.getFlag() != null){
                 session.setAttribute("flag",bookQuery.getFlag());
-                User user = new User();
+               /* User user = new User();
                 user.setId("ea0b33ba3b65429f976a6514ae9296e8");
                 user.setNickname("绿箭");
                 user.setWeiXin("ZXL690345407");
                 user.setPhone("14787484930");
                 user.setOpenId("123456");
+                user.setFlag(bookQuery.getFlag());
+                session.setAttribute("userInfo",user);*/
+
+                UserQuery userQuery = new UserQuery();
+                userQuery.setWeiXin("ZXL690345407");
+                User user = userService.getByWeiXin(userQuery);
                 user.setFlag(bookQuery.getFlag());
                 session.setAttribute("userInfo",user);
         }else{
