@@ -3,10 +3,6 @@ package com.ebook.beans.tutoring;
 import com.ebook.beans.base.BaseQuery;
 import com.ebook.beans.reportuser.ReportUser;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.validation.constraints.Past;
-import java.util.Date;
 
 
 @Data
@@ -29,5 +25,6 @@ public class TutoringQuery extends BaseQuery {
     private ReportUser reportUser;
     private Integer isReport; //是否举报{0：不举报，1：举报}
     private Integer isScore; //是否评价了{0：没有评分过，1：已经评分过了}
+    private String des;
 
 }

@@ -59,7 +59,7 @@
       (
         id,
         userId,
-        TutoringId,
+        tutoringId,
         des,
         createTime,
         createUser,
@@ -69,7 +69,7 @@
       (
         #{id},
         #{userId.id},
-        #{TutoringId},
+        #{tutoringId},
         #{des},
         #{createTime},
         #{createUser.id},

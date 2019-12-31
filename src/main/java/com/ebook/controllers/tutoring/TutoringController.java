@@ -288,6 +288,8 @@ public class TutoringController {
             reportUser.setCreateTime(new Date());
             reportUser.setCreateUser((User)session.getAttribute("userInfo"));
             reportUser.setId(GeneratingId.getId());
+            reportUser.setDes(tutoringQuery.getDes());
+            reportUser.setUserId((User)session.getAttribute("userInfo"));
         }
 
         tutoringService.updateUserScore(user,reportUser);
