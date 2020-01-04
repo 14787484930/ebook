@@ -5,7 +5,6 @@ import com.ebook.beans.electronics.ElectronicsQuery;
 import com.ebook.beans.other.OtherQuery;
 import com.ebook.beans.reportuser.ReportProduct;
 import com.ebook.beans.reportuser.ReportProductQuery;
-import com.ebook.beans.tutoring.Tutoring;
 import com.ebook.beans.tutoring.TutoringQuery;
 import com.ebook.beans.user.User;
 import com.ebook.services.*;
@@ -130,7 +129,15 @@ public class ReportProductController {
                 tutoringService.delete(tutoringQuery);
                 break;
         }
-        return ResultInfo.success();
+
+        ReportProductQuery reportP = new ReportProductQuery();
+        reportP.setProductId(reportProductQuery.getProductId());
+        int status = reportProductService.delete(reportP);
+        if(status == 0){
+            return ResultInfo.fail();
+        }else{
+            return ResultInfo.success();
+        }
     }
 
     /**
@@ -145,8 +152,13 @@ public class ReportProductController {
     @ResponseBody
     public Object delete(ReportProductQuery reportProductQuery){
 
-        reportProductService.delete(reportProductQuery);
-        return ResultInfo.success();
+        int status = reportProductService.delete(reportProductQuery);
+        if(status == 0){
+            return ResultInfo.fail();
+        }else{
+            return ResultInfo.success();
+        }
+
     }
 
     @CrossOrigin
