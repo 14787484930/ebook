@@ -14,9 +14,9 @@ public  class Constant {
     //获取ACCESS_TOKEN的url
     public static final String GET_ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
     //第三方用户唯一凭证
-    public static final String APPID = "wx3393132e8ecc0542";
+    public static final String APPID = "wxbc1b39dfff36120c";
     //第三方用户唯一凭证密钥
-    public static final String APPSECRET = "332493c05a5932737400ada0f4a61109";
+    public static final String APPSECRET = "d6d68a7b3f7162465b6c7eff6a15834b";
     //调用接口凭据
     public static String ACCESSTOKEN = "17_uJBHxd55DocGY8bE-MX0RRG1IB4zqs-pcW8jvh1RjB5QmWHYHwo3pkNSX-f7A4kmYSM78fnZiFx9ERjwddZXkONftugvhmfdEE_lLcNpXgS6aafCn8-IEM4iE5WlwHU5I1cDA5lviuP7JnlQLGYeAAADYQ";
     //查询菜单

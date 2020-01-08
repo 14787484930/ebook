@@ -59,33 +59,6 @@ public class WeiXinSend {
 
     /**
      * zxl
-     * 自定义菜单
-     * */
-    @Test
-    public void doPost() throws IOException {
-
-        /*发送post请求*/
-        //创建执行对象
-        HttpClient httpClient = HttpClients.createDefault();
-        //创建发送对象
-        HttpPost httpPost = new HttpPost();
-        //设置请求参数
-        //httpPost.setEntity();
-        //发送请求，得到响应结果
-        HttpResponse response = httpClient.execute(httpPost);
-
-        /*解析响应结果*/
-        //得到请求状态
-        int code = response.getStatusLine().getStatusCode();
-        System.out.println(code);
-        //得到响应内容
-        HttpEntity httpEntity = response.getEntity();
-        String jsonStr = EntityUtils.toString(httpEntity);
-        System.out.println(jsonStr);
-    }
-
-    /**
-     * zxl
      * 添加菜单
      * */
     @Test
@@ -134,13 +107,13 @@ public class WeiXinSend {
         JSONObject toBuy = new JSONObject();
         toBuy.put("type","view");
         toBuy.put("name","我要购买");
-        toBuy.put("url","http://321f11a4.ngrok.io/weixin/getNumber");
+        toBuy.put("url","https://8733bedd.ngrok.io/weixin/getNumber");
 
         //我要发布
         JSONObject toRealse = new JSONObject();
         toRealse.put("type","view");
         toRealse.put("name","我要发布");
-        toRealse.put("url","http://321f11a4.ngrok.io");
+        toRealse.put("url","https://8733bedd.ngrok.io/");
 
         //加入集合
         twoLevelMenus1.add(toBuy);
