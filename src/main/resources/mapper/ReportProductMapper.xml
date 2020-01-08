@@ -25,7 +25,15 @@
     <delete id="delete" parameterType="ReportProductQuery">
       update reportproductinfo
       set dataStatus = 100
-      where id = #{id}
+      <choose>
+          <when test="id != null">
+              where id = #{id}
+          </when>
+          <when test="productId != null">
+              where productId = #{productId}
+          </when>
+      </choose>
+
     </delete>
 
     <!--处理举报-->

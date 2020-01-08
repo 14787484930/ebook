@@ -10,5 +10,5 @@ public interface ReportProductService {
     public void save(ReportProduct other);
     public ReportProduct getById(String id);
     public void update(ReportProduct other);
-    public void delete(ReportProductQuery query);
+    public int delete(ReportProductQuery query);
 }

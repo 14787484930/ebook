@@ -40,7 +40,14 @@ public class ReportProductServiceImpl implements ReportProductService {
     }
 
     @Override
-    public void delete(ReportProductQuery query) {
+    public int delete(ReportProductQuery query) {
+
+        if((query.getId() != null && query.getProductId() != null) || (query.getId() == null && query.getProductId() == null)) {
+            return 0;
+        }else {
+            reportProductDao.delete(query);
+            return 1;
+        }
 
     }
 }
