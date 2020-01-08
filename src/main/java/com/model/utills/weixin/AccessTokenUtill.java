@@ -1,14 +1,9 @@
 package com.model.utills.weixin;
 
+import com.ebook.container.WeiXinToken;
 import com.model.utills.constants.Constant;
 import com.model.utills.http.SendHttp;
 import net.sf.json.JSONObject;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 
 /**
  * @author zxl
@@ -26,10 +21,9 @@ public class AccessTokenUtill {
         if(accessTokenJson != null){
 
             JSONObject json = JSONObject.fromObject(accessTokenJson);
-            Constant.ACCESSTOKEN = json.getString("access_token");
+            WeiXinToken.ACCESSTOKEN = json.getString("access_token");
             return true;
         }else{
-            System.out.println("==========获取AccessToken失败！");
             return false;
         }
 
