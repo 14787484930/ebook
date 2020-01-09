@@ -1,36 +1,31 @@
 package com.ebook.controllers.filter;
 
-import java.io.IOException;
-import java.net.URLEncoder;
+import com.ebook.beans.user.User;
+import com.ebook.beans.user.UserQuery;
+import com.ebook.services.UserService;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.ebook.beans.book.Book;
-import com.ebook.beans.book.BookQuery;
-import com.ebook.services.BookService;
-import com.model.utills.constants.Constant;
-import com.model.utills.http.SendHttp;
-import net.sf.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.io.IOException;
 
 
-//@WebFilter("/*")
+@WebFilter("/*")
 public class WeixinAuthFilter implements Filter {
 
-    @Autowired
-    public BookService bookService;
+
+    private UserService userService;
+
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 
-	}
+        ServletContext context = filterConfig.getServletContext();
+        WebApplicationContext cxt = WebApplicationContextUtils.getWebApplicationContext(context);
+        userService = (UserService) cxt.getBean(UserService.class);
+    }
 
 	/*
 	 * Session中不存在
@@ -41,10 +36,11 @@ public class WeixinAuthFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain)  {
-        BookQuery bookQuery = new BookQuery();
-        bookQuery.setId("1");
-	    Book book = bookService.getById("1");
-        System.out.println("校验吗数据："+book.toString());
+
+        UserQuery query = new UserQuery();
+        query.setWeiXin("ZXL690345407");
+	    User user = userService.getByWeiXin(query);
+        System.out.println("校验吗数据："+user.toString());
 
         HttpServletRequest hRequest = (HttpServletRequest) request;
         HttpServletResponse hResponse = (HttpServletResponse) response;
@@ -56,7 +52,7 @@ public class WeixinAuthFilter implements Filter {
         //{
         try {
         	  //只有在微信端才做里面的操作
-            if (agent != null && agent.toLowerCase().indexOf("micromessenger") >= 0)
+            /*if (agent != null && agent.toLowerCase().indexOf("micromessenger") >= 0)
             {
                 String code = request.getParameter("code");
                 String state = request.getParameter("state");
@@ -98,7 +94,7 @@ public class WeixinAuthFilter implements Filter {
                     hResponse.sendRedirect(uri);
                     return;
                 }
-            }
+            }*/
        // }
 
             chain.doFilter(hRequest, hResponse);

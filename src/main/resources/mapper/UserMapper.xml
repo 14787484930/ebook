@@ -86,7 +86,7 @@
     <!--查看指定楼栋小卖铺-->
     <select id="getsuperMarkets" parameterType="UserQuery" resultType="User">
         select id,buildingNumber,superMarketName,buildingNum from userinfo
-        where buildingNumber = #{buildingNum}
+        where buildingNumber = #{user.buildingNum}
     </select>
 
     <!--选择所在楼栋-->

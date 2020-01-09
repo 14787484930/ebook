@@ -1,16 +1,11 @@
 package com.ebook.controllers.filter;
 
 import com.ebook.beans.user.User;
-import com.model.utills.constants.Constant;
-import com.model.utills.http.SendHttp;
-import net.sf.json.JSONObject;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URLEncoder;
 
 /**
  * @author zxl
@@ -18,7 +13,7 @@ import java.net.URLEncoder;
  * @describe
  */
 
-@WebFilter("/*")
+//@WebFilter("/*")
 public class SysFilter implements Filter {
 
 

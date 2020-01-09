@@ -8,7 +8,6 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
@@ -64,7 +63,10 @@ public class WeiXinSend {
     @Test
     public void add(){
 
-        String url = Constant.ADD_MENU_URL.replace("ACCESS_TOKEN",Constant.ACCESSTOKEN);
+        //AccessTokenUtill.getAccessToken();
+
+        //String url = Constant.ADD_MENU_URL.replace("ACCESS_TOKEN", WeiXinToken.ACCESSTOKEN);
+        String url = Constant.ADD_MENU_URL.replace("ACCESS_TOKEN", "29_neKnP8Tv7y3CLSz4Pg-2p1Ve7UUgwETmRvFqR6iO67R4tk_0u-zu8mBtDIX3Fb3S1KA1C1qQA44_TN4XY_i1-Vn3ydyRk_rZOeyv27H4BX8LomP8kg_BreXiHKxh3wfKuzLKO8-0b_b0nDaoTLDjABAYQI");
 
         String jsonParams = objToJsonstr();
         System.out.println(jsonParams);
@@ -107,17 +109,24 @@ public class WeiXinSend {
         JSONObject toBuy = new JSONObject();
         toBuy.put("type","view");
         toBuy.put("name","我要购买");
-        toBuy.put("url","https://8733bedd.ngrok.io/weixin/getNumber");
+        toBuy.put("url","http://47.106.222.50/ebook/#/market/books/books?flag=0");
 
         //我要发布
         JSONObject toRealse = new JSONObject();
         toRealse.put("type","view");
         toRealse.put("name","我要发布");
-        toRealse.put("url","https://8733bedd.ngrok.io/");
+        toRealse.put("url","http://47.106.222.50/ebook/#/market/books/books?flag=1");
+
+        //小卖铺
+        JSONObject shop = new JSONObject();
+        shop.put("type","view");
+        shop.put("name","小卖铺");
+        shop.put("url","http://www.baidu.com");
 
         //加入集合
         twoLevelMenus1.add(toBuy);
         twoLevelMenus1.add(toRealse);
+        twoLevelMenus1.add(shop);
 
         //将集合放到一级菜单下
         input.put("sub_button",twoLevelMenus1);
@@ -129,13 +138,13 @@ public class WeiXinSend {
         JSONObject introduceOur = new JSONObject();
         introduceOur.put("type","view");
         introduceOur.put("name","我的建议");
-        introduceOur.put("url","http://www.baidu.com");
+        introduceOur.put("url","http://47.106.222.50/ebook/#/advice");
 
         //我要发布
         JSONObject myAdvice = new JSONObject();
         myAdvice.put("type","view");
         myAdvice.put("name","关于我们");
-        myAdvice.put("url","https://www.taobao.com");
+        myAdvice.put("url","http://47.106.222.50/ebook/#/version");
 
         //加入集合
         twoLevelMenus2.add(introduceOur);
@@ -176,7 +185,7 @@ public class WeiXinSend {
     @Test
     public void delMenu(){
 
-        String url = Constant.DEL_MENU_URL.replace("ACCESS_TOKEN",Constant.ACCESSTOKEN);
+        String url = Constant.DEL_MENU_URL.replace("ACCESS_TOKEN","29_neKnP8Tv7y3CLSz4Pg-2p1Ve7UUgwETmRvFqR6iO67R4tk_0u-zu8mBtDIX3Fb3S1KA1C1qQA44_TN4XY_i1-Vn3ydyRk_rZOeyv27H4BX8LomP8kg_BreXiHKxh3wfKuzLKO8-0b_b0nDaoTLDjABAYQI");
         String str = SendHttp.sendGet(url);
         System.out.println(str);
     }

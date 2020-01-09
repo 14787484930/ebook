@@ -277,9 +277,12 @@ public class UserController {
     @SysLog(moduleName = "选择楼栋信息")
     public Object updateBuildingNum(UserQuery userQuery, HttpSession session){
 
+
+        User user = ((User)session.getAttribute("userInfo"));
+        userQuery.setId(user.getId());
         userService.updateBuildingNum(userQuery);
         UserQuery query = new UserQuery();
-        query.setWeiXin(((User)session.getAttribute("userInfo")).getWeiXin());
+        query.setWeiXin(user.getWeiXin());
         session.setAttribute("userInfo",userService.getByWeiXin(query));
         return ResultInfo.success();
     }
