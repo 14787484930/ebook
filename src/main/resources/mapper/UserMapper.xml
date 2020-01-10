@@ -25,6 +25,12 @@
       where weiXin = #{weiXin}
     </select>
 
+    <select id="getByOpenId" resultType="User">
+      select id,studNo,weiXin,sex,phone,email,score,createTime,updateTime,openId,nickname,scoreNumber,buildingNumber,superMarketName,buildingNum
+      from userinfo
+      where openId = #{openId}
+    </select>
+
     <update id="update" parameterType="User">
       update userinfo
         <set>

@@ -49,6 +49,12 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
+    public User getByOpenId(UserQuery query) {
+        User user = userDao.getByOpenId(query);
+        return user;
+    }
+
     /**
      * zxl
      * @param user

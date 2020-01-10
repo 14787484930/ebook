@@ -42,13 +42,11 @@ public class WeixinAuthFilter implements Filter {
 			FilterChain chain)  {
 
         UserQuery userQuery = new UserQuery();
-        userQuery.setWeiXin("ZXL690345407");
-	    //User user = userService.getByWeiXin(userQuery);
-        //System.out.println("校验吗数据："+user.toString());
+
 
         HttpServletRequest hRequest = (HttpServletRequest) request;
         HttpServletResponse hResponse = (HttpServletResponse) response;
-        System.out.println("====================123");
+
         String agent = hRequest.getHeader("User-Agent");
 
         //如果session中已经存在微信号了，就不用获取了，否则要获取，获取到以后要存放sesion
@@ -73,14 +71,27 @@ public class WeixinAuthFilter implements Filter {
                     String openid = JSONObject.fromObject(json).getString("openid");
 
                     //判断用户是否认证过
+                    userQuery.setOpenId(openid);
+                    User user = userService.getByOpenId(userQuery);
 
-                    //通过openid获取access_token
-                    String access_token = JSONObject.fromObject(json).getString("access_token");
+                    if(user != null){    //表示已经认证过
+                        hRequest.getSession().setAttribute("userInfo",user);
+                    }else{   //表示没有认证过
 
-                    //通过access_token和openid获取用户基本信息
-                    String userUrl = Constant.GET_USER_URL.replace("ACCESS_TOKEN",access_token).replace("OPENID",openid);
-                    String jsonStr = SendHttp.sendGet(userUrl);
-                    System.out.println("打印数据："+jsonStr);
+                        //通过openid获取access_token
+                        String access_token = JSONObject.fromObject(json).getString("access_token");
+
+                        //通过access_token和openid获取用户基本信息
+                        String userUrl = Constant.GET_USER_URL.replace("ACCESS_TOKEN",access_token).replace("OPENID",openid);
+                        String jsonStr = SendHttp.sendGet(userUrl);
+                        JSONObject jsonObject = JSONObject.fromObject(jsonStr);
+                        user = new User();
+                        user.setFlag(1);
+                        user.setOpenId(jsonObject.getString("openid"));
+                        user.setNickname(jsonObject.getString("nickname"));
+                        user.setSex(jsonObject.getInt("sex") == 1 ? "男":"女");
+                        System.out.println("打印数据："+jsonStr);
+                    }
 
 
                 }

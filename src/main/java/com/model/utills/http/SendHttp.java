@@ -31,7 +31,6 @@ public class SendHttp {
             //得到响应内容
             HttpEntity httpEntity = response.getEntity();
             String jsonStr = EntityUtils.toString(httpEntity,"utf-8");
-            System.out.println(jsonStr);
             return jsonStr;
         } catch (Exception e) {
             e.printStackTrace();

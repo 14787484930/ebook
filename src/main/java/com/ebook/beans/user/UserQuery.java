@@ -19,6 +19,7 @@ public class UserQuery {
     private String nickname; //微信昵称你
     public Date startTime; //开始日期
     public Date endTime; //结束日期
+    public String openId; //用户唯一标识
     public User user; //用户信息
 
     /*分页相关*/

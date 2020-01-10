@@ -9,6 +9,7 @@ public interface UserDao {
 
     public List<User> getUsers(UserQuery query);
     public User getByWeiXin(UserQuery query);
+    public User getByOpenId(UserQuery query);
     public void save(User user);
     public User getById(String id);
     public void update(User user);
