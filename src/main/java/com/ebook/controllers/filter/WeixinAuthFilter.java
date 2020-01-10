@@ -3,6 +3,9 @@ package com.ebook.controllers.filter;
 import com.ebook.beans.user.User;
 import com.ebook.beans.user.UserQuery;
 import com.ebook.services.UserService;
+import com.model.utills.constants.Constant;
+import com.model.utills.http.SendHttp;
+import net.sf.json.JSONObject;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -11,6 +14,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 
 @WebFilter("/*")
@@ -37,46 +41,51 @@ public class WeixinAuthFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain)  {
 
-        UserQuery query = new UserQuery();
-        query.setWeiXin("ZXL690345407");
-	    User user = userService.getByWeiXin(query);
-        System.out.println("校验吗数据："+user.toString());
+        UserQuery userQuery = new UserQuery();
+        userQuery.setWeiXin("ZXL690345407");
+	    //User user = userService.getByWeiXin(userQuery);
+        //System.out.println("校验吗数据："+user.toString());
 
         HttpServletRequest hRequest = (HttpServletRequest) request;
         HttpServletResponse hResponse = (HttpServletResponse) response;
         System.out.println("====================123");
         String agent = hRequest.getHeader("User-Agent");
+
         //如果session中已经存在微信号了，就不用获取了，否则要获取，获取到以后要存放sesion
         String fromUserName = (String) hRequest.getSession().getAttribute("fromUserName");
-        //if (fromUserName == null)
-        //{
+
         try {
         	  //只有在微信端才做里面的操作
-            /*if (agent != null && agent.toLowerCase().indexOf("micromessenger") >= 0)
+            if (agent != null && agent.toLowerCase().indexOf("micromessenger") >= 0)
             {
                 String code = request.getParameter("code");
                 String state = request.getParameter("state");
                 //如果code不为空，scope为base,scope为userInfo代表用户已经同意
                 if (code != null && state != null && state.equals("1"))
                 {
-                	System.out.println("1111111111111");
                     // 通过Code获取openid来进行授权
                     String url =  Constant.GET_USERINFO_URL
                     		.replace("APPID", Constant.APPID)
                     		.replace("SECRET", Constant.APPSECRET)
                     		.replace("CODE", code);
+                    //通过code和state获取openid
                     String json = SendHttp.sendGet(url);
                     String openid = JSONObject.fromObject(json).getString("openid");
+
+                    //判断用户是否认证过
+
+                    //通过openid获取access_token
                     String access_token = JSONObject.fromObject(json).getString("access_token");
-                    String a = Constant.GET_USER_URL.replace("ACCESS_TOKEN",access_token).replace("OPENID",openid);
-                    String jsonStr = SendHttp.sendGet(a);
+
+                    //通过access_token和openid获取用户基本信息
+                    String userUrl = Constant.GET_USER_URL.replace("ACCESS_TOKEN",access_token).replace("OPENID",openid);
+                    String jsonStr = SendHttp.sendGet(userUrl);
                     System.out.println("打印数据："+jsonStr);
-                    hRequest.getSession().setAttribute("fromUserName", openid);
-                    System.out.println(openid+"jjjjjjjjjjjjjjj");
+
+
                 }
                 else
                 {
-                	System.out.println("2222222222222222");
                 	  //发送用户同意的请求
                     String path = hRequest.getRequestURL().toString();
                     String query = hRequest.getQueryString();
@@ -94,8 +103,7 @@ public class WeixinAuthFilter implements Filter {
                     hResponse.sendRedirect(uri);
                     return;
                 }
-            }*/
-       // }
+            }
 
             chain.doFilter(hRequest, hResponse);
         } catch (IOException e) {
