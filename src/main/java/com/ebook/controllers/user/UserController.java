@@ -307,4 +307,14 @@ public class UserController {
 
         return ResultInfo.success();
     }
+
+
+    @CrossOrigin
+    @RequestMapping("/checkinfo")
+    @ResponseBody
+    //@SysLog(moduleName = "开通小卖铺")
+    public Object returnCheckInfo(HttpSession session){
+
+        return ResultInfo.fail().add("mes","此用户尚未未认证！");
+    }
 }
