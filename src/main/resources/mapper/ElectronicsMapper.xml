@@ -24,12 +24,17 @@
             <result property="weiXin" column="weiXin"/>
             <result property="nickname" column="nickname"/>
             <result property="openId" column="openId"/>
+            <result property="sex" column="sex"/>
+            <result property="headImg" column="headImg"/>
+            <result property="buildingNumber" column="buildingNumber"/>
+            <result property="superMarketName" column="superMarketName"/>
+            <result property="buildingNum" column="buildingNum"/>
         </association>
     </resultMap>
 
     <!--查询用户信息-->
     <select id="getUser"  resultType="User">
-        select id,weiXin,studNo,nickname,openId from userInfo where id = #{createUser}
+        select id,weiXin,studNo,nickname,openId,sex,headImg,buildingNumber,superMarketName,buildingNum from userInfo where id = #{createUser}
     </select>
 
 

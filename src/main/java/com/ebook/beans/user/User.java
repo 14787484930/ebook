@@ -17,6 +17,7 @@ public class User implements Serializable {
     private String nickname; //微信昵称你
     private String phone; //用户手机号
     private String sex; //性别
+    private String headImg; //头像
     private Integer dataStatus; //数据状态
     private Double score; //用户评分
     private Integer scoreNumber; //评分次数

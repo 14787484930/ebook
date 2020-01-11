@@ -27,12 +27,14 @@
             <result property="buildingNumber" column="buildingNumber"/>
             <result property="superMarketName" column="superMarketName"/>
             <result property="buildingNum" column="buildingNum"/>
+            <result property="sex" column="sex"/>
+            <result property="headImg" column="headImg"/>
         </association>
     </resultMap>
 
     <!--查询用户信息-->
     <select id="getUser"  resultType="User">
-        select id,weiXin,studNo,nickname,openId,buildingNumber,superMarketName,buildingNum from userInfo where id = #{createUser}
+        select id,weiXin,studNo,nickname,openId,buildingNumber,superMarketName,buildingNum,sex,headImg from userInfo where id = #{createUser}
     </select>
 
     <!--查看图书table-->
