@@ -9,11 +9,12 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.model.utills.messages.ResultInfo;
 import com.model.utills.validate.ValidateDate;
+import net.sf.json.JSONArray;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -98,7 +99,7 @@ public class OrderController {
     @CrossOrigin
     @RequestMapping("/save")
     @ResponseBody
-    public Object save(@RequestBody @Valid Order order, BindingResult result,
+    public Object save( @Valid Order order, BindingResult result,
                        HttpSession session) throws Exception {
 
         /*服务器端校验*/
@@ -106,6 +107,13 @@ public class OrderController {
             //校验失败
             return ResultInfo.fail().add("errors", ValidateDate.checkDate(result));
         }
+
+        if(StringUtils.isBlank(order.getGoodsStr())){
+            return ResultInfo.fail().add("errors","不能提交空订单！");
+        }
+
+        JSONArray array = JSONArray.fromObject(order.getGoodsStr());
+        //order.setGoods(JSONArray.toCollection(array),Good.class));
 
         order.setCreateUser((User)session.getAttribute("userInfo"));
         order.setCreateTime(new Date());
