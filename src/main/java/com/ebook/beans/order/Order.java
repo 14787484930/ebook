@@ -29,4 +29,5 @@ public class Order extends BaseBean {
     private Double totalCost; //订单总金额
 
     private List<Good> goods; //订单详细信息
+    private String goodsStr; //订单商品
 }

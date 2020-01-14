@@ -1,5 +1,7 @@
 package com.ebook.controllers.order;
 
+import com.alibaba.fastjson.JSONArray;
+import com.ebook.beans.good.Good;
 import com.ebook.beans.order.Order;
 import com.ebook.beans.order.OrderQuery;
 import com.ebook.beans.user.User;
@@ -9,7 +11,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.model.utills.messages.ResultInfo;
 import com.model.utills.validate.ValidateDate;
-import net.sf.json.JSONArray;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -112,8 +113,8 @@ public class OrderController {
             return ResultInfo.fail().add("errors","不能提交空订单！");
         }
 
-        JSONArray array = JSONArray.fromObject(order.getGoodsStr());
-        //order.setGoods(JSONArray.toCollection(array),Good.class));
+        JSONArray array = JSONArray.parseArray(order.getGoodsStr());
+        order.setGoods(array.toJavaList(Good.class));
 
         order.setCreateUser((User)session.getAttribute("userInfo"));
         order.setCreateTime(new Date());
