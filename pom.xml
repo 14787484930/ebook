@@ -277,6 +277,15 @@
       <version>1.11.3</version>
     </dependency>
 
+
+    <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.62</version>
+    </dependency>
+
+
     <!--引入JavaMail-->
     <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
     <dependency>
