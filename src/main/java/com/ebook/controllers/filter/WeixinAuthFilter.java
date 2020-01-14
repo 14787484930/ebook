@@ -57,13 +57,24 @@ public class WeixinAuthFilter implements Filter {
         	  //只有在微信端才做里面的操作
             if (agent != null && agent.toLowerCase().indexOf("micromessenger") >= 0)
             {
-                if(hRequest.getSession().getAttribute("userInfo") != null){
+                StringBuffer wxurl = hRequest.getRequestURL();
+                if(wxurl.indexOf("") > 0 || wxurl.indexOf("") > 0 || wxurl.indexOf("") > 0){
+
+
+                } else if(hRequest.getSession().getAttribute("userInfo") != null){
 
                     User user = (User)hRequest.getSession().getAttribute("userInfo");
+
+                    if(hRequest.getParameter("flag") != null){
+                        user.setFlag(Integer.parseInt(hRequest.getParameter("flag")));
+                        hRequest.getSession().setAttribute("userInfo",user);
+                    }
+
                     //没有认证就跳去认证校验
                     if(user.getFlag() == 1 && StringUtils.isBlank(user.getStudNo())){
-                        hRequest.getRequestDispatcher("/user/").forward(request,response);//跳转认证页面
+                        hRequest.getRequestDispatcher("/user/checkinfo").forward(request,response);//跳转认证页面
                     }
+
 
                 }else{
                     String code = request.getParameter("code");
@@ -85,6 +96,7 @@ public class WeixinAuthFilter implements Filter {
                         User user = userService.getByOpenId(userQuery);
 
                         if(user != null){    //表示已经认证过
+                            user.setFlag(Integer.parseInt(hRequest.getParameter("flag")));
                             hRequest.getSession().setAttribute("userInfo",user);
                         }else{   //表示没有认证过
 
@@ -103,7 +115,7 @@ public class WeixinAuthFilter implements Filter {
                             System.out.println("打印数据："+jsonStr);
 
                             //将用户信息存入session
-                            hRequest.setAttribute("userInfo",user);
+                            hRequest.getSession().setAttribute("userInfo",user);
 
                             //判断请求权限
                             if(user.getFlag() == 1){
@@ -134,9 +146,20 @@ public class WeixinAuthFilter implements Filter {
                         return;
                     }
                 }
-
+                System.out.println("微信浏览器访问！");
             }else{
 
+                StringBuffer hurl = hRequest.getRequestURL();
+                if(hurl.indexOf("") < 0 && hurl.indexOf("") < 0){
+
+                    //判断是否登录过
+                    User user = (User)hRequest.getSession().getAttribute("userInfo");
+                    if(user == null){
+                        hRequest.getRequestDispatcher("/user/checkinfo").forward(request,response);//跳转认证页面
+                    }
+                }
+
+                System.out.println("普通浏览器访问！");
             }
 
             chain.doFilter(hRequest, hResponse);

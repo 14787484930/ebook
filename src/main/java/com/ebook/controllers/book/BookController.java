@@ -117,30 +117,6 @@ public class BookController {
         }*/
 
 
-        //权限处理
-        if(bookQuery.getFlag() != null){
-                session.setAttribute("flag",bookQuery.getFlag());
-               /* User user = new User();
-                user.setId("ea0b33ba3b65429f976a6514ae9296e8");
-                user.setNickname("绿箭");
-                user.setWeiXin("ZXL690345407");
-                user.setPhone("14787484930");
-                user.setOpenId("123456");
-                user.setFlag(bookQuery.getFlag());
-                session.setAttribute("userInfo",user);*/
-
-                UserQuery userQuery = new UserQuery();
-                userQuery.setWeiXin("ZXL690345407");
-                User user = userService.getByWeiXin(userQuery);
-                user.setFlag(bookQuery.getFlag());
-                session.setAttribute("userInfo",user);
-        }else{
-            Object obj = session.getAttribute("flag");
-            if(obj != null){
-                bookQuery.setFlag((Integer) obj);
-            }
-        }
-
         //权限初始化
         bookQuery.intiQuery(session);
 

@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import com.model.utills.crawler.Crawler;
 import com.model.utills.messages.ResultInfo;
 import com.model.utills.validate.ValidateDate;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -315,6 +316,28 @@ public class UserController {
     //@SysLog(moduleName = "开通小卖铺")
     public Object returnCheckInfo(HttpSession session){
 
-        return ResultInfo.fail().add("mes","此用户尚未未认证！");
+        return ResultInfo.fail().add("mes","此用户尚未未认证！").add("userInfo",session.getAttribute("userInfo"));
+    }
+
+
+    @CrossOrigin
+    @RequestMapping("/pclogin")
+    @ResponseBody
+    public Object pcLogin(User user,HttpSession session){
+
+        if(StringUtils.isBlank(user.getWeiXin()) || StringUtils.isBlank(user.getStudNo())) {
+            return ResultInfo.fail().add("msg","账号或密码不能为空！");
+        }
+
+        UserQuery query = new UserQuery();
+        query.setOpenId(user.getOpenId());
+        User u = userService.getByOpenId(query);
+
+        if (u != null && user.getStudNo().equals(u.getStudNo())) {
+            session.setAttribute("userInfo",u);
+            return ResultInfo.success().add("msg","登录成功！");
+        }else{
+            return ResultInfo.fail().add("msg","账号或密码错误！");
+        }
     }
 }
