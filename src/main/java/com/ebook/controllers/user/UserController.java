@@ -213,6 +213,7 @@ public class UserController {
 
         //判断所填写的学号是否已经认证过了
         UserQuery query = new UserQuery();
+        query.setStudNo(user.getStudNo());
         List<User> users = userService.getUsers(query);
         if(users.size() > 0){
             return ResultInfo.fail().add("errors", "此用户已经认证过了，请勿重复认证！");
@@ -222,21 +223,24 @@ public class UserController {
             if(Crawler.WebLogin(map)) {
 
                 //认证成功，将认证结果写入数据库
-                /*User userInfo = (User)session.getAttribute("userInfo");
+                User userInfo = (User)session.getAttribute("userInfo");
                 userInfo.setCreateTime(new Date());
                 userInfo.setEmail(user.getEmail());
                 userInfo.setStudNo(user.getStudNo());
-                userService.save(userInfo);*/
+                userInfo.setWeiXin(user.getWeiXin());
+                userInfo.setPhone(user.getPhone());
+                userService.save(userInfo);
+                session.setAttribute("userInfo",userInfo);
 
                 //响应认证结果
                 return ResultInfo.success();
             }else{
                 ///用户名密码或验证码输入有误
-                return ResultInfo.fail().add("errors","请输入正确的学号、密码和验证码！");
+                return ResultInfo.fail().add("userInfo",session.getAttribute("userInfo")).add("errors","请输入正确的学号、密码和验证码！");
             }
         } catch (IOException e) {
             //系统异常
-            return ResultInfo.fail().add("errors","系统异常，请稍后重试！");
+            return ResultInfo.fail().add("userInfo",session.getAttribute("userInfo")).add("errors","系统异常，请稍后重试！");
         }
 
 

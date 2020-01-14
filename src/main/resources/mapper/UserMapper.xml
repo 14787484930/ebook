@@ -63,7 +63,7 @@
             email,
             score,
             openId,
-            nicname,
+            nickname,
             createTime,
             dataStatus,
             headImg
@@ -78,7 +78,7 @@
             #{email},
             #{score},
             #{openId},
-            #{nicname},
+            #{nickname},
             #{createTime},
             1,
             #{headImg}

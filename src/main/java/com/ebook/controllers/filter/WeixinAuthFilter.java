@@ -58,7 +58,7 @@ public class WeixinAuthFilter implements Filter {
             if (agent != null && agent.toLowerCase().indexOf("micromessenger") >= 0)
             {
                 StringBuffer wxurl = hRequest.getRequestURL();
-                if(wxurl.indexOf("") > 0 || wxurl.indexOf("") > 0 || wxurl.indexOf("") > 0){
+                if(wxurl.indexOf("/getKey") > 0 || wxurl.indexOf("/authentication") > 0 || wxurl.indexOf("weixin/test") > 0){
 
 
                 } else if(hRequest.getSession().getAttribute("userInfo") != null){
@@ -149,15 +149,15 @@ public class WeixinAuthFilter implements Filter {
                 System.out.println("微信浏览器访问！");
             }else{
 
-                StringBuffer hurl = hRequest.getRequestURL();
-                if(hurl.indexOf("") < 0 && hurl.indexOf("") < 0){
+               /* StringBuffer hurl = hRequest.getRequestURL();
+                if(hurl.indexOf("/pclogin") < 0){
 
                     //判断是否登录过
                     User user = (User)hRequest.getSession().getAttribute("userInfo");
                     if(user == null){
                         hRequest.getRequestDispatcher("/user/checkinfo").forward(request,response);//跳转认证页面
                     }
-                }
+                }*/
 
                 System.out.println("普通浏览器访问！");
             }

@@ -58,6 +58,6 @@ public  class Constant {
     public static final String SWFU_LOGIN_CHECKCODE = "/CheckCode.aspx";
 
     /*图片上传相关常量*/
-    public static final String PICPATH = "F:/pictures/";
+    public static final String PICPATH = "C:/pictures/";
     public static final String SYPATH = PICPATH + "sy/sy.png";
 }
