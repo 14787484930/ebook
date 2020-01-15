@@ -4,6 +4,7 @@ import com.ebook.beans.good.Good;
 import com.ebook.beans.good.GoodQuery;
 import com.ebook.daos.GoodDao;
 import com.ebook.services.GoodService;
+import com.model.utills.uuid.GeneratingId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +45,7 @@ public class GoodServiceImpl implements GoodService {
     @Override
     public void save(Good good) {
 
+        good.setId(GeneratingId.getId());
         goodDao.save(good);
     }
 }
