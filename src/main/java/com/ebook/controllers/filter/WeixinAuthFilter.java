@@ -57,31 +57,37 @@ public class WeixinAuthFilter implements Filter {
         	  //只有在微信端才做里面的操作
             if (agent != null && agent.toLowerCase().indexOf("micromessenger") >= 0)
             {
+                System.out.println("==================================1");
                 StringBuffer wxurl = hRequest.getRequestURL();
                 if(wxurl.indexOf("/getKey") > 0 || wxurl.indexOf("/authentication") > 0 || wxurl.indexOf("weixin/test") > 0){
 
 
                 } else if(hRequest.getSession().getAttribute("userInfo") != null){
+                    System.out.println("==================================2");
 
                     User user = (User)hRequest.getSession().getAttribute("userInfo");
 
                     if(hRequest.getParameter("flag") != null){
+                        System.out.println("==================================3");
                         user.setFlag(Integer.parseInt(hRequest.getParameter("flag")));
                         hRequest.getSession().setAttribute("userInfo",user);
                     }
 
                     //没有认证就跳去认证校验
                     if(user.getFlag() == 1 && StringUtils.isBlank(user.getStudNo())){
+                        System.out.println("==================================4");
                         hRequest.getRequestDispatcher("/user/checkinfo").forward(request,response);//跳转认证页面
                     }
 
 
                 }else{
+                    System.out.println("==================================5");
                     String code = request.getParameter("code");
                     String state = request.getParameter("state");
                     //如果code不为空，scope为base,scope为userInfo代表用户已经同意
                     if (code != null && state != null && state.equals("1"))
                     {
+                        System.out.println("==================================6");
                         // 通过Code获取openid来进行授权
                         String url =  Constant.GET_USERINFO_URL
                                 .replace("APPID", Constant.APPID)
@@ -96,9 +102,11 @@ public class WeixinAuthFilter implements Filter {
                         User user = userService.getByOpenId(userQuery);
 
                         if(user != null){    //表示已经认证过
+                            System.out.println("==================================7");
                             user.setFlag(Integer.parseInt(hRequest.getParameter("flag")));
                             hRequest.getSession().setAttribute("userInfo",user);
                         }else{   //表示没有认证过
+                            System.out.println("==================================8");
 
                             //通过openid获取access_token
                             String access_token = JSONObject.fromObject(json).getString("access_token");
@@ -120,6 +128,8 @@ public class WeixinAuthFilter implements Filter {
                             //判断请求权限
                             if(user.getFlag() == 1){
 
+                                System.out.println("==================================9");
+
                                 hRequest.getRequestDispatcher("/user/checkinfo").forward(request,response);//跳转认证页面
                             }
                         }
@@ -128,6 +138,7 @@ public class WeixinAuthFilter implements Filter {
                     }
                     else
                     {
+                        System.out.println("==================================10");
                         //发送用户同意的请求
                         String path = hRequest.getRequestURL().toString();
                         String query = hRequest.getQueryString();
